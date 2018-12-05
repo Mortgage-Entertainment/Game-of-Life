@@ -1,2 +1,2 @@
 # Game-of-Life
-"Game of Life" is modification of popular learning to programming arcade game "Life".
+"Game of Life" is modification of popular arcade game for learning to programming "Conway's Game of Life".
