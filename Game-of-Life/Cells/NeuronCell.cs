@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Game_of_Life.Cells
 {
-    class NeuronCell
+    class NeuronCell : Cell
     {
-
+        public NeuronCell()
+        {
+            
+        }
     }
 }
