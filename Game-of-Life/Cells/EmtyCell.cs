@@ -16,7 +16,7 @@ namespace Game_of_Life.Cells
 
         const int Value = 150;
         private int x, y;
-        static private EmtyCell[,] Array1 = new EmtyCell[Value, Value];
+        static private EmtyCell[,] Grid = new EmtyCell[Value, Value];
         
         CellType Type;
 

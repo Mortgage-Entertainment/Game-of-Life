@@ -8,6 +8,7 @@ namespace Game_of_Life
 {
     class ScrollPosition
     {
+        static public uint CameraX, CameraY;
 
     }
 }
