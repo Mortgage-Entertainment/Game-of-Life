@@ -14,6 +14,12 @@ namespace Game_of_Life.Cells
          * и невизульно содержать другие объекты вроде нейрона.
          */
 
+        const int Value = 150;
+        private int x, y;
+        static private EmtyCell[,] Array1 = new EmtyCell[Value, Value];
+        
+        CellType Type;
+
         private enum CellType
         {
             /* Перечисление, которое содержит названия типов клеток.
@@ -31,7 +37,7 @@ namespace Game_of_Life.Cells
 
         public EmtyCell()   // Конструктор по умолчанию класса EmptyCell
         {
-            CellType Type = 0;   // Устанавливаем в тип клетки значение None
+            Type = 0;   // Устанавливаем в тип клетки значение None
         }
     }
 }
