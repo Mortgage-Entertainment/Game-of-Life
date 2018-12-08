@@ -1,5 +1,5 @@
 # Game-of-Life
-"**Game of Life**" is 2D-strategy game. Here need control your colony and make it a self-sufficient structure. Many types of cells and things on the map and many types of resources. There are two enemies: _bacteria and viruses_. Bacteria is colony that can attack your colony and you need defend it. _Viruses is attacking if you are near to each other_. 
+"**Game of Life**" is a 2D-strategy game. In this game, you need to control your colony and make it a _self-sufficient structure_. There will be provided many types of cells and things on the map and a variety of resources. There are two enemies: _bacteria and viruses_. Bacteria is a colony that can attack your colony and _you need to defend it_. Viruses attacks _if you are near each other_.
 ### Language: 
 
 * C# with XAML (WPF).
