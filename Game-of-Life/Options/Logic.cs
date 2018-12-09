@@ -123,11 +123,6 @@ namespace Game_of_Life
                 IndexY = ScrollPosition.CameraY - 1;
                 valueconst += 2;
             }
-
-
-
-
-
         }
     }
 }
