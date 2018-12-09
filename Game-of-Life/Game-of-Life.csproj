@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="NativeWindow.cs" />
     <Compile Include="Options\Logic.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>

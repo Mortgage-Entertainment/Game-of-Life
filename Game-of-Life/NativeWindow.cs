@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game_of_Life
 {
-    class ScrollPosition
+    class NativeWindow
     {
-        static public uint CameraX, CameraY;
     }
 }

@@ -32,13 +32,13 @@ namespace Game_of_Life
 
             valueconst = 3;
 
-            while (valueconst < ScrollPosition.aprx+7)
+            while (valueconst < ScrollPosition.aprx + 7)
             {
                 value = valueconst;
                 RowsCount = (valueconst - 1) / 2;
                 IndexX = IndexX + RowsCount;
                 IndexY = IndexY + RowsCount;
-                while ()
+                while (true)        /*Аргумент*/
                 {
                     /*  
                      *  если картинка не создана то создать
