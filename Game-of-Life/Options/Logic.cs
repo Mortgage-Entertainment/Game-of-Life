@@ -74,9 +74,7 @@ namespace Game_of_Life
 
                     EmtyCell.SetGridImageSize(IndexX, IndexY, cellhgh);
 
-                    EmtyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount);
-                    EmptyCell.Grid[IndexX, IndexY].Imaжka.Right = (SystemParameters.PrimaryScreenWidth / 2) - (cellhgh / 2) - (cellhgh * RowsCount) - (cellhgh * (valueconst - value)) + ScrollPosition.topoffset - ScrollPosition.downoffset;
-
+                    EmtyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value);
                     IndexY--;
                     value--;
                 }
@@ -94,8 +92,12 @@ namespace Game_of_Life
 
                     EmtyCell.SetGridImageSize(IndexX, IndexY, cellhgh);
 
-                    EmptyCell.Grid[IndexX, IndexY].Imaжka.Left = (ShirinaEcrana / 2) * (cellhgh / 2) - (cellhgh * RowsCount) + (cellhgh * ((work2) - work3)) + scrlpos.leftoffset - scrlpos.rightoffset;
-                    EmptyCell.Grid[IndexX, IndexY].Imaжka.Top = (VisotaEcrana / 2) * (cellhgh / 2) - (cellhgh * RowsCount) + scrlpos.topoffset - scrlpos.downoffset;
+                    EmtyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value);
+
+                    /* может пригодиться
+                    EmptyCell.Grid[IndexX, IndexY].Imaжka.Left = (SystemParameters.PrimaryScreenHeight / 2) * (cellhgh / 2) - (cellhgh * RowsCount) + (cellhgh * ((valueconst) - value)) + ScrollPosition.GetLeftofSet() - ScrollPosition.GetRightofSet();
+                    EmptyCell.Grid[IndexX, IndexY].Imaжka.Top = (SystemParameters.PrimaryScreenWidth / 2) * (cellhgh / 2) - (cellhgh * RowsCount) + ScrollPosition.GetToptofSet() - ScrollPosition.GetDowntofSet();
+                    */
 
                     IndexX++;
                     value--;
@@ -114,8 +116,7 @@ namespace Game_of_Life
 
                     EmtyCell.SetGridImageSize(IndexX, IndexY, cellhgh);
 
-                    EmptyCell.Grid[IndexX, IndexY].Imaжka.Left = (ShirinaEcrana / 2) * (cellhgh / 2) + (cellhgh * RowsCount) + scrlpos.leftoffset - scrlpos.rightoffset;
-                    EmptyCell.Grid[IndexX, IndexY].Imaжka.Top = (VisotaEcrana / 2) * (cellhgh / 2) - (cellhgh * RowsCount) + (cellhgh * ((work2 - 2) - work3)) + cellhgh + scrlpos.topoffset - scrlpos.downoffset;
+                    EmtyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value);
 
                     IndexY++;
                     value--;

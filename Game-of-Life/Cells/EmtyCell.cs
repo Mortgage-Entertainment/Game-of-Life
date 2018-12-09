@@ -50,9 +50,10 @@ namespace Game_of_Life.Cells
             Value++;
         }
 
-        static public void SetImagePosition(uint IndexX, uint IndexY, double CellHeight, uint RowsCount)
+        static public void SetImagePosition(uint IndexX, uint IndexY, double CellHeight, uint RowsCount, uint CellsinRow, uint value)
         {
             Grid[IndexX, IndexY].Model.Left = (SystemParameters.PrimaryScreenHeight / 2) - (CellHeight / 2) + (CellHeight * RowsCount) + ScrollPosition.GetLeftofSet() - ScrollPosition.GetRightofSet();
+            Grid[IndexX, IndexY].Model.Left = (SystemParameters.PrimaryScreenWidth / 2) - (CellHeight / 2) - (CellHeight * RowsCount) - (CellHeight * (CellsinRow - value)) + ScrollPosition.GetToptofSet() - ScrollPosition.GetDowntofSet();
         }
     }
 }
