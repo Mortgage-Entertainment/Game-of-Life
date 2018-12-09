@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace Game_of_Life.Cells
 {
@@ -36,12 +38,21 @@ namespace Game_of_Life.Cells
             Dead           // Мёртвая клетка
         };
 
+        static public void SetGridImageSize(uint IndexX, uint IndexY, double CellHeight)                // нужно переименовать поля
+        {
+            Grid[IndexX, IndexY].Model.Height = CellHeight;
+            Grid[IndexX, IndexY].Model.Width = CellHeight;
+        }
+
         public EmtyCell()   // Конструктор по умолчанию класса EmptyCell
         {
             Type = 0;   // Устанавливаем в тип клетки значение None
             Value++;
         }
 
-
+        static public void SetImagePosition(uint IndexX, uint IndexY, double CellHeight, uint RowsCount)
+        {
+            Grid[IndexX, IndexY].Model.Left = (SystemParameters.PrimaryScreenHeight / 2) - (CellHeight / 2) + (CellHeight * RowsCount) + ScrollPosition.GetLeftofSet() - ScrollPosition.GetRightofSet();
+        }
     }
 }

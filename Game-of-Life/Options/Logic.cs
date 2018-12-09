@@ -4,19 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Game_of_Life.Cells;
 
 namespace Game_of_Life
 {
     class Logic
     {
+        static private uint RowsCount;
+
         static void Drawing()
         {
+        //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
             uint IndexX, IndexY, value, valueconst;   //рабочие переменные для элемента горизонтального массива, вертикального, инкремент цикла, его установка
-                                                      //cellhgh = щширина экрана / (5*scrollposition.aprx)
+            double cellhgh = (SystemParameters.PrimaryScreenHeight / (5 * ScrollPosition.GetAprX()));  //cellhgh = щширина экрана / (5*scrollposition.aprx)
 
+        //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-            IndexX = ScrollPosition.CameraX - 1;
-            IndexY = ScrollPosition.CameraY - 1;
+            IndexX = ScrollPosition.GetCameraX() - 1;
+            IndexY = ScrollPosition.GetCameraY() - 1;
 
             /*  
              *  если картинка не создана то создать
@@ -32,13 +38,13 @@ namespace Game_of_Life
 
             valueconst = 3;
 
-            while (valueconst < ScrollPosition.aprx + 7)
+            while (valueconst < ScrollPosition.GetAprX() + 7)
             {
                 value = valueconst;
                 RowsCount = (valueconst - 1) / 2;
                 IndexX = IndexX + RowsCount;
                 IndexY = IndexY + RowsCount;
-                while (true)        /*Аргумент*/
+                while ()        /*Аргумент*/
                 {
                     /*  
                      *  если картинка не создана то создать
@@ -46,8 +52,7 @@ namespace Game_of_Life
                      *  и загрузить картинку
                      */
 
-                    EmptyCell.Grid[IndexX, IndexY].Imaжka.Height = cellhgh;
-                    EmptyCell.Grid[IndexX, IndexY].Imaжka.Width = cellhgh;
+                    EmtyCell.SetGridImageSize(IndexX, IndexY, cellhgh);
 
                     // EmtyCell.Grid[IndexX, IndexY].Imaжka.Left = (ShirinaEcrana / 2) - (cellhgh / 2) + (cellhgh * RowsCount) - (cellhgh* (work2 - work3)) + scrlpos.leftoffset - scrlpos.rightoffset;
                     // EmtyCell.Grid[IndexX, IndexY].Imaжka.Top = (VisotaEcrana / 2) - (cellhgh / 2) + (cellhgh * RowsCount) + scrlpos.topoffset - scrlpos.downoffset;
@@ -67,11 +72,10 @@ namespace Game_of_Life
                      *  и загрузить картинку
                      */
 
-                    EmptyCell.Grid[IndexX, IndexY].Imaжka.Height = cellhgh;
-                    EmptyCell.Grid[IndexX, IndexY].Imaжka.Widht = cellhgh;
+                    EmtyCell.SetGridImageSize(IndexX, IndexY, cellhgh);
 
-                    EmptyCell.Grid[IndexX, IndexY].Imaжka.Left = (ShirinaEcrana / 2) - (cellhgh / 2) + (cellhgh * RowsCount) + scrlpos.leftoffset - scrlpos.rightoffset;
-                    EmptyCell.Grid[IndexX, IndexY].Imaжka.Right = (VisotaEcrana / 2) - (cellhgh / 2) - (cellhgh * RowsCount) - (cellhgh * (work2 - work3)) + scrlpos.topoffset - scrlpos.downoffset;
+                    EmtyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount);
+                    EmptyCell.Grid[IndexX, IndexY].Imaжka.Right = (SystemParameters.PrimaryScreenWidth / 2) - (cellhgh / 2) - (cellhgh * RowsCount) - (cellhgh * (valueconst - value)) + ScrollPosition.topoffset - ScrollPosition.downoffset;
 
                     IndexY--;
                     value--;
@@ -88,8 +92,7 @@ namespace Game_of_Life
                      *  и загрузить картинку
                      */
 
-                    EmptyCell.Grid[IndexX, IndexY].Imaжka.Width = cellhgh;
-                    EmptyCell.Grid[IndexX, IndexY].Imaжka.Height = cellhgh;
+                    EmtyCell.SetGridImageSize(IndexX, IndexY, cellhgh);
 
                     EmptyCell.Grid[IndexX, IndexY].Imaжka.Left = (ShirinaEcrana / 2) * (cellhgh / 2) - (cellhgh * RowsCount) + (cellhgh * ((work2) - work3)) + scrlpos.leftoffset - scrlpos.rightoffset;
                     EmptyCell.Grid[IndexX, IndexY].Imaжka.Top = (VisotaEcrana / 2) * (cellhgh / 2) - (cellhgh * RowsCount) + scrlpos.topoffset - scrlpos.downoffset;
@@ -109,8 +112,7 @@ namespace Game_of_Life
                      *  и загрузить картинку
                      */
 
-                    EmptyCell.Grid[IndexX, IndexY].Imaжka.Width = cellhgh;
-                    EmptyCell.Grid[IndexX, IndexY].Imaжka.Height = cellhgh;
+                    EmtyCell.SetGridImageSize(IndexX, IndexY, cellhgh);
 
                     EmptyCell.Grid[IndexX, IndexY].Imaжka.Left = (ShirinaEcrana / 2) * (cellhgh / 2) + (cellhgh * RowsCount) + scrlpos.leftoffset - scrlpos.rightoffset;
                     EmptyCell.Grid[IndexX, IndexY].Imaжka.Top = (VisotaEcrana / 2) * (cellhgh / 2) - (cellhgh * RowsCount) + (cellhgh * ((work2 - 2) - work3)) + cellhgh + scrlpos.topoffset - scrlpos.downoffset;
@@ -119,8 +121,8 @@ namespace Game_of_Life
                     value--;
                 }
 
-                IndexX = ScrollPosition.CameraX - 1;
-                IndexY = ScrollPosition.CameraY - 1;
+                IndexX = ScrollPosition.GetCameraX() - 1;
+                IndexY = ScrollPosition.GetCameraY() - 1;
                 valueconst += 2;
             }
         }
