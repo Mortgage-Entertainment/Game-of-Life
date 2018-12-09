@@ -16,6 +16,7 @@ namespace Game_of_Life.Cells
          * и невизульно содержать другие объекты вроде нейрона.
          */
 
+
         const int ArraySize = 150;
         private int Value = 0;
         private int x, y;

@@ -44,7 +44,7 @@ namespace Game_of_Life
                 RowsCount = (valueconst - 1) / 2;
                 IndexX = IndexX + RowsCount;
                 IndexY = IndexY + RowsCount;
-                while ()        /*Аргумент*/
+                while (value > 0)        /*Аргумент*/
                 {
                     /*  
                      *  если картинка не создана то создать
