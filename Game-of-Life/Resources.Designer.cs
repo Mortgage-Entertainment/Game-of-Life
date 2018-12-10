@@ -69,14 +69,5 @@ namespace Game_of_Life {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на .
-        /// </summary>
-        public static string Картинка {
-            get {
-                return ResourceManager.GetString("Картинка", resourceCulture);
-            }
-        }
     }
 }

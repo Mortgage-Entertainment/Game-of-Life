@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Game of Life" FontFamily="Century Gothic"
         WindowState="Maximized"
-        WindowStyle="None">
+        WindowStyle="None" Loaded="Window_Loaded">
         
 
     <Grid>

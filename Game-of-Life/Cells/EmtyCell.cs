@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace Game_of_Life.Cells
 {
@@ -16,13 +17,17 @@ namespace Game_of_Life.Cells
          * и невизульно содержать другие объекты вроде нейрона.
          */
 
+    //-----------------------------Объявление переменных-------------------------------------\\ 
 
         const int ArraySize = 150;
         private int Value = 0;
         private int x, y;
         static private EmtyCell[,] Grid = new EmtyCell[ArraySize, ArraySize];
-        
+        Image Model = new Image();
+
         CellType Type;
+
+    //---------------------------------------------------------------------------------------\\
 
         private enum CellType
         {
@@ -39,6 +44,8 @@ namespace Game_of_Life.Cells
             Dead           // Мёртвая клетка
         };
 
+    //---------------------------------------------------------------------------------------\\
+
         static public void SetGridImageSize(uint IndexX, uint IndexY, double CellHeight)                // нужно переименовать поля
         {
             Grid[IndexX, IndexY].Model.Height = CellHeight;
@@ -47,6 +54,7 @@ namespace Game_of_Life.Cells
 
         public EmtyCell()   // Конструктор по умолчанию класса EmptyCell
         {
+            Model.Source = new BitmapImage(new Uri("/Resources/EmtyCell540.jpg"));
             Type = 0;   // Устанавливаем в тип клетки значение None
             Value++;
         }

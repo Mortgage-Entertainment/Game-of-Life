@@ -24,5 +24,10 @@ namespace Game_of_Life
         {
             InitializeComponent();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Logic.Drawing();
+        }
     }
 }
