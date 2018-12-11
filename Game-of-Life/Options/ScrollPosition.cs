@@ -9,19 +9,19 @@ namespace Game_of_Life
     class ScrollPosition
     {
         static private uint CameraX, CameraY;
-        static private byte AprX;  // степень приближения в клетках (approximitation)
-        static private uint LeftOffset, RightOffset;
-        static private uint TopOffset, DownOffset;
+        static private byte AprX;            // степень приближения в клетках (approximitation)
+        static private uint LeftofSet, RightofSet;
+        static private uint TopofSet, DownofSet;
 
-        //------------------------------------------------------------------------------------------------------------------------------------\\
+        //-----------------------------------------------------<Геттеры>----------------------------------------------------------------------\\
 
-        static public uint GetRightOffset() => RightOffset;
+        static public uint GetRightofSet() => RightofSet;
 
-        static public uint GetLeftOffset() => LeftOffset;
+        static public uint GetLeftofSet() => LeftofSet;
 
-        static public uint GetTopOffset() => TopOffset;
+        static public uint GetToptofSet() => TopofSet;
 
-        static public uint GetDownOffset() => DownOffset;
+        static public uint GetDowntofSet() => DownofSet;
 
         static public byte GetAprX() => AprX;
 
