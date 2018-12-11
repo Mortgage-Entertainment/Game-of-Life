@@ -17,13 +17,13 @@ namespace Game_of_Life.Cells
          * и невизульно содержать другие объекты вроде нейрона.
          */
 
-    //-----------------------------Объявление переменных-------------------------------------\\ 
+    //-----------------------------<Объявление переменных>-------------------------------------\\ 
 
-        const int ArraySize = 150;
+        const int ArraySize = 150;     // для удобства хранит размер массива             
         private int Value = 0;
         private int x, y;
         static private EmtyCell[,] Grid = new EmtyCell[ArraySize, ArraySize];
-        Image Model = new Image();
+        private Image Model;
 
         CellType Type;
 
@@ -46,11 +46,13 @@ namespace Game_of_Life.Cells
 
     //---------------------------------------------------------------------------------------\\
 
-        static public void SetGridImageSize(uint IndexX, uint IndexY, double CellHeight)                // нужно переименовать поля
+        static public void SetGridImageSize(uint IndexX, uint IndexY, double CellHeight)
         {
             Grid[IndexX, IndexY].Model.Height = CellHeight;
             Grid[IndexX, IndexY].Model.Width = CellHeight;
         }
+
+    //---------------------------------<Конструкторы>------------------------------------------\\
 
         public EmtyCell()   // Конструктор по умолчанию класса EmptyCell
         {
@@ -58,6 +60,16 @@ namespace Game_of_Life.Cells
             Type = 0;   // Устанавливаем в тип клетки значение None
             Value++;
         }
+
+        public EmtyCell(uint IndexX, uint IndexY)
+        {
+            Grid[IndexX, IndexY].Model = new Image();
+            Grid[IndexX, IndexY].Model.Source = new BitmapImage(new Uri("/Resources/EmtyCell540.jpg"));
+            Grid[IndexX, IndexY].Type = 0;    // Устанавливаем в тип клетки значение None
+            Value++;
+        }
+
+    //----------------------------------------------------------------------------------------\\
 
         static public void SetImagePosition(uint IndexX, uint IndexY, double CellHeight, uint RowsCount, uint CellsinRow, uint value)
         {
