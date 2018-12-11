@@ -10,18 +10,18 @@ namespace Game_of_Life
     {
         static private uint CameraX, CameraY;
         static private byte AprX;            // степень приближения в клетках (approximitation)
-        static private uint LeftofSet, RightofSet;
-        static private uint TopofSet, DownofSet;
+        static private uint LeftOffset, RightOffset;
+        static private uint TopOffset, DownOffset;
 
         //-----------------------------------------------------<Геттеры>----------------------------------------------------------------------\\
 
-        static public uint GetRightofSet() => RightofSet;
+        static public uint GetRightOffset() => RightOffset;
 
-        static public uint GetLeftofSet() => LeftofSet;
+        static public uint GetLeftOffset() => LeftOffset;
 
-        static public uint GetToptofSet() => TopofSet;
+        static public uint GetTopOffset() => TopOffset;
 
-        static public uint GetDowntofSet() => DownofSet;
+        static public uint GetDownOffset() => DownOffset;
 
         static public byte GetAprX() => AprX;
 
