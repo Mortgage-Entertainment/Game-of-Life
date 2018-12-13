@@ -97,10 +97,12 @@ namespace Game_of_Life.Cells
              *   в классе Logic )
              */
 
-            if (FormuleType == FT_DownFirst)
+            int TypeofFormule = (int)(FormuleType);
+
+            if (TypeofFormule == 1)
             {
-                MarginValues[1] = unchecked((int)((int)(SystemParameters.PrimaryScreenWidth / 2) - (int)(CellHeight / 2) + (CellHeight * RowsCount) - CellHeight * (CellsinRow - value) + ScrollPosition.GetLeftOffset() - ScrollPosition.GetRightOffset()));//установка горизонтальной координаты картинки центральной ячйеки
-                MarginValues[2] = unchecked((int)(Convert.ToInt32(SystemParameters.PrimaryScreenHeight / 2) - Convert.ToInt32(CellHeight / 2) + (CellHeight * RowsCount) + ScrollPosition.GetTopOffset() - ScrollPosition.GetDownOffset()));//установка вертикальной координаты картинки центральной ячйеки
+                MarginValues[1] = unchecked((int)((int)(SystemParameters.PrimaryScreenWidth / 2) - (int)(CellHeight / 2) + (CellHeight * RowsCount) - CellHeight * (CellsinRow - value) + ScrollPosition.GetLeftOffset() - ScrollPosition.GetRightOffset()));   //установка горизонтальной координаты картинки центральной ячйеки
+                MarginValues[2] = unchecked((int)(Convert.ToInt32(SystemParameters.PrimaryScreenHeight / 2) - Convert.ToInt32(CellHeight / 2) + (CellHeight * RowsCount) + ScrollPosition.GetTopOffset() - ScrollPosition.GetDownOffset()));     //установка вертикальной координаты картинки центральной ячйеки
 
                 MarginValues[3] = Convert.ToInt32(SystemParameters.PrimaryScreenWidth - CellHeight - MarginValues[1]);
                 MarginValues[4] = Convert.ToInt32(SystemParameters.PrimaryScreenHeight - CellHeight - MarginValues[2]);
@@ -108,10 +110,10 @@ namespace Game_of_Life.Cells
                 Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
             }
 
-            if (FormuleType == FT_LeftSecond)
+            if (TypeofFormule == 2)
             {
-                MarginValues[1] = unchecked((int)((int)(SystemParameters.PrimaryScreenWidth / 2) - (int)(CellHeight / 2) - (CellHeight * RowsCount) + ScrollPosition.GetLeftOffset() - ScrollPosition.GetRightOffset()));//установка горизонтальной координаты картинки центральной ячйеки
-                MarginValues[2] = unchecked((int)((int)(SystemParameters.PrimaryScreenHeight / 2) - (int)(CellHeight / 2) + (CellHeight * RowsCount) - (CellHeight * (CellsinRow - value)) + ScrollPosition.GetTopOffset() - ScrollPosition.GetDownOffset()));//установка вертикальной координаты картинки центральной ячйеки
+                MarginValues[1] = unchecked((int)((int)(SystemParameters.PrimaryScreenWidth / 2) - (int)(CellHeight / 2) - (CellHeight * RowsCount) + ScrollPosition.GetLeftOffset() - ScrollPosition.GetRightOffset()));       //установка горизонтальной координаты картинки центральной ячйеки
+                MarginValues[2] = unchecked((int)((int)(SystemParameters.PrimaryScreenHeight / 2) - (int)(CellHeight / 2) + (CellHeight * RowsCount) - (CellHeight * (CellsinRow - value)) + ScrollPosition.GetTopOffset() - ScrollPosition.GetDownOffset()));      //установка вертикальной координаты картинки центральной ячйеки
 
                 MarginValues[3] = Convert.ToInt32(SystemParameters.PrimaryScreenWidth - CellHeight - MarginValues[1]);
                 MarginValues[4] = Convert.ToInt32(SystemParameters.PrimaryScreenHeight - CellHeight - MarginValues[2]);
@@ -119,10 +121,10 @@ namespace Game_of_Life.Cells
                 Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
             }
 
-            if (FormuleType == FT_UpThreed)
+            if (TypeofFormule == 3)
             {
-                MarginValues[1] = unchecked((int)((int)(SystemParameters.PrimaryScreenWidth / 2) - (int)(CellHeight / 2) - (CellHeight * RowsCount) + (CellHeight * (CellsinRow - value)) + ScrollPosition.GetLeftOffset() - ScrollPosition.GetRightOffset()));//установка горизонтальной координаты картинки центральной ячйеки
-                MarginValues[2] = unchecked((int)((int)(SystemParameters.PrimaryScreenHeight / 2) - (int)(CellHeight / 2) -(CellHeight * RowsCount) + ScrollPosition.GetTopOffset() - ScrollPosition.GetDownOffset()));//установка вертикальной координаты картинки центральной ячйеки
+                MarginValues[1] = unchecked((int)((int)(SystemParameters.PrimaryScreenWidth / 2) - (int)(CellHeight / 2) - (CellHeight * RowsCount) + (CellHeight * (CellsinRow - value)) + ScrollPosition.GetLeftOffset() - ScrollPosition.GetRightOffset()));        //установка горизонтальной координаты картинки центральной ячйеки
+                MarginValues[2] = unchecked((int)((int)(SystemParameters.PrimaryScreenHeight / 2) - (int)(CellHeight / 2) -(CellHeight * RowsCount) + ScrollPosition.GetTopOffset() - ScrollPosition.GetDownOffset()));       //установка вертикальной координаты картинки центральной ячйеки
 
                 MarginValues[3] = Convert.ToInt32(SystemParameters.PrimaryScreenWidth - CellHeight - MarginValues[1]);
                 MarginValues[4] = Convert.ToInt32(SystemParameters.PrimaryScreenHeight - CellHeight - MarginValues[2]);
@@ -130,7 +132,7 @@ namespace Game_of_Life.Cells
                 Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
             }
 
-            if (FormuleType == FT_RightFourth)
+            if (TypeofFormule == 4)
             {
                 MarginValues[1] = unchecked((int)((int)(SystemParameters.PrimaryScreenWidth / 2) - (int)(CellHeight / 2) + (CellHeight * RowsCount) + ScrollPosition.GetLeftOffset() - ScrollPosition.GetRightOffset()));//установка горизонтальной координаты картинки центральной ячйеки
                 MarginValues[2] = unchecked((int)((int)(SystemParameters.PrimaryScreenHeight / 2) - (int)(CellHeight / 2) - (CellHeight * RowsCount) + (CellHeight * ((CellsinRow - 2) - value)) + CellHeight + ScrollPosition.GetTopOffset() - ScrollPosition.GetDownOffset()));//установка вертикальной координаты картинки центральной ячйеки
@@ -150,7 +152,7 @@ namespace Game_of_Life.Cells
              * 
              * Нужна, чтобы отрисовать центральную ячейку,
              * 
-             * так как при её отрисовки имеются ещё не все значения, необходимые в аргументах оригинальной функции.
+             * так как при её отрисовке имеются ещё не все значения, необходимые в аргументах оригинальной функции.
              */
 
             MarginValues[1] = Convert.ToInt32(SystemParameters.PrimaryScreenWidth / 2) - (CellHeight / 2);
@@ -160,7 +162,7 @@ namespace Game_of_Life.Cells
             MarginValues[3] = Convert.ToInt32(SystemParameters.PrimaryScreenWidth - CellHeight - MarginValues[1]);
             MarginValues[4] = Convert.ToInt32(SystemParameters.PrimaryScreenHeight - CellHeight - MarginValues[2]);
 
-            Grid[IndexX, IndexY].Model.Margin = MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4];
+            Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
         }
             
     }

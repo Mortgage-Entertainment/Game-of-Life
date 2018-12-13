@@ -53,7 +53,7 @@ namespace Game_of_Life
                      *  и загрузить картинку
                      */
 
-                    EmtyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, FT_DownFirst);
+                    EmtyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, EmtyCell.NamesFormuleType.FT_DownFirst);
 
                     IndexX--;
                     value--;
@@ -70,7 +70,7 @@ namespace Game_of_Life
                      *  и загрузить картинку
                      */
 
-                    EmtyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, FT_LeftSecond);
+                    EmtyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, EmtyCell.NamesFormuleType.FT_LeftSecond);
 
                     IndexY--;
                     value--;
@@ -87,7 +87,7 @@ namespace Game_of_Life
                      *  и загрузить картинку
                      */
 
-                    EmtyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, FT_UpThreed);
+                    EmtyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, EmtyCell.NamesFormuleType.FT_UpThreed);
 
                     IndexX++;
                     value--;
@@ -104,7 +104,7 @@ namespace Game_of_Life
                      *  и загрузить картинку
                      */
 
-                    EmtyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, FT_RightFourth);
+                    EmtyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, EmtyCell.NamesFormuleType.FT_RightFourth);
 
                     IndexY++;
                     value--;
