@@ -21,18 +21,20 @@ namespace Game_of_Life.Cells
     //-----------------------------<Объявление переменных>-------------------------------------\\ 
 
         const int ArraySize = 150;     // для удобства хранит размер массива             
-        private int Value = 0;
-        private int x, y;
-        static private EmtyCell[,] Grid = new EmtyCell[ArraySize, ArraySize];
-        private Image Model;
+        private int Value = 0;         // для удобства хранит кол-во созданных объектов этого класса
+        private int x, y;              
+        static private EmtyCell[,] Grid = new EmtyCell[ArraySize, ArraySize];        // Один из важнейших массивов в игре. Хранит пустые клетки (для удобной работы)
+        static private int[] MarginValues = new int[4];            // Массив хранящий координаты margin для установки их в объект при отрисовке
+        private Image Model;                // Объект картинки. Нужен для визуального отображения пустой клетки
 
-        CellType Type;
+        CellType Type;              // Объект перечисления, который хранит название типа хлетки, которая находится в этой (пустой) клетке 
 
-    //---------------------------------------------------------------------------------------\\
+    //-----------------------------------------------------------------------------------------\\
 
         private enum CellType
         {
-            /* Перечисление, которое содержит названия типов клеток.
+            /* 
+             * Перечисление, которое содержит названия типов клеток.
              * Будет юзаться для хранения типа клетки, которая содержится
              * в объекте класса EmtyCell
              */
@@ -49,15 +51,12 @@ namespace Game_of_Life.Cells
 
         public EmtyCell()   // Конструктор по умолчанию класса EmptyCell
         {
-            Model.Source = new BitmapImage(new Uri("/Resources/EmtyCell540.jpg"));
             Type = 0;   // Устанавливаем в тип клетки значение None
             Value++;
         }
 
         public EmtyCell(uint IndexX, uint IndexY)
         {
-            Grid[IndexX, IndexY].Model = new Image();
-            Grid[IndexX, IndexY].Model.Source = new BitmapImage(new Uri("/Resources/EmtyCell540.jpg"));
             Grid[IndexX, IndexY].Type = 0;    // Устанавливаем в тип клетки значение None
             Value++;
         }
@@ -82,7 +81,6 @@ namespace Game_of_Life.Cells
             FT_RightFourth = 4   // Четвёртая формула, проход правой части
         }
 
-        static private int[] MarginValues = new int[4];
 
         static public void SetImagePosition(uint IndexX, uint IndexY, int CellHeight, uint RowsCount, uint CellsinRow, uint value, NamesFormuleType FormuleType)
         {
@@ -163,6 +161,17 @@ namespace Game_of_Life.Cells
             MarginValues[4] = Convert.ToInt32(SystemParameters.PrimaryScreenHeight - CellHeight - MarginValues[2]);
 
             Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
+        }
+
+        static public void SetGridImage(uint IndexX, uint IndexY)    // аргументы для нахождения определённого элемента в масстиве "Grid"
+        {
+            /*
+             * Функция, устанавливающая 
+             * картинку для пустой клетки
+             */
+
+            Grid[IndexX, IndexY].Model = new Image();
+            Grid[IndexX, IndexY].Model.Source = new BitmapImage(new Uri("/Resources/EmtyCell540.jpg"));
         }
             
     }
