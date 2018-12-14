@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Game_of_Life.Cells;
 
 namespace Game_of_Life
 {
@@ -27,6 +28,7 @@ namespace Game_of_Life
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            EmtyCell.GridInitialization();
             Logic.Drawing();
         }
     }
