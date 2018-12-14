@@ -117,14 +117,6 @@ namespace Game_of_Life
                 valueconst += 2;
             }
         }
-
-        static public void GridInitialization()
-        {
-            /*
-             * Метод, инициализирующий 
-             * элементы массива Grid
-             */
-        }
     }
 }
 
