@@ -37,6 +37,8 @@ namespace Game_of_Life
              *  и загрузить картинку
              */
 
+            EmtyCell.SetGridImage(IndexX, IndexY);
+
             EmtyCell.SetImagePosition(IndexX, IndexY, cellhgh);
 
             valueconst = 3;
@@ -47,13 +49,15 @@ namespace Game_of_Life
                 RowsCount = (valueconst - 1) / 2;
                 IndexX = IndexX + RowsCount;
                 IndexY = IndexY + RowsCount;
-                while (value > 0)        /*Аргумент*/
+                while (value > 0)
                 {
                     /*  
                      *  если картинка не создана то создать
                      *  установить растягиваемость
                      *  и загрузить картинку
                      */
+
+                    EmtyCell.SetGridImage(IndexX, IndexY);
 
                     EmtyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, EmtyCell.NamesFormuleType.FT_DownFirst);
 
@@ -72,6 +76,8 @@ namespace Game_of_Life
                      *  и загрузить картинку
                      */
 
+                    EmtyCell.SetGridImage(IndexX, IndexY);
+
                     EmtyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, EmtyCell.NamesFormuleType.FT_LeftSecond);
 
                     IndexY--;
@@ -89,6 +95,8 @@ namespace Game_of_Life
                      *  и загрузить картинку
                      */
 
+                    EmtyCell.SetGridImage(IndexX, IndexY);
+
                     EmtyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, EmtyCell.NamesFormuleType.FT_UpThreed);
 
                     IndexX++;
@@ -105,6 +113,8 @@ namespace Game_of_Life
                      *  установить растягиваемость
                      *  и загрузить картинку
                      */
+
+                    EmtyCell.SetGridImage(IndexX, IndexY);
 
                     EmtyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, EmtyCell.NamesFormuleType.FT_RightFourth);
 
