@@ -24,8 +24,8 @@ namespace Game_of_Life
             int cellhgh;
 
             if (SystemParameters.PrimaryScreenHeight > SystemParameters.PrimaryScreenWidth)
-                cellhgh = Convert.ToInt32(SystemParameters.PrimaryScreenHeight / (5 * ScrollPosition.GetAprX()));  //cellhgh = щширина экрана / (5*scrollposition.aprx)
-                else cellhgh = Convert.ToInt32(SystemParameters.PrimaryScreenWidth / (5 * ScrollPosition.GetAprX()));
+                cellhgh = Convert.ToInt32(SystemParameters.PrimaryScreenHeight / (5 + ScrollPosition.GetAprX()));  //cellhgh = щширина экрана / (5*scrollposition.aprx)
+                else cellhgh = Convert.ToInt32(SystemParameters.PrimaryScreenWidth / (5 + ScrollPosition.GetAprX()));
             //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
             IndexX = ScrollPosition.GetCameraX() - 1;
@@ -126,14 +126,6 @@ namespace Game_of_Life
                 IndexY = ScrollPosition.GetCameraY() - 1;
                 valueconst += 2;
             }
-        }
-
-        static public void GridInitialization()
-        {
-            /*
-             * Метод, инициализирующий 
-             * элементы массива Grid
-             */
         }
     }
 }
