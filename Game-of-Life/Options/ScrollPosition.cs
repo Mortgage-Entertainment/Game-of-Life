@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Game_of_Life
 {
@@ -88,10 +89,34 @@ namespace Game_of_Life
                  *  
                  */
 
+                ///  Перемещение   // Вверх
+                /*if (Cursor.Position.Y < 2) {
+
+                    if () {
+                        
+                    }
+
+                }
                 
+                ///  Перемещение   // Влево
+                if (Cursor.Position.X < 2) {
+                    
+                }
+
+                ///  Перемещение   // Вправо
+                if (Cursor.Position.X > SystemParameters.PrimaryScreenWidth - 2)
+                {
+                    
+                }
+                
+                ///  Перемещение   // Вниз
+                if (Cursor.Position.Y > SystemParameters.PrimaryScreenHeight - 2)
+                {
+                    
+                }*/
             } 
             
-            //------------------------------------------------------------------------------------------------------------------------------------\\
+            //------------------------------------------------------------------------------------------------------------------------------------\\ */
 
     }
 }
