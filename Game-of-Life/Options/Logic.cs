@@ -24,8 +24,8 @@ namespace Game_of_Life
             int cellhgh;
 
             if (SystemParameters.PrimaryScreenHeight > SystemParameters.PrimaryScreenWidth)
-                cellhgh = Convert.ToInt32(SystemParameters.PrimaryScreenHeight / (5 + ScrollPosition.GetAprX()));  //cellhgh = щширина экрана / (5*scrollposition.aprx)
-                else cellhgh = Convert.ToInt32(SystemParameters.PrimaryScreenWidth / (5 + ScrollPosition.GetAprX()));
+                cellhgh = Convert.ToInt32(SystemParameters.PrimaryScreenHeight / (5 + ScrollPosition.GetAprx()));  //cellhgh = щширина экрана / (5*scrollposition.aprx)
+                else cellhgh = Convert.ToInt32(SystemParameters.PrimaryScreenWidth / (5 + ScrollPosition.GetAprx()));
             //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
             IndexX = ScrollPosition.GetCameraX() - 1;
@@ -43,7 +43,7 @@ namespace Game_of_Life
 
             valueconst = 3;
 
-            while (valueconst < ScrollPosition.GetAprX() + 7)
+            while (valueconst < ScrollPosition.GetAprx() + 7)
             {
                 value = valueconst;
                 RowsCount = (valueconst - 1) / 2;
