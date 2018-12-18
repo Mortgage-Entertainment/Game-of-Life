@@ -28,8 +28,10 @@ namespace Game_of_Life
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            EmtyCell.GridInitialization();
-            Logic.Drawing();
+            //EmtyCell.GridInitialization();
+            //Logic.Drawing();
+            Button button = new Button();
+            button.Width = 100;
         }
     }
 }
