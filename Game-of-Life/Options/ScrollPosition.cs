@@ -57,7 +57,7 @@ namespace Game_of_Life
                  * 
                  */
                 
-                ScrollPosition.Aprx--;
+                Aprx--;
                 Logic.Drawing();
             }
             
@@ -72,7 +72,7 @@ namespace Game_of_Life
                  * 
                  */
 
-                ScrollPosition.Aprx++;
+                Aprx++;
                 Logic.Drawing();
             }
 
@@ -90,10 +90,31 @@ namespace Game_of_Life
                  */
 
                 ///  Перемещение   // Вверх
-                /*if (Cursor.Position.Y < 2) {
+                if (Cursor.Position.Y < 2) {
 
-                    if () {
+                    if (RightOffset < 1) {
                         
+                        LeftOffset = LeftOffset + ScrollMoveSpeed;
+                        
+                        if (LeftOffset > Convert.ToInt32(Logic.GetCellhgh() / 2)) {
+                            RightOffset = Convert.ToUInt32(Logic.GetCellhgh() - LeftOffset);
+                            LeftOffset = 0;
+                            CameraX--;
+                        }
+
+                        Logic.ScrollingMoveDrawing();
+
+                    } else {
+                        
+                        if (RightOffset > ScrollMoveSpeed) {
+                            RightOffset = RightOffset - ScrollMoveSpeed;
+                        } else {
+                            LeftOffset = ScrollMoveSpeed - RightOffset;
+                            RightOffset = 0;
+                        }
+
+                        Logic.ScrollingMoveDrawing();
+
                     }
 
                 }
@@ -104,16 +125,14 @@ namespace Game_of_Life
                 }
 
                 ///  Перемещение   // Вправо
-                if (Cursor.Position.X > SystemParameters.PrimaryScreenWidth - 2)
-                {
+                if (Cursor.Position.X > SystemParameters.PrimaryScreenWidth - 2) {
                     
                 }
                 
                 ///  Перемещение   // Вниз
-                if (Cursor.Position.Y > SystemParameters.PrimaryScreenHeight - 2)
-                {
+                if (Cursor.Position.Y > SystemParameters.PrimaryScreenHeight - 2) {
                     
-                }*/
+                }
             } 
             
             //------------------------------------------------------------------------------------------------------------------------------------\\ */

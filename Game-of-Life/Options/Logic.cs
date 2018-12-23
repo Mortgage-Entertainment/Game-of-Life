@@ -11,6 +11,13 @@ namespace Game_of_Life
     class Logic
     {
         static private uint RowsCount;
+        static private int cellhgh;
+
+
+        static public int GetCellhgh() => cellhgh;
+
+        static public uint GetRowsCount() => RowsCount;
+
 
         static public void Drawing()
         {
@@ -21,7 +28,6 @@ namespace Game_of_Life
            //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
             uint IndexX, IndexY, value, valueconst;   //рабочие переменные для элемента горизонтального массива, вертикального, инкремент цикла, его установка
-            int cellhgh;
 
             if (SystemParameters.PrimaryScreenHeight > SystemParameters.PrimaryScreenWidth)
                 cellhgh = Convert.ToInt32(SystemParameters.PrimaryScreenHeight / (5 + ScrollPosition.GetAprx()));  //cellhgh = щширина экрана / (5*scrollposition.aprx)
@@ -126,6 +132,11 @@ namespace Game_of_Life
                 IndexY = ScrollPosition.GetCameraY() - 1;
                 valueconst += 2;
             }
+        }
+
+        static public void ScrollingMoveDrawing()
+        {
+
         }
     }
 }
