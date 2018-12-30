@@ -17,7 +17,12 @@ namespace Game_of_Life
         {
             //EmtyCell.GridInitialization();
             //Logic.Drawing();
-            
+            Button button = new Button();
+            Grid grid = new Grid();
+
+            grid.Children.Add(button);
+            Grid.SetRow(button, 0);
+            Grid.SetColumn(button, 0);
         }
     }
 }
