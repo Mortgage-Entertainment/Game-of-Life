@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Game_of_Life.Cells;
+using System;
 using System.Windows;
-using Game_of_Life.Cells;
 
 namespace Game_of_Life
 {
-    class Logic
+    internal class Logic
     {
         static private uint RowsCount;
+        static private int cellhgh;
+
+        static public int GetCellhgh() => cellhgh;
+
+        static public uint GetRowsCount() => RowsCount;
 
         static public void Drawing()
         {
@@ -18,20 +19,19 @@ namespace Game_of_Life
              * Метод отрисовки картинок
              */
 
-           //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------\\
+            //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
             uint IndexX, IndexY, value, valueconst;   //рабочие переменные для элемента горизонтального массива, вертикального, инкремент цикла, его установка
-            int cellhgh;
 
             if (SystemParameters.PrimaryScreenHeight > SystemParameters.PrimaryScreenWidth)
                 cellhgh = Convert.ToInt32(SystemParameters.PrimaryScreenHeight / (5 + ScrollPosition.GetAprx()));  //cellhgh = щширина экрана / (5*scrollposition.aprx)
-                else cellhgh = Convert.ToInt32(SystemParameters.PrimaryScreenWidth / (5 + ScrollPosition.GetAprx()));
+            else cellhgh = Convert.ToInt32(SystemParameters.PrimaryScreenWidth / (5 + ScrollPosition.GetAprx()));
             //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
             IndexX = ScrollPosition.GetCameraX() - 1;
             IndexY = ScrollPosition.GetCameraY() - 1;
 
-            /*  
+            /*
              *  если картинка не создана то создать
              *  установить растягиваемость
              *  и загрузить картинку
@@ -51,7 +51,7 @@ namespace Game_of_Life
                 IndexY = IndexY + RowsCount;
                 while (value > 0)
                 {
-                    /*  
+                    /*
                      *  если картинка не создана то создать
                      *  установить растягиваемость
                      *  и загрузить картинку
@@ -70,7 +70,7 @@ namespace Game_of_Life
 
                 while (value > 0)
                 {
-                    /*  
+                    /*
                      *  если картинка не создана то создать
                      *  установить растягиваемость
                      *  и загрузить картинку
@@ -89,7 +89,7 @@ namespace Game_of_Life
 
                 while (value > 0)
                 {
-                    /*  
+                    /*
                      *  если картинка не создана то создать
                      *  установить растягиваемость
                      *  и загрузить картинку
@@ -108,7 +108,7 @@ namespace Game_of_Life
 
                 while (value > 0)
                 {
-                    /*  
+                    /*
                      *  если картинка не создана то создать
                      *  установить растягиваемость
                      *  и загрузить картинку
@@ -127,6 +127,9 @@ namespace Game_of_Life
                 valueconst += 2;
             }
         }
+
+        static public void ScrollingMoveDrawing()
+        {
+        }
     }
 }
-

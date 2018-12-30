@@ -4,6 +4,5 @@
              xmlns:local="clr-namespace:Game_of_Life"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
     </Application.Resources>
 </Application>
