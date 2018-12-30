@@ -8,7 +8,7 @@ namespace Game_of_Life
         static private uint CameraX = 127, CameraY = 7;
         static private byte Aprx = 4;            // степень приближения в клетках (approximitation)
         static private uint LeftOffset = 0, RightOffset = 0;
-        static private uint TopOffset = 0, DownOffset = 0;
+        static private uint TopOffset = 0, BottomOffset = 0;
 
         //-----------------------------------------------------<Геттеры>----------------------------------------------------------------------\\
 
@@ -18,7 +18,7 @@ namespace Game_of_Life
 
         static public uint GetTopOffset() => TopOffset;
 
-        static public uint GetDownOffset() => DownOffset;
+        static public uint GetBottomOffset() => BottomOffset;
 
         static public byte GetAprx() => Aprx;
 
@@ -82,54 +82,158 @@ namespace Game_of_Life
              *  Перемещает камеру в сторону
              *    ( клетки в обратную )
              *  , на которую "давит" курсор
-             *
-             */
+             *  
+             *  для вызова внутри него - методы с префиксом SM_
+             *   ( SM - Scrolling Move )
+             *  
+             */      /////   не закончено - ( Cursor.Position - позиция курсора, 
+                         //  ScrollMoveSpeed - скорость перемещения камеры, параметр будет регулироваться в настройках )
+                         
+                         //  Код был проанализирован логически только в первоначальном варианте ( перемещение влево )
+                         //  в остальных случаях он был скопирован и заменены только названия ( Top, Left, Right, Bottom )
 
-            ///  Перемещение   // Вверх
-            if (Cursor.Position.Y < 2)
-            {
-                if (RightOffset < 1)
-                {
+
+            ///  Перемещение   // Вниз
+            if (Cursor.Position.Y > SystemParameters.PrimaryScreenHeight - 2) {
+                
+                if (TopOffset < 1) {
+                    BottomOffset = BottomOffset + ScrollMoveSpeed;
+
+                    if (BottomOffset > Convert.ToInt32(Logic.GetCellhgh() / 2)) {
+
+                        TopOffset = Convert.ToUInt32(Logic.GetCellhgh() - BottomOffset);
+                        BottomOffset = 0;
+                        CameraX--;
+                        Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_BottomSide, true);
+
+                    } else {
+
+                        Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_BottomSide, false);
+                    }
+
+
+                } else {
+
+                    if (TopOffset > ScrollMoveSpeed) {
+
+                        TopOffset = TopOffset - ScrollMoveSpeed;
+
+                    } else {
+
+                        BottomOffset = ScrollMoveSpeed - TopOffset;
+                        TopOffset = 0;
+                    }
+
+                    Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_BottomSide, false);
+                }
+            }
+
+
+            ///  Перемещение   // Влево
+            if (Cursor.Position.X < 2) {
+
+                if (RightOffset < 1) {
+
                     LeftOffset = LeftOffset + ScrollMoveSpeed;
 
-                    if (LeftOffset > Convert.ToInt32(Logic.GetCellhgh() / 2))
-                    {
+                    if (LeftOffset > Convert.ToInt32(Logic.GetCellhgh() / 2)) {
+
                         RightOffset = Convert.ToUInt32(Logic.GetCellhgh() - LeftOffset);
                         LeftOffset = 0;
                         CameraX--;
-                    }
+                        Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_LeftSide, true);
 
-                    Logic.ScrollingMoveDrawing();
-                }
-                else
-                {
-                    if (RightOffset > ScrollMoveSpeed)
-                    {
-                        RightOffset = RightOffset - ScrollMoveSpeed;
+                    } else {
+
+                        Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_LeftSide, false);
                     }
-                    else
-                    {
+                    
+                } else {
+
+                    if (RightOffset > ScrollMoveSpeed) {
+
+                        RightOffset = RightOffset - ScrollMoveSpeed;
+
+                    } else {
+
                         LeftOffset = ScrollMoveSpeed - RightOffset;
                         RightOffset = 0;
                     }
 
-                    Logic.ScrollingMoveDrawing();
+                    Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_LeftSide, false);
                 }
             }
 
-            ///  Перемещение   // Влево
-            if (Cursor.Position.X < 2)
-            {
+
+            ///  Перемещение   // Вверх
+            if (Cursor.Position.Y < 2) {
+
+                if (BottomOffset < 1) {
+                    TopOffset = TopOffset + ScrollMoveSpeed;
+
+                    if (TopOffset > Convert.ToInt32(Logic.GetCellhgh() / 2)) {
+
+                        BottomOffset = Convert.ToUInt32(Logic.GetCellhgh() - TopOffset);
+                        TopOffset = 0;
+                        CameraX--;
+                        Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_TopSide, true);
+
+                    } else {
+
+                        Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_TopSide, false);
+                    }
+
+
+                } else {
+
+                    if (BottomOffset > ScrollMoveSpeed) {
+
+                        BottomOffset = BottomOffset - ScrollMoveSpeed;
+
+                    } else {
+
+                        TopOffset = ScrollMoveSpeed - BottomOffset;
+                        BottomOffset = 0;
+                    }
+
+                    Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_TopSide, false);
+                }
             }
 
-            ///  Перемещение   // Вправо
-            if (Cursor.Position.X > SystemParameters.PrimaryScreenWidth - 2)
-            {
-            }
 
-            ///  Перемещение   // Вниз
-            if (Cursor.Position.Y > SystemParameters.PrimaryScreenHeight - 2)
-            {
+            ///  Перемещение   // Впарво
+            if (Cursor.Position.X > SystemParameters.PrimaryScreenWidth - 2) {
+                
+                if (LeftOffset < 1) {
+
+                    RightOffset = RightOffset + ScrollMoveSpeed;
+
+                    if (RightOffset > Convert.ToInt32(Logic.GetCellhgh() / 2)) {
+
+                        LeftOffset = Convert.ToUInt32(Logic.GetCellhgh() - RightOffset);
+                        RightOffset = 0;
+                        CameraX--;
+                        Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_RightSide, true);
+
+                    } else {
+
+                        Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_RightSide, false);
+                    }
+                    
+                } else {
+
+                    if (LeftOffset > ScrollMoveSpeed) {
+
+                        LeftOffset = LeftOffset - ScrollMoveSpeed;
+
+                    } else {
+
+                        RightOffset = ScrollMoveSpeed - LeftOffset;
+                        LeftOffset = 0;
+                    }
+
+                    Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_RightSide, false);
+                }
             }
         }
 
