@@ -56,7 +56,8 @@ namespace Game_of_Life {
             
             #line 1 "..\..\MainWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
-            
+
+
             #line default
             #line hidden
         }

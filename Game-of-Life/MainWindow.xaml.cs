@@ -30,8 +30,7 @@ namespace Game_of_Life
         {
             //EmtyCell.GridInitialization();
             //Logic.Drawing();
-            Button button = new Button();
-            button.Width = 100;
+            
         }
     }
 }
