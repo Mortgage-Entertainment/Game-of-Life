@@ -7,9 +7,10 @@ namespace Game_of_Life
     internal class Logic
     {
         static private uint RowsCount;
-        static private int cellhgh;
+        static private uint cellhgh;
+        static private uint IndexX, IndexY, value, valueconst;  //  рабочие переменные для элемента горизонтального массива, вертикального, инкремента цикла, его установки
 
-        static public int GetCellhgh() => cellhgh;
+        static public uint GetCellhgh() => cellhgh;
 
         static public uint GetRowsCount() => RowsCount;
 
@@ -21,11 +22,9 @@ namespace Game_of_Life
 
             //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
-            uint IndexX, IndexY, value, valueconst;   //рабочие переменные для элемента горизонтального массива, вертикального, инкремент цикла, его установка
-
             if (SystemParameters.PrimaryScreenHeight > SystemParameters.PrimaryScreenWidth)
-                cellhgh = Convert.ToInt32(SystemParameters.PrimaryScreenHeight / (5 + ScrollPosition.GetAprx()));  //cellhgh = щширина экрана / (5*scrollposition.aprx)
-            else cellhgh = Convert.ToInt32(SystemParameters.PrimaryScreenWidth / (5 + ScrollPosition.GetAprx()));
+                cellhgh = Convert.ToUInt32(SystemParameters.PrimaryScreenHeight / (5 + ScrollPosition.GetAprx()));  //cellhgh = щширина экрана / (5*scrollposition.aprx)
+            else cellhgh = Convert.ToUInt32(SystemParameters.PrimaryScreenWidth / (5 + ScrollPosition.GetAprx()));
             //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
             IndexX = ScrollPosition.GetCameraX() - 1;
@@ -37,9 +36,9 @@ namespace Game_of_Life
              *  и загрузить картинку
              */
 
-            EmtyCell.SetGridImage(IndexX, IndexY);
+            EmptyCell.SetGridImage(IndexX, IndexY);
 
-            EmtyCell.SetImagePosition(IndexX, IndexY, cellhgh);
+            EmptyCell.SetImagePosition(IndexX, IndexY, cellhgh);
 
             valueconst = 3;
 
@@ -57,9 +56,9 @@ namespace Game_of_Life
                      *  и загрузить картинку
                      */
 
-                    EmtyCell.SetGridImage(IndexX, IndexY);
+                    EmptyCell.SetGridImage(IndexX, IndexY);
 
-                    EmtyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, EmtyCell.NamesFormuleType.FT_DownFirst);
+                    EmptyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, EmptyCell.NamesFormuleType.FT_DownFirst);
 
                     IndexX--;
                     value--;
@@ -76,9 +75,9 @@ namespace Game_of_Life
                      *  и загрузить картинку
                      */
 
-                    EmtyCell.SetGridImage(IndexX, IndexY);
+                    EmptyCell.SetGridImage(IndexX, IndexY);
 
-                    EmtyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, EmtyCell.NamesFormuleType.FT_LeftSecond);
+                    EmptyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, EmptyCell.NamesFormuleType.FT_LeftSecond);
 
                     IndexY--;
                     value--;
@@ -95,9 +94,9 @@ namespace Game_of_Life
                      *  и загрузить картинку
                      */
 
-                    EmtyCell.SetGridImage(IndexX, IndexY);
+                    EmptyCell.SetGridImage(IndexX, IndexY);
 
-                    EmtyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, EmtyCell.NamesFormuleType.FT_UpThreed);
+                    EmptyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, EmptyCell.NamesFormuleType.FT_UpThreed);
 
                     IndexX++;
                     value--;
@@ -114,9 +113,9 @@ namespace Game_of_Life
                      *  и загрузить картинку
                      */
 
-                    EmtyCell.SetGridImage(IndexX, IndexY);
+                    EmptyCell.SetGridImage(IndexX, IndexY);
 
-                    EmtyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, EmtyCell.NamesFormuleType.FT_RightFourth);
+                    EmptyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, EmptyCell.NamesFormuleType.FT_RightFourth);
 
                     IndexY++;
                     value--;
@@ -127,9 +126,65 @@ namespace Game_of_Life
                 valueconst += 2;
             }
         }
+        ////   КОНЕЦ ФУНКЦИИ     ///  DRAWING
 
-        static public void ScrollingMoveDrawing()
+        //-------------------------------------------------Перемещение камеры( SM - Scrolling of Move )-----------------------------------------------------------------\\
+
+        public enum ScreenSideofDrawing
         {
+            /*
+             *  Перечисление
+             *  для определения стороны экрана
+             *  
+             *  префикс SD_ 
+             *   ( SD - Side of Drawing )
+             */
+             
+            SD_BottomSide = 1,   //  низ
+            SD_LeftSide = 2,   //  лево
+            SD_TopSide = 3,    //  верх
+            SD_RightSide = 4   //  право
+        }
+        
+        static public void SM_Drawing(ScreenSideofDrawing VectorofScrolling, bool ReDraw)
+        {
+            /*
+             *  Метод перерисовки клеток
+             *  при 
+             *  
+             *   скроллинге перемещения
+             *   
+             *    ( метод ScrollingMove в классе ScrollPosition )
+             *    
+             */
+
+            byte VoS = (byte)VectorofScrolling;                                        //  Подготовка
+            IndexX = ScrollPosition.GetCameraX() - 1;                                  //  
+            IndexY = ScrollPosition.GetCameraY() - 1;                                  //  метода
+
+            IndexX = IndexX - RowsCount;                                               //  ( задание начальных
+            IndexY = IndexY - RowsCount;                                               //   значений переменных
+
+
+            while ( ScrollPosition.GetCameraX() - 1 + RowsCount + 1  >  IndexX ) {                //  Перемещение
+                while ( ScrollPosition.GetCameraY() - 1 + RowsCount + 1  >  IndexY) {             //
+                                                                                                  //  камеры
+                    EmptyCell.SM_OffsetingImages(IndexX, IndexY, cellhgh, VoS);        //
+
+                    IndexY++;                                                                     //  ( клеток
+                }                                                                                 //   в обратную
+                IndexX++;                                                                         //   сторону )
+                IndexY = IndexY - (2 * RowsCount) - 1;                                            //
+            }
+
+
+            if (ReDraw == true) {                           //  добавление и удаление картинок
+
+                EmptyCell.SM_DeletingCells(RowsCount, VoS); //  удаление ячеек, что попали за границу экрана
+
+                EmptyCell.SM_AddingCells(RowsCount, VoS);   //  отрисовка ячеек, что были за границей экрана
+            }
+
         }
     }
 }
