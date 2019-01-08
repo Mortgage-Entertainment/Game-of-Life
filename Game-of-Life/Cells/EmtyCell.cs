@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using Game_of_Life.Options;
 
 namespace Game_of_Life.Cells
 {
@@ -207,18 +208,18 @@ namespace Game_of_Life.Cells
             if (VoS == 1) {  //  при перемещении  / ВНИЗ
 
                 MarginValues[1] = (uint)Grid[IndexX, IndexY].Model.Margin.Left;
-                MarginValues[2] = (uint)Grid[IndexX, IndexY].Model.Margin.Top - ScrollMoveSpeed;
+                MarginValues[2] = (uint)Grid[IndexX, IndexY].Model.Margin.Top - Settings.ScrollMoveSpeed;
                 MarginValues[3] = (uint)Grid[IndexX, IndexY].Model.Margin.Right;
-                MarginValues[4] = (uint)Grid[IndexX, IndexY].Model.Margin.Bottom + ScrollMoveSpeed;
+                MarginValues[4] = (uint)Grid[IndexX, IndexY].Model.Margin.Bottom + Settings.ScrollMoveSpeed;
 
                 Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
             }
 
             if (VoS == 2) {  //  при перемещении  / ВЛЕВО
 
-                MarginValues[1] = (uint)Grid[IndexX, IndexY].Model.Margin.Left + ScrollMoveSpeed;
+                MarginValues[1] = (uint)Grid[IndexX, IndexY].Model.Margin.Left + Settings.ScrollMoveSpeed;
                 MarginValues[2] = (uint)Grid[IndexX, IndexY].Model.Margin.Top;
-                MarginValues[3] = (uint)Grid[IndexX, IndexY].Model.Margin.Right - ScrollMoveSpeed;
+                MarginValues[3] = (uint)Grid[IndexX, IndexY].Model.Margin.Right - Settings.ScrollMoveSpeed;
                 MarginValues[4] = (uint)Grid[IndexX, IndexY].Model.Margin.Bottom;
 
                 Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
@@ -227,18 +228,18 @@ namespace Game_of_Life.Cells
             if (VoS == 3) {  //  при перемещении  / ВВЕРХ
 
                 MarginValues[1] = (uint)Grid[IndexX, IndexY].Model.Margin.Left;
-                MarginValues[2] = (uint)Grid[IndexX, IndexY].Model.Margin.Top + ScrollMoveSpeed;
+                MarginValues[2] = (uint)Grid[IndexX, IndexY].Model.Margin.Top + Settings.ScrollMoveSpeed;
                 MarginValues[3] = (uint)Grid[IndexX, IndexY].Model.Margin.Right;
-                MarginValues[4] = (uint)Grid[IndexX, IndexY].Model.Margin.Bottom - ScrollMoveSpeed;
+                MarginValues[4] = (uint)Grid[IndexX, IndexY].Model.Margin.Bottom - Settings.ScrollMoveSpeed;
 
                 Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
             }
 
             if (VoS == 4) {  //  при перемещении  / ВПРАВО
 
-                MarginValues[1] = (uint)Grid[IndexX, IndexY].Model.Margin.Left - ScrollMoveSpeed;
+                MarginValues[1] = (uint)Grid[IndexX, IndexY].Model.Margin.Left - Settings.ScrollMoveSpeed;
                 MarginValues[2] = (uint)Grid[IndexX, IndexY].Model.Margin.Top;
-                MarginValues[3] = (uint)Grid[IndexX, IndexY].Model.Margin.Right + ScrollMoveSpeed;
+                MarginValues[3] = (uint)Grid[IndexX, IndexY].Model.Margin.Right + Settings.ScrollMoveSpeed;
                 MarginValues[4] = (uint)Grid[IndexX, IndexY].Model.Margin.Bottom;
 
                 Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);

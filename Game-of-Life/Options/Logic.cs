@@ -2,7 +2,7 @@
 using System;
 using System.Windows;
 
-namespace Game_of_Life
+namespace Game_of_Life.Options
 {
     internal class Logic
     {
