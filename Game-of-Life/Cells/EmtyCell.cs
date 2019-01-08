@@ -246,7 +246,7 @@ namespace Game_of_Life.Cells
             }
         }
 
-        static public void SM_AddingCells(uint RowsCount, byte VoS)
+        static public void SM_AddingCells(uint RowsCount, byte VoS, uint CellHeight)
         {
             /*
              *  Метод 
@@ -277,6 +277,17 @@ namespace Game_of_Life.Cells
 
                     if (Grid[IndexX, IndexY].Model == null)  Grid[IndexX, IndexY].Model = new Image();
 
+                    IndexY--;   //  начало расчёта координат новой отрисованной ячейки
+
+                    MarginValues[1] = (uint)Grid[IndexX, IndexY].Model.Margin.Left;                  //  берутся координаты
+                    MarginValues[2] = (uint)Grid[IndexX, IndexY].Model.Margin.Top + CellHeight;      //  соседней уже отрисованной
+                    MarginValues[3] = (uint)Grid[IndexX, IndexY].Model.Margin.Right;                 //  ячейки 
+                    MarginValues[4] = (uint)Grid[IndexX, IndexY].Model.Margin.Bottom - CellHeight;   //  и смещаются на одну клетку
+
+                    IndexY++;
+                    Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
+                    //  конец расчёта координат новой отрисованной ячейки
+
                     IndexX++;
                 }
             }
@@ -289,6 +300,17 @@ namespace Game_of_Life.Cells
                 while (ScrollPosition.GetCameraY() - 1 + ((RowsCount * 2) + 1) > IndexY) {
 
                     if (Grid[IndexX, IndexY].Model == null)  Grid[IndexX, IndexY].Model = new Image();
+
+                    IndexX++;   //  начало расчёта координат новой отрисованной ячейки
+
+                    MarginValues[1] = (uint)Grid[IndexX, IndexY].Model.Margin.Left - CellHeight;   //  берутся координаты
+                    MarginValues[2] = (uint)Grid[IndexX, IndexY].Model.Margin.Top;                 //  соседней уже отрисованной
+                    MarginValues[3] = (uint)Grid[IndexX, IndexY].Model.Margin.Right + CellHeight;  //  ячейки 
+                    MarginValues[4] = (uint)Grid[IndexX, IndexY].Model.Margin.Bottom;              //  и смещаются на одну клетку
+
+                    IndexX--;
+                    Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
+                    //  конец расчёта координат новой отрисованной ячейки
 
                     IndexY++;
                 }
@@ -303,6 +325,17 @@ namespace Game_of_Life.Cells
 
                     if (Grid[IndexX, IndexY].Model == null)  Grid[IndexX, IndexY].Model = new Image();
 
+                    IndexY++;   //  начало расчёта координат новой отрисованной ячейки
+
+                    MarginValues[1] = (uint)Grid[IndexX, IndexY].Model.Margin.Left;                  //  берутся координаты
+                    MarginValues[2] = (uint)Grid[IndexX, IndexY].Model.Margin.Top - CellHeight;      //  соседней уже отрисованной
+                    MarginValues[3] = (uint)Grid[IndexX, IndexY].Model.Margin.Right;                 //  ячейки 
+                    MarginValues[4] = (uint)Grid[IndexX, IndexY].Model.Margin.Bottom + CellHeight;   //  и смещаются на одну клетку
+
+                    IndexY--;
+                    Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
+                    //  конец расчёта координат новой отрисованной ячейки
+
                     IndexX++;
                 }
             }
@@ -315,6 +348,17 @@ namespace Game_of_Life.Cells
                 while (ScrollPosition.GetCameraY() - 1 + ((RowsCount * 2) + 1) > IndexY) {
 
                     if (Grid[IndexX, IndexY].Model == null)  Grid[IndexX, IndexY].Model = new Image();
+
+                    IndexX--;   //  начало расчёта координат новой отрисованной ячейки
+
+                    MarginValues[1] = (uint)Grid[IndexX, IndexY].Model.Margin.Left + CellHeight;   //  берутся координаты
+                    MarginValues[2] = (uint)Grid[IndexX, IndexY].Model.Margin.Top;                 //  соседней уже отрисованной
+                    MarginValues[3] = (uint)Grid[IndexX, IndexY].Model.Margin.Right - CellHeight;  //  ячейки 
+                    MarginValues[4] = (uint)Grid[IndexX, IndexY].Model.Margin.Bottom;              //  и смещаются на одну клетку
+
+                    IndexX++;
+                    Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
+                    //  конец расчёта координат новой отрисованной ячейки
 
                     IndexY++;
                 }

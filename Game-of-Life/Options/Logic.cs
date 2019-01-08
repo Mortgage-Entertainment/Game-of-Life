@@ -182,7 +182,7 @@ namespace Game_of_Life.Options
 
                 EmptyCell.SM_DeletingCells(RowsCount, VoS); //  удаление ячеек, что попали за границу экрана
 
-                EmptyCell.SM_AddingCells(RowsCount, VoS);   //  отрисовка ячеек, что были за границей экрана
+                EmptyCell.SM_AddingCells(RowsCount, VoS, cellhgh);   //  отрисовка ячеек, что были за границей экрана
             }
 
         }

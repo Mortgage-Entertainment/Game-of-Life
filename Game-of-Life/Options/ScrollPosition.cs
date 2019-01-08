@@ -86,14 +86,12 @@ namespace Game_of_Life.Options
              *  для вызова внутри него - методы с префиксом SM_
              *   ( SM - Scrolling Move )
              *  
-             */      /////   не закончено - ( Cursor.Position - позиция курсора, 
-                         //  ScrollMoveSpeed - скорость перемещения камеры, параметр будет регулироваться в настройках )
-                         
-                         //  Код был проанализирован логически только в первоначальном варианте ( перемещение влево )
-                         //  в остальных случаях он был скопирован и заменены только названия ( Top, Left, Right, Bottom )
+             */      /////   не закончено - 
+                          //   Код был проанализирован логически только в первоначальном варианте ( перемещение влево )
+                          //   в остальных случаях он был скопирован и заменены только названия ( Top, Left, Right, Bottom )
 
 
-            ///  Перемещение   // Вниз
+            ////  Перемещение   // Вниз
             if (CursorPositionY > SystemParameters.PrimaryScreenHeight - 2) {
                 
                 if (TopOffset < 1) {
@@ -129,7 +127,7 @@ namespace Game_of_Life.Options
             }
 
 
-            ///  Перемещение   // Влево
+            ////  Перемещение   // Влево
             if (CursorPositionX < 2) {
 
                 if (RightOffset < 1) {
@@ -165,7 +163,7 @@ namespace Game_of_Life.Options
             }
 
 
-            ///  Перемещение   // Вверх
+            ////  Перемещение   // Вверх
             if (CursorPositionY < 2) {
 
                 if (BottomOffset < 1) {
@@ -201,7 +199,7 @@ namespace Game_of_Life.Options
             }
 
 
-            ///  Перемещение   // Впарво
+            ////  Пер+емещение   // Впарво
             if (CursorPositionX > SystemParameters.PrimaryScreenWidth - 2) {
                 
                 if (LeftOffset < 1) {
