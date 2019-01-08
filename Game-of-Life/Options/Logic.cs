@@ -14,6 +14,26 @@ namespace Game_of_Life.Options
 
         static public uint GetRowsCount() => RowsCount;
 
+        //-----------------------------------------------------------------------------------------------------------------------------------\\
+
+        public enum ScreenSideofDrawing
+        {
+            /*
+             *  Перечисление
+             *  для определения стороны экрана
+             *  
+             *  префикс SD_ 
+             *   ( SD - Side of Drawing )
+             */
+
+            SD_BottomSide = 1,   //  низ
+            SD_LeftSide = 2,   //  лево
+            SD_TopSide = 3,    //  верх
+            SD_RightSide = 4   //  право
+        }
+
+        //----------------------------------------------------------------------------------------------------------------------------------\\
+
         static public void Drawing()
         {
             /*
@@ -36,9 +56,9 @@ namespace Game_of_Life.Options
              *  и загрузить картинку
              */
 
-            EmptyCell.SetGridImage(IndexX, IndexY);
+            EmptyCells.SetGridImage(IndexX, IndexY);
 
-            EmptyCell.SetImagePosition(IndexX, IndexY, cellhgh);
+            EmptyCells.SetImagePosition(IndexX, IndexY, cellhgh);
 
             valueconst = 3;
 
@@ -56,9 +76,9 @@ namespace Game_of_Life.Options
                      *  и загрузить картинку
                      */
 
-                    EmptyCell.SetGridImage(IndexX, IndexY);
+                    EmptyCells.SetGridImage(IndexX, IndexY);
 
-                    EmptyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, EmptyCell.NamesFormuleType.FT_DownFirst);
+                    EmptyCells.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, ScreenSideofDrawing.SD_BottomSide);
 
                     IndexX--;
                     value--;
@@ -75,9 +95,9 @@ namespace Game_of_Life.Options
                      *  и загрузить картинку
                      */
 
-                    EmptyCell.SetGridImage(IndexX, IndexY);
+                    EmptyCells.SetGridImage(IndexX, IndexY);
 
-                    EmptyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, EmptyCell.NamesFormuleType.FT_LeftSecond);
+                    EmptyCells.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, ScreenSideofDrawing.SD_LeftSide);
 
                     IndexY--;
                     value--;
@@ -94,9 +114,9 @@ namespace Game_of_Life.Options
                      *  и загрузить картинку
                      */
 
-                    EmptyCell.SetGridImage(IndexX, IndexY);
+                    EmptyCells.SetGridImage(IndexX, IndexY);
 
-                    EmptyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, EmptyCell.NamesFormuleType.FT_UpThreed);
+                    EmptyCells.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, ScreenSideofDrawing.SD_RightSide);
 
                     IndexX++;
                     value--;
@@ -113,9 +133,9 @@ namespace Game_of_Life.Options
                      *  и загрузить картинку
                      */
 
-                    EmptyCell.SetGridImage(IndexX, IndexY);
+                    EmptyCells.SetGridImage(IndexX, IndexY);
 
-                    EmptyCell.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, EmptyCell.NamesFormuleType.FT_RightFourth);
+                    EmptyCells.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, ScreenSideofDrawing.SD_TopSide);
 
                     IndexY++;
                     value--;
@@ -129,22 +149,6 @@ namespace Game_of_Life.Options
         ////   КОНЕЦ ФУНКЦИИ     ///  DRAWING
 
         //-------------------------------------------------Перемещение камеры( SM - Scrolling of Move )-----------------------------------------------------------------\\
-
-        public enum ScreenSideofDrawing
-        {
-            /*
-             *  Перечисление
-             *  для определения стороны экрана
-             *  
-             *  префикс SD_ 
-             *   ( SD - Side of Drawing )
-             */
-             
-            SD_BottomSide = 1,   //  низ
-            SD_LeftSide = 2,   //  лево
-            SD_TopSide = 3,    //  верх
-            SD_RightSide = 4   //  право
-        }
         
         static public void SM_Drawing(ScreenSideofDrawing VectorofScrolling, bool ReDraw)
         {
@@ -169,7 +173,7 @@ namespace Game_of_Life.Options
             while ( ScrollPosition.GetCameraX() - 1 + RowsCount + 1  >  IndexX ) {                //  Перемещение
                 while ( ScrollPosition.GetCameraY() - 1 + RowsCount + 1  >  IndexY) {             //
                                                                                                   //  камеры
-                    EmptyCell.SM_OffsetingImages(IndexX, IndexY, cellhgh, VoS);        //
+                    EmptyCells.SM_OffsetingImages(IndexX, IndexY, cellhgh, VoS);        //
 
                     IndexY++;                                                                     //  ( клеток
                 }                                                                                 //   в обратную
@@ -180,9 +184,9 @@ namespace Game_of_Life.Options
 
             if (ReDraw == true) {                           //  добавление и удаление картинок
 
-                EmptyCell.SM_DeletingCells(RowsCount, VoS); //  удаление ячеек, что попали за границу экрана
+                EmptyCells.SM_DeletingCells(RowsCount, VoS); //  удаление ячеек, что попали за границу экрана
 
-                EmptyCell.SM_AddingCells(RowsCount, VoS, cellhgh);   //  отрисовка ячеек, что были за границей экрана
+                EmptyCells.SM_AddingCells(RowsCount, VoS, cellhgh);   //  отрисовка ячеек, что были за границей экрана
             }
 
         }

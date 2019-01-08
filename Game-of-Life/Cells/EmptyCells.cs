@@ -6,54 +6,65 @@ using Game_of_Life.Options;
 
 namespace Game_of_Life.Cells
 {
-    internal class EmptyCell
+    class EmptyCells
     {
-        /*Класс пустой клетки.
-         * Объект этого класса визуально будет
-         * выступать в роли фоновых клеток
-         * и невизульно содержать другие объекты вроде нейрона.
-         */
+        /*
+         *   Класс обслуживания и управления 
+         *   ячейками
+         *     ( объектами класса BaseCell )
+         *   
+         *   Здесь находятся методы, 
+         *     связанные с ячейками;
+         *   массив Grid, 
+         *     который является картой, на которой идёт игра;
+         *   переменные, хранящие данные
+         *     о ячейках.
+         *   
+         */  //   если кто-то знает о классе EmptyCell, то для него:
 
-        //-----------------------------<Объявление переменных>-------------------------------------\\
+                    //   КЛАСС EmptyCell БЫЛ РЗДЕЛЁН на 
+                          //
+                          //  EmptyCells    И       //  BaseCell
+ 
+        //---------------------------------------------<Объявление переменных>---------------------------------------------------------------\\
 
         private const int ArraySize = 150;     // для удобства хранит размер массива
-        private int Value = 0;         // для удобства хранит кол-во созданных объектов этого класса
-        private int x, y;
-        static private EmptyCell[,] Grid = new EmptyCell[ArraySize, ArraySize];        // Один из важнейших массивов в игре. Хранит пустые клетки (для удобной работы)
+        static private int Value = 0;         // для удобства хранит кол-во созданных объектов этого класса
+        static private BaseCell[,] Grid = new BaseCell[ArraySize, ArraySize];        // Один из важнейших массивов в игре. Хранит пустые клетки (для удобной работы)
+        
         static private uint[] MarginValues = new uint[4];            // Массив хранящий координаты margin для установки их в объект при отрисовке
-        private Image Model;                // Объект картинки. Нужен для визуального отображения пустой клетки
-
-        private CellType Type;              // Объект перечисления, который хранит название типа хлетки, которая находится в этой (пустой) клетке
 
         //-----------------------------------------------------------------------------------------\\
 
-        private enum CellType
+        public enum CellType
         {
             /*
              * Перечисление, которое содержит названия типов клеток.
              * Будет юзаться для хранения типа клетки, которая содержится
              * в объекте класса EmtyCell
+             * 
+             *   префикс CT - CellType
              */
 
-            None = 0,      // Это значение имеет каждый объект этого класса по умолчанию
-            Neuron,        // Нейрон
-            Building,      // Тип строительной клетки
-            Leukocyte,     // Лейкоцит
-            Muscle,        // Мышца
-            Dead           // Мёртвая клетка
+            CT_None = 0,      // Это значение имеет каждый объект этого класса по умолчанию
+            CT_Neuron,        // Нейрон
+            CT_Building,      // Тип строительной клетки
+            CT_Leukocyte,     // Лейкоцит
+            CT_Muscle,        // Мышца
+            CT_Dead           // Мёртвая клетка
         };
 
         //---------------------------------<Конструкторы>------------------------------------------\\
 
-        public EmptyCell()   // Конструктор по умолчанию класса EmptyCell
+        static public void BaseCellConstr()   // Конструктор по умолчанию класса BaseCell
         {
-            Type = 0;   // Устанавливаем в тип клетки значение None
+            BaseCell.CellType = 0;   // Устанавливаем в тип клетки значение None
             Value++;
         }
 
-        public EmptyCell(uint IndexX, uint IndexY)
+        static public void BaseCellConstr(uint IndexX, uint IndexY)
         {
-            Grid[IndexX, IndexY].Type = 0;    // Устанавливаем в тип клетки значение None
+            Grid[IndexX, IndexY].CellType = 0;    // Устанавливаем в тип клетки значение None
             Value++;
         }
 
@@ -72,7 +83,7 @@ namespace Game_of_Life.Cells
             {
                 while (IndexY < 150)
                 {
-                    Grid[IndexX, IndexY] = new EmptyCell();
+                    Grid[IndexX, IndexY] = new BaseCell();
                     IndexY++;
                 }
                 IndexY = 0;
@@ -80,27 +91,9 @@ namespace Game_of_Life.Cells
             }
         }
 
-        //-----------------------------------------------------------------------------------------\\
+        //----------------------------------------------------------------------------------------------------------------------------------\\
 
-        public enum NamesFormuleType
-        {
-            /*
-            *  Перечисление, которое
-            *  определяет, какая формула будет использоваться
-            *  в методе формул расчёта координат изображений
-            *   ( имя метода - SetImagePosition)
-            *
-            *   ( для метода отрисовки DrawingCells
-            *    в классе Logic )
-            */
-
-            FT_DownFirst = 1,    // Первая формула, проход нижней части
-            FT_LeftSecond = 2,   // Вторая формула, проход левой части
-            FT_UpThreed = 3,     // Третья формула, проход верхней части
-            FT_RightFourth = 4   // Четвёртая формула, проход правой части
-        }
-
-        static public void SetImagePosition(uint IndexX, uint IndexY, uint CellHeight, uint RowsCount, uint CellsinRow, uint value, NamesFormuleType FormuleType)
+        static public void SetImagePosition(uint IndexX, uint IndexY, uint CellHeight, uint RowsCount, uint CellsinRow, uint value, Logic.ScreenSideofDrawing FormuleType)
         {
             /*
              * Метод вычисления координат.
@@ -152,7 +145,7 @@ namespace Game_of_Life.Cells
             {
                 MarginValues[1] = unchecked((uint)((uint)(SystemParameters.PrimaryScreenWidth / 2) - CellHeight / 2 + (CellHeight * RowsCount) + ScrollPosition.GetLeftOffset() - ScrollPosition.GetRightOffset()));//установка горизонтальной координаты картинки центральной ячйеки
                 MarginValues[2] = unchecked((uint)((uint)(SystemParameters.PrimaryScreenHeight / 2) - CellHeight / 2 - (CellHeight * RowsCount) + (CellHeight * ((CellsinRow - 2) - value)) + CellHeight + ScrollPosition.GetTopOffset() - ScrollPosition.GetBottomOffset()));//установка вертикальной координаты картинки центральной ячйеки
-                
+
                 MarginValues[3] = Convert.ToUInt32(SystemParameters.PrimaryScreenWidth - CellHeight - MarginValues[1]);
                 MarginValues[4] = Convert.ToUInt32(SystemParameters.PrimaryScreenHeight - CellHeight - MarginValues[2]);
 
@@ -205,7 +198,8 @@ namespace Game_of_Life.Cells
              *  
              */
 
-            if (VoS == 1) {  //  при перемещении  / ВНИЗ
+            if (VoS == 1)
+            {  //  при перемещении  / ВНИЗ
 
                 MarginValues[1] = (uint)Grid[IndexX, IndexY].Model.Margin.Left;
                 MarginValues[2] = (uint)Grid[IndexX, IndexY].Model.Margin.Top - Settings.ScrollMoveSpeed;
@@ -215,7 +209,8 @@ namespace Game_of_Life.Cells
                 Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
             }
 
-            if (VoS == 2) {  //  при перемещении  / ВЛЕВО
+            if (VoS == 2)
+            {  //  при перемещении  / ВЛЕВО
 
                 MarginValues[1] = (uint)Grid[IndexX, IndexY].Model.Margin.Left + Settings.ScrollMoveSpeed;
                 MarginValues[2] = (uint)Grid[IndexX, IndexY].Model.Margin.Top;
@@ -225,7 +220,8 @@ namespace Game_of_Life.Cells
                 Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
             }
 
-            if (VoS == 3) {  //  при перемещении  / ВВЕРХ
+            if (VoS == 3)
+            {  //  при перемещении  / ВВЕРХ
 
                 MarginValues[1] = (uint)Grid[IndexX, IndexY].Model.Margin.Left;
                 MarginValues[2] = (uint)Grid[IndexX, IndexY].Model.Margin.Top + Settings.ScrollMoveSpeed;
@@ -235,7 +231,8 @@ namespace Game_of_Life.Cells
                 Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
             }
 
-            if (VoS == 4) {  //  при перемещении  / ВПРАВО
+            if (VoS == 4)
+            {  //  при перемещении  / ВПРАВО
 
                 MarginValues[1] = (uint)Grid[IndexX, IndexY].Model.Margin.Left - Settings.ScrollMoveSpeed;
                 MarginValues[2] = (uint)Grid[IndexX, IndexY].Model.Margin.Top;
@@ -269,13 +266,15 @@ namespace Game_of_Life.Cells
             uint IndexY = ScrollPosition.GetCameraY() - 1;
 
 
-            if (VoS == 1) {                  //  При перемещении    / ВНИЗ
+            if (VoS == 1)
+            {                  //  При перемещении    / ВНИЗ
                 IndexX = IndexX - RowsCount;
                 IndexY = IndexY + RowsCount;
 
-                while (ScrollPosition.GetCameraX() - 1 + ((RowsCount * 2) + 1) > IndexX) {
+                while (ScrollPosition.GetCameraX() - 1 + ((RowsCount * 2) + 1) > IndexX)
+                {
 
-                    if (Grid[IndexX, IndexY].Model == null)  Grid[IndexX, IndexY].Model = new Image();
+                    if (Grid[IndexX, IndexY].Model == null) Grid[IndexX, IndexY].Model = new Image();
 
                     IndexY--;   //  начало расчёта координат новой отрисованной ячейки
 
@@ -293,13 +292,15 @@ namespace Game_of_Life.Cells
             }
 
 
-            if (VoS == 2) {                  //  При перемещении    / ВЛЕВО
+            if (VoS == 2)
+            {                  //  При перемещении    / ВЛЕВО
                 IndexX = IndexX - RowsCount;
                 IndexY = IndexY - RowsCount;
 
-                while (ScrollPosition.GetCameraY() - 1 + ((RowsCount * 2) + 1) > IndexY) {
+                while (ScrollPosition.GetCameraY() - 1 + ((RowsCount * 2) + 1) > IndexY)
+                {
 
-                    if (Grid[IndexX, IndexY].Model == null)  Grid[IndexX, IndexY].Model = new Image();
+                    if (Grid[IndexX, IndexY].Model == null) Grid[IndexX, IndexY].Model = new Image();
 
                     IndexX++;   //  начало расчёта координат новой отрисованной ячейки
 
@@ -317,13 +318,15 @@ namespace Game_of_Life.Cells
             }
 
 
-            if (VoS == 3) {                  //  При перемещении    / ВВЕРХ
+            if (VoS == 3)
+            {                  //  При перемещении    / ВВЕРХ
                 IndexX = IndexX - RowsCount;
                 IndexY = IndexY - RowsCount;
 
-                while (ScrollPosition.GetCameraX() - 1 + ((RowsCount * 2) + 1) > IndexX) {
+                while (ScrollPosition.GetCameraX() - 1 + ((RowsCount * 2) + 1) > IndexX)
+                {
 
-                    if (Grid[IndexX, IndexY].Model == null)  Grid[IndexX, IndexY].Model = new Image();
+                    if (Grid[IndexX, IndexY].Model == null) Grid[IndexX, IndexY].Model = new Image();
 
                     IndexY++;   //  начало расчёта координат новой отрисованной ячейки
 
@@ -341,13 +344,15 @@ namespace Game_of_Life.Cells
             }
 
 
-            if (VoS == 4) {                  //  При перемещении    / ВПРАВО
+            if (VoS == 4)
+            {                  //  При перемещении    / ВПРАВО
                 IndexX = IndexX + RowsCount;
                 IndexY = IndexY - RowsCount;
 
-                while (ScrollPosition.GetCameraY() - 1 + ((RowsCount * 2) + 1) > IndexY) {
+                while (ScrollPosition.GetCameraY() - 1 + ((RowsCount * 2) + 1) > IndexY)
+                {
 
-                    if (Grid[IndexX, IndexY].Model == null)  Grid[IndexX, IndexY].Model = new Image();
+                    if (Grid[IndexX, IndexY].Model == null) Grid[IndexX, IndexY].Model = new Image();
 
                     IndexX--;   //  начало расчёта координат новой отрисованной ячейки
 
@@ -382,7 +387,7 @@ namespace Game_of_Life.Cells
              *   в методе SM_Drawing
              *   класса Logic )
              * 
-             */   
+             */
 
             uint IndexX = ScrollPosition.GetCameraX() - 1;
             uint IndexY = ScrollPosition.GetCameraY() - 1;
@@ -447,6 +452,5 @@ namespace Game_of_Life.Cells
                 }
             }
         }
-
     }
 }
