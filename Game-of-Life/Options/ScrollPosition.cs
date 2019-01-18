@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace Game_of_Life
+namespace Game_of_Life.Options
 {
     internal class ScrollPosition
     {
@@ -74,7 +74,7 @@ namespace Game_of_Life
 
         //-------------------------------------------------------------<Перемещение>-----------------------------------------------------------------------\\
 
-        static public void ScrollingMove()
+        static public void ScrollingMove(uint CursorPositionX, uint CursorPositionY)
         {
             /*
              *  Метод перемещения
@@ -86,18 +86,16 @@ namespace Game_of_Life
              *  для вызова внутри него - методы с префиксом SM_
              *   ( SM - Scrolling Move )
              *  
-             */      /////   не закончено - ( Cursor.Position - позиция курсора, 
-                         //  ScrollMoveSpeed - скорость перемещения камеры, параметр будет регулироваться в настройках )
-                         
-                         //  Код был проанализирован логически только в первоначальном варианте ( перемещение влево )
-                         //  в остальных случаях он был скопирован и заменены только названия ( Top, Left, Right, Bottom )
+             */      /////   не закончено - 
+                          //   Код был проанализирован логически только в первоначальном варианте ( перемещение влево )
+                          //   в остальных случаях он был скопирован и заменены только названия ( Top, Left, Right, Bottom )
 
 
-            ///  Перемещение   // Вниз
-            if (Cursor.Position.Y > SystemParameters.PrimaryScreenHeight - 2) {
+            ////  Перемещение   // Вниз
+            if (CursorPositionY > SystemParameters.PrimaryScreenHeight - 2) {
                 
                 if (TopOffset < 1) {
-                    BottomOffset = BottomOffset + ScrollMoveSpeed;
+                    BottomOffset = BottomOffset + Settings.ScrollMoveSpeed;
 
                     if (BottomOffset > Convert.ToInt32(Logic.GetCellhgh() / 2)) {
 
@@ -114,13 +112,13 @@ namespace Game_of_Life
 
                 } else {
 
-                    if (TopOffset > ScrollMoveSpeed) {
+                    if (TopOffset > Settings.ScrollMoveSpeed) {
 
-                        TopOffset = TopOffset - ScrollMoveSpeed;
+                        TopOffset = TopOffset - Settings.ScrollMoveSpeed;
 
                     } else {
 
-                        BottomOffset = ScrollMoveSpeed - TopOffset;
+                        BottomOffset = Settings.ScrollMoveSpeed - TopOffset;
                         TopOffset = 0;
                     }
 
@@ -129,12 +127,12 @@ namespace Game_of_Life
             }
 
 
-            ///  Перемещение   // Влево
-            if (Cursor.Position.X < 2) {
+            ////  Перемещение   // Влево
+            if (CursorPositionX < 2) {
 
                 if (RightOffset < 1) {
 
-                    LeftOffset = LeftOffset + ScrollMoveSpeed;
+                    LeftOffset = LeftOffset + Settings.ScrollMoveSpeed;
 
                     if (LeftOffset > Convert.ToInt32(Logic.GetCellhgh() / 2)) {
 
@@ -150,13 +148,13 @@ namespace Game_of_Life
                     
                 } else {
 
-                    if (RightOffset > ScrollMoveSpeed) {
+                    if (RightOffset > Settings.ScrollMoveSpeed) {
 
-                        RightOffset = RightOffset - ScrollMoveSpeed;
+                        RightOffset = RightOffset - Settings.ScrollMoveSpeed;
 
                     } else {
 
-                        LeftOffset = ScrollMoveSpeed - RightOffset;
+                        LeftOffset = Settings.ScrollMoveSpeed - RightOffset;
                         RightOffset = 0;
                     }
 
@@ -165,11 +163,11 @@ namespace Game_of_Life
             }
 
 
-            ///  Перемещение   // Вверх
-            if (Cursor.Position.Y < 2) {
+            ////  Перемещение   // Вверх
+            if (CursorPositionY < 2) {
 
                 if (BottomOffset < 1) {
-                    TopOffset = TopOffset + ScrollMoveSpeed;
+                    TopOffset = TopOffset + Settings.ScrollMoveSpeed;
 
                     if (TopOffset > Convert.ToInt32(Logic.GetCellhgh() / 2)) {
 
@@ -186,13 +184,13 @@ namespace Game_of_Life
 
                 } else {
 
-                    if (BottomOffset > ScrollMoveSpeed) {
+                    if (BottomOffset > Settings.ScrollMoveSpeed) {
 
-                        BottomOffset = BottomOffset - ScrollMoveSpeed;
+                        BottomOffset = BottomOffset - Settings.ScrollMoveSpeed;
 
                     } else {
 
-                        TopOffset = ScrollMoveSpeed - BottomOffset;
+                        TopOffset = Settings.ScrollMoveSpeed - BottomOffset;
                         BottomOffset = 0;
                     }
 
@@ -201,12 +199,12 @@ namespace Game_of_Life
             }
 
 
-            ///  Перемещение   // Впарво
-            if (Cursor.Position.X > SystemParameters.PrimaryScreenWidth - 2) {
+            ////  Пер+емещение   // Впарво
+            if (CursorPositionX > SystemParameters.PrimaryScreenWidth - 2) {
                 
                 if (LeftOffset < 1) {
 
-                    RightOffset = RightOffset + ScrollMoveSpeed;
+                    RightOffset = RightOffset + Settings.ScrollMoveSpeed;
 
                     if (RightOffset > Convert.ToInt32(Logic.GetCellhgh() / 2)) {
 
@@ -222,13 +220,13 @@ namespace Game_of_Life
                     
                 } else {
 
-                    if (LeftOffset > ScrollMoveSpeed) {
+                    if (LeftOffset > Settings.ScrollMoveSpeed) {
 
-                        LeftOffset = LeftOffset - ScrollMoveSpeed;
+                        LeftOffset = LeftOffset - Settings.ScrollMoveSpeed;
 
                     } else {
 
-                        RightOffset = ScrollMoveSpeed - LeftOffset;
+                        RightOffset = Settings.ScrollMoveSpeed - LeftOffset;
                         LeftOffset = 0;
                     }
 
