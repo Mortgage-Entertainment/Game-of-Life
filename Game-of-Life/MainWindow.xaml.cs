@@ -21,8 +21,6 @@ namespace Game_of_Life
             Grid grid = new Grid();
 
             grid.Children.Add(button);
-            Grid.SetRow(button, 0);
-            Grid.SetColumn(button, 0);
         }
     }
 }
