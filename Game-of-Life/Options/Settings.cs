@@ -22,6 +22,6 @@ namespace Game_of_Life.Options
          *   
          */
 
-        static public uint ScrollMoveSpeed;
+        static public int ScrollMoveSpeed;
     }
 }

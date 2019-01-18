@@ -32,7 +32,7 @@ namespace Game_of_Life.Cells
         static private int Value = 0;         // для удобства хранит кол-во созданных объектов этого класса
         static private BaseCell[,] Grid = new BaseCell[ArraySize, ArraySize];        // Один из важнейших массивов в игре. Хранит пустые клетки (для удобной работы)
         
-        static private uint[] MarginValues = new uint[4];            // Массив хранящий координаты margin для установки их в объект при отрисовке
+        static private int[] MarginValues = new int[4];            // Массив хранящий координаты margin для установки их в объект при отрисовке
 
         //-----------------------------------------------------------------------------------------\\
 
@@ -93,7 +93,7 @@ namespace Game_of_Life.Cells
 
         //----------------------------------------------------------------------------------------------------------------------------------\\
 
-        static public void SetImagePosition(uint IndexX, uint IndexY, uint CellHeight, uint RowsCount, uint CellsinRow, uint value, Logic.ScreenSideofDrawing FormuleType)
+        static public void SetImagePosition(int IndexX, int IndexY, int CellHeight, int RowsCount, int CellsinRow, int value, Logic.ScreenSideofDrawing FormuleType)
         {
             /*
              * Метод вычисления координат.
@@ -110,50 +110,50 @@ namespace Game_of_Life.Cells
 
             if (TypeofFormule == 1)
             {
-                MarginValues[1] = unchecked((uint)((uint)(SystemParameters.PrimaryScreenWidth / 2) - CellHeight / 2 + (CellHeight * RowsCount) - CellHeight * (CellsinRow - value) + ScrollPosition.GetLeftOffset() - ScrollPosition.GetRightOffset()));   //установка горизонтальной координаты картинки центральной ячйеки
-                MarginValues[2] = unchecked((uint)(Convert.ToInt32(SystemParameters.PrimaryScreenHeight / 2) - Convert.ToInt32(CellHeight / 2) + (CellHeight * RowsCount) + ScrollPosition.GetTopOffset() - ScrollPosition.GetBottomOffset()));     //установка вертикальной координаты картинки центральной ячйеки
+                MarginValues[0] = unchecked((int)((int)(SystemParameters.PrimaryScreenWidth / 2) - CellHeight / 2 + (CellHeight * RowsCount) - CellHeight * (CellsinRow - value) + ScrollPosition.GetLeftOffset() - ScrollPosition.GetRightOffset()));   //установка горизонтальной координаты картинки центральной ячйеки
+                MarginValues[1] = unchecked((int)(Convert.ToInt32(SystemParameters.PrimaryScreenHeight / 2) - Convert.ToInt32(CellHeight / 2) + (CellHeight * RowsCount) + ScrollPosition.GetTopOffset() - ScrollPosition.GetBottomOffset()));     //установка вертикальной координаты картинки центральной ячйеки
 
-                MarginValues[3] = Convert.ToUInt32(SystemParameters.PrimaryScreenWidth - CellHeight - MarginValues[1]);
-                MarginValues[4] = Convert.ToUInt32(SystemParameters.PrimaryScreenHeight - CellHeight - MarginValues[2]);
+                MarginValues[2] = Convert.ToInt32(SystemParameters.PrimaryScreenWidth - CellHeight - MarginValues[0]);
+                MarginValues[3] = Convert.ToInt32(SystemParameters.PrimaryScreenHeight - CellHeight - MarginValues[1]);
 
-                Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
+                Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
             }
 
             if (TypeofFormule == 2)
             {
-                MarginValues[1] = unchecked((uint)((uint)(SystemParameters.PrimaryScreenWidth / 2) - CellHeight / 2 - (CellHeight * RowsCount) + ScrollPosition.GetLeftOffset() - ScrollPosition.GetRightOffset()));       //установка горизонтальной координаты картинки центральной ячйеки
-                MarginValues[2] = unchecked((uint)((uint)(SystemParameters.PrimaryScreenHeight / 2) - CellHeight / 2 + (CellHeight * RowsCount) - (CellHeight * (CellsinRow - value)) + ScrollPosition.GetTopOffset() - ScrollPosition.GetBottomOffset()));      //установка вертикальной координаты картинки центральной ячйеки
+                MarginValues[0] = unchecked((int)((int)(SystemParameters.PrimaryScreenWidth / 2) - CellHeight / 2 - (CellHeight * RowsCount) + ScrollPosition.GetLeftOffset() - ScrollPosition.GetRightOffset()));       //установка горизонтальной координаты картинки центральной ячйеки
+                MarginValues[1] = unchecked((int)((int)(SystemParameters.PrimaryScreenHeight / 2) - CellHeight / 2 + (CellHeight * RowsCount) - (CellHeight * (CellsinRow - value)) + ScrollPosition.GetTopOffset() - ScrollPosition.GetBottomOffset()));      //установка вертикальной координаты картинки центральной ячйеки
 
-                MarginValues[3] = Convert.ToUInt32(SystemParameters.PrimaryScreenWidth - CellHeight - MarginValues[1]);
-                MarginValues[4] = Convert.ToUInt32(SystemParameters.PrimaryScreenHeight - CellHeight - MarginValues[2]);
+                MarginValues[2] = Convert.ToInt32(SystemParameters.PrimaryScreenWidth - CellHeight - MarginValues[0]);
+                MarginValues[3] = Convert.ToInt32(SystemParameters.PrimaryScreenHeight - CellHeight - MarginValues[1]);
 
-                Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
+                Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
             }
 
             if (TypeofFormule == 3)
             {
-                MarginValues[1] = unchecked((uint)((uint)(SystemParameters.PrimaryScreenWidth / 2) - CellHeight / 2 - (CellHeight * RowsCount) + (CellHeight * (CellsinRow - value)) + ScrollPosition.GetLeftOffset() - ScrollPosition.GetRightOffset()));        //установка горизонтальной координаты картинки центральной ячйеки
-                MarginValues[2] = unchecked((uint)((uint)(SystemParameters.PrimaryScreenHeight / 2) - CellHeight / 2 - (CellHeight * RowsCount) + ScrollPosition.GetTopOffset() - ScrollPosition.GetBottomOffset()));       //установка вертикальной координаты картинки центральной ячйеки
+                MarginValues[0] = unchecked((int)((int)(SystemParameters.PrimaryScreenWidth / 2) - CellHeight / 2 - (CellHeight * RowsCount) + (CellHeight * (CellsinRow - value)) + ScrollPosition.GetLeftOffset() - ScrollPosition.GetRightOffset()));        //установка горизонтальной координаты картинки центральной ячйеки
+                MarginValues[1] = unchecked((int)((int)(SystemParameters.PrimaryScreenHeight / 2) - CellHeight / 2 - (CellHeight * RowsCount) + ScrollPosition.GetTopOffset() - ScrollPosition.GetBottomOffset()));       //установка вертикальной координаты картинки центральной ячйеки
 
-                MarginValues[3] = Convert.ToUInt32(SystemParameters.PrimaryScreenWidth - CellHeight - MarginValues[1]);
-                MarginValues[4] = Convert.ToUInt32(SystemParameters.PrimaryScreenHeight - CellHeight - MarginValues[2]);
+                MarginValues[2] = Convert.ToInt32(SystemParameters.PrimaryScreenWidth - CellHeight - MarginValues[0]);
+                MarginValues[3] = Convert.ToInt32(SystemParameters.PrimaryScreenHeight - CellHeight - MarginValues[1]);
 
-                Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
+                Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
             }
 
             if (TypeofFormule == 4)
             {
-                MarginValues[1] = unchecked((uint)((uint)(SystemParameters.PrimaryScreenWidth / 2) - CellHeight / 2 + (CellHeight * RowsCount) + ScrollPosition.GetLeftOffset() - ScrollPosition.GetRightOffset()));//установка горизонтальной координаты картинки центральной ячйеки
-                MarginValues[2] = unchecked((uint)((uint)(SystemParameters.PrimaryScreenHeight / 2) - CellHeight / 2 - (CellHeight * RowsCount) + (CellHeight * ((CellsinRow - 2) - value)) + CellHeight + ScrollPosition.GetTopOffset() - ScrollPosition.GetBottomOffset()));//установка вертикальной координаты картинки центральной ячйеки
+                MarginValues[0] = unchecked((int)((int)(SystemParameters.PrimaryScreenWidth / 2) - CellHeight / 2 + (CellHeight * RowsCount) + ScrollPosition.GetLeftOffset() - ScrollPosition.GetRightOffset()));//установка горизонтальной координаты картинки центральной ячйеки
+                MarginValues[1] = unchecked((int)((int)(SystemParameters.PrimaryScreenHeight / 2) - CellHeight / 2 - (CellHeight * RowsCount) + (CellHeight * ((CellsinRow - 2) - value)) + CellHeight + ScrollPosition.GetTopOffset() - ScrollPosition.GetBottomOffset()));//установка вертикальной координаты картинки центральной ячйеки
 
-                MarginValues[3] = Convert.ToUInt32(SystemParameters.PrimaryScreenWidth - CellHeight - MarginValues[1]);
-                MarginValues[4] = Convert.ToUInt32(SystemParameters.PrimaryScreenHeight - CellHeight - MarginValues[2]);
+                MarginValues[2] = Convert.ToInt32(SystemParameters.PrimaryScreenWidth - CellHeight - MarginValues[0]);
+                MarginValues[3] = Convert.ToInt32(SystemParameters.PrimaryScreenHeight - CellHeight - MarginValues[1]);
 
-                Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
+                Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
             }
         }
 
-        static public void SetImagePosition(uint IndexX, uint IndexY, uint CellHeight)
+        static public void SetImagePosition(int IndexX, int IndexY, int CellHeight)
         {
             /*
              * Перегруженная функция.
@@ -163,16 +163,16 @@ namespace Game_of_Life.Cells
              * так как при её отрисовке имеются ещё не все значения, необходимые в аргументах оригинальной функции.
              */
 
-            MarginValues[1] = Convert.ToUInt32((int)(SystemParameters.PrimaryScreenWidth / 2) - (CellHeight / 2));
-            MarginValues[2] = Convert.ToUInt32((int)(SystemParameters.PrimaryScreenHeight / 2) - (CellHeight / 2));
+            MarginValues[0] = Convert.ToInt32((int)(SystemParameters.PrimaryScreenWidth / 2) - (CellHeight / 2));
+            MarginValues[1] = Convert.ToInt32((int)(SystemParameters.PrimaryScreenHeight / 2) - (CellHeight / 2));
 
-            MarginValues[3] = Convert.ToUInt32(SystemParameters.PrimaryScreenWidth - CellHeight - MarginValues[1]);
-            MarginValues[4] = Convert.ToUInt32(SystemParameters.PrimaryScreenHeight - CellHeight - MarginValues[2]);
+            MarginValues[2] = Convert.ToInt32(SystemParameters.PrimaryScreenWidth - CellHeight - MarginValues[0]);
+            MarginValues[3] = Convert.ToInt32(SystemParameters.PrimaryScreenHeight - CellHeight - MarginValues[1]);
 
-            Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
+            Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
         }
 
-        static public void SetGridImage(uint IndexX, uint IndexY)    // аргументы для нахождения определённого элемента в масстиве "Grid"
+        static public void SetGridImage(int IndexX, int IndexY, Grid grid)    // аргументы для нахождения определённого элемента в масстиве "Grid"
         {
             /*
              * Функция, устанавливающая
@@ -180,12 +180,13 @@ namespace Game_of_Life.Cells
              */
 
             Grid[IndexX, IndexY].Model = new Image();
-            Grid[IndexX, IndexY].Model.Source = new BitmapImage(new Uri("/Resources/EmtyCell540.jpg"));
+            grid.Children.Add(Grid[IndexX, IndexY].Model);
+            Grid[IndexX, IndexY].Model.Source = new BitmapImage(new Uri(@"D:\Game-of-Life\Game-of-Life\Game-of-Life\Resources\540.jpg"));
         }
 
         //--------------------------------------------------------------Перемещение камеры ( SM - ScrollingMove )------------------------------------------------------------------------------\\
 
-        static public void SM_OffsetingImages(uint IndexX, uint IndexY, uint cellhgh, byte VoS)
+        static public void SM_OffsetingImages(int IndexX, int IndexY, int cellhgh, byte VoS)
         {
             /*
              *  метод 
@@ -201,49 +202,49 @@ namespace Game_of_Life.Cells
             if (VoS == 1)
             {  //  при перемещении  / ВНИЗ
 
-                MarginValues[1] = (uint)Grid[IndexX, IndexY].Model.Margin.Left;
-                MarginValues[2] = (uint)Grid[IndexX, IndexY].Model.Margin.Top - Settings.ScrollMoveSpeed;
-                MarginValues[3] = (uint)Grid[IndexX, IndexY].Model.Margin.Right;
-                MarginValues[4] = (uint)Grid[IndexX, IndexY].Model.Margin.Bottom + Settings.ScrollMoveSpeed;
+                MarginValues[0] = (int)Grid[IndexX, IndexY].Model.Margin.Left;
+                MarginValues[1] = (int)Grid[IndexX, IndexY].Model.Margin.Top - (int)Settings.ScrollMoveSpeed;
+                MarginValues[2] = (int)Grid[IndexX, IndexY].Model.Margin.Right;
+                MarginValues[3] = (int)Grid[IndexX, IndexY].Model.Margin.Bottom + (int)Settings.ScrollMoveSpeed;
 
-                Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
+                Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
             }
 
             if (VoS == 2)
             {  //  при перемещении  / ВЛЕВО
 
-                MarginValues[1] = (uint)Grid[IndexX, IndexY].Model.Margin.Left + Settings.ScrollMoveSpeed;
-                MarginValues[2] = (uint)Grid[IndexX, IndexY].Model.Margin.Top;
-                MarginValues[3] = (uint)Grid[IndexX, IndexY].Model.Margin.Right - Settings.ScrollMoveSpeed;
-                MarginValues[4] = (uint)Grid[IndexX, IndexY].Model.Margin.Bottom;
+                MarginValues[0] = (int)Grid[IndexX, IndexY].Model.Margin.Left + (int)Settings.ScrollMoveSpeed;
+                MarginValues[1] = (int)Grid[IndexX, IndexY].Model.Margin.Top;
+                MarginValues[2] = (int)Grid[IndexX, IndexY].Model.Margin.Right - (int)Settings.ScrollMoveSpeed;
+                MarginValues[3] = (int)Grid[IndexX, IndexY].Model.Margin.Bottom;
 
-                Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
+                Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
             }
 
             if (VoS == 3)
             {  //  при перемещении  / ВВЕРХ
 
-                MarginValues[1] = (uint)Grid[IndexX, IndexY].Model.Margin.Left;
-                MarginValues[2] = (uint)Grid[IndexX, IndexY].Model.Margin.Top + Settings.ScrollMoveSpeed;
-                MarginValues[3] = (uint)Grid[IndexX, IndexY].Model.Margin.Right;
-                MarginValues[4] = (uint)Grid[IndexX, IndexY].Model.Margin.Bottom - Settings.ScrollMoveSpeed;
+                MarginValues[0] = (int)Grid[IndexX, IndexY].Model.Margin.Left;
+                MarginValues[1] = (int)Grid[IndexX, IndexY].Model.Margin.Top + (int)Settings.ScrollMoveSpeed;
+                MarginValues[2] = (int)Grid[IndexX, IndexY].Model.Margin.Right;
+                MarginValues[3] = (int)Grid[IndexX, IndexY].Model.Margin.Bottom - (int)Settings.ScrollMoveSpeed;
 
-                Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
+                Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
             }
 
             if (VoS == 4)
             {  //  при перемещении  / ВПРАВО
 
-                MarginValues[1] = (uint)Grid[IndexX, IndexY].Model.Margin.Left - Settings.ScrollMoveSpeed;
-                MarginValues[2] = (uint)Grid[IndexX, IndexY].Model.Margin.Top;
-                MarginValues[3] = (uint)Grid[IndexX, IndexY].Model.Margin.Right + Settings.ScrollMoveSpeed;
-                MarginValues[4] = (uint)Grid[IndexX, IndexY].Model.Margin.Bottom;
+                MarginValues[0] = (int)Grid[IndexX, IndexY].Model.Margin.Left - (int)Settings.ScrollMoveSpeed;
+                MarginValues[1] = (int)Grid[IndexX, IndexY].Model.Margin.Top;
+                MarginValues[2] = (int)Grid[IndexX, IndexY].Model.Margin.Right + (int)Settings.ScrollMoveSpeed;
+                MarginValues[3] = (int)Grid[IndexX, IndexY].Model.Margin.Bottom;
 
-                Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
+                Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
             }
         }
 
-        static public void SM_AddingCells(uint RowsCount, byte VoS, uint CellHeight)
+        static public void SM_AddingCells(int RowsCount, byte VoS, int CellHeight)
         {
             /*
              *  Метод 
@@ -262,8 +263,8 @@ namespace Game_of_Life.Cells
              * 
              */   /////  не закончено, расчёта координат пока нет
 
-            uint IndexX = ScrollPosition.GetCameraX() - 1;
-            uint IndexY = ScrollPosition.GetCameraY() - 1;
+            int IndexX = ScrollPosition.GetCameraX() - 1;
+            int IndexY = ScrollPosition.GetCameraY() - 1;
 
 
             if (VoS == 1)
@@ -278,10 +279,10 @@ namespace Game_of_Life.Cells
 
                     IndexY--;   //  начало расчёта координат новой отрисованной ячейки
 
-                    MarginValues[1] = (uint)Grid[IndexX, IndexY].Model.Margin.Left;                  //  берутся координаты
-                    MarginValues[2] = (uint)Grid[IndexX, IndexY].Model.Margin.Top + CellHeight;      //  соседней уже отрисованной
-                    MarginValues[3] = (uint)Grid[IndexX, IndexY].Model.Margin.Right;                 //  ячейки 
-                    MarginValues[4] = (uint)Grid[IndexX, IndexY].Model.Margin.Bottom - CellHeight;   //  и смещаются на одну клетку
+                    MarginValues[1] = (int)Grid[IndexX, IndexY].Model.Margin.Left;                  //  берутся координаты
+                    MarginValues[2] = (int)Grid[IndexX, IndexY].Model.Margin.Top + CellHeight;      //  соседней уже отрисованной
+                    MarginValues[3] = (int)Grid[IndexX, IndexY].Model.Margin.Right;                 //  ячейки 
+                    MarginValues[4] = (int)Grid[IndexX, IndexY].Model.Margin.Bottom - CellHeight;   //  и смещаются на одну клетку
 
                     IndexY++;
                     Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
@@ -304,10 +305,10 @@ namespace Game_of_Life.Cells
 
                     IndexX++;   //  начало расчёта координат новой отрисованной ячейки
 
-                    MarginValues[1] = (uint)Grid[IndexX, IndexY].Model.Margin.Left - CellHeight;   //  берутся координаты
-                    MarginValues[2] = (uint)Grid[IndexX, IndexY].Model.Margin.Top;                 //  соседней уже отрисованной
-                    MarginValues[3] = (uint)Grid[IndexX, IndexY].Model.Margin.Right + CellHeight;  //  ячейки 
-                    MarginValues[4] = (uint)Grid[IndexX, IndexY].Model.Margin.Bottom;              //  и смещаются на одну клетку
+                    MarginValues[1] = (int)Grid[IndexX, IndexY].Model.Margin.Left - CellHeight;   //  берутся координаты
+                    MarginValues[2] = (int)Grid[IndexX, IndexY].Model.Margin.Top;                 //  соседней уже отрисованной
+                    MarginValues[3] = (int)Grid[IndexX, IndexY].Model.Margin.Right + CellHeight;  //  ячейки 
+                    MarginValues[4] = (int)Grid[IndexX, IndexY].Model.Margin.Bottom;              //  и смещаются на одну клетку
 
                     IndexX--;
                     Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
@@ -330,10 +331,10 @@ namespace Game_of_Life.Cells
 
                     IndexY++;   //  начало расчёта координат новой отрисованной ячейки
 
-                    MarginValues[1] = (uint)Grid[IndexX, IndexY].Model.Margin.Left;                  //  берутся координаты
-                    MarginValues[2] = (uint)Grid[IndexX, IndexY].Model.Margin.Top - CellHeight;      //  соседней уже отрисованной
-                    MarginValues[3] = (uint)Grid[IndexX, IndexY].Model.Margin.Right;                 //  ячейки 
-                    MarginValues[4] = (uint)Grid[IndexX, IndexY].Model.Margin.Bottom + CellHeight;   //  и смещаются на одну клетку
+                    MarginValues[1] = (int)Grid[IndexX, IndexY].Model.Margin.Left;                  //  берутся координаты
+                    MarginValues[2] = (int)Grid[IndexX, IndexY].Model.Margin.Top - CellHeight;      //  соседней уже отрисованной
+                    MarginValues[3] = (int)Grid[IndexX, IndexY].Model.Margin.Right;                 //  ячейки 
+                    MarginValues[4] = (int)Grid[IndexX, IndexY].Model.Margin.Bottom + CellHeight;   //  и смещаются на одну клетку
 
                     IndexY--;
                     Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
@@ -356,10 +357,10 @@ namespace Game_of_Life.Cells
 
                     IndexX--;   //  начало расчёта координат новой отрисованной ячейки
 
-                    MarginValues[1] = (uint)Grid[IndexX, IndexY].Model.Margin.Left + CellHeight;   //  берутся координаты
-                    MarginValues[2] = (uint)Grid[IndexX, IndexY].Model.Margin.Top;                 //  соседней уже отрисованной
-                    MarginValues[3] = (uint)Grid[IndexX, IndexY].Model.Margin.Right - CellHeight;  //  ячейки 
-                    MarginValues[4] = (uint)Grid[IndexX, IndexY].Model.Margin.Bottom;              //  и смещаются на одну клетку
+                    MarginValues[1] = (int)Grid[IndexX, IndexY].Model.Margin.Left + CellHeight;   //  берутся координаты
+                    MarginValues[2] = (int)Grid[IndexX, IndexY].Model.Margin.Top;                 //  соседней уже отрисованной
+                    MarginValues[3] = (int)Grid[IndexX, IndexY].Model.Margin.Right - CellHeight;  //  ячейки 
+                    MarginValues[4] = (int)Grid[IndexX, IndexY].Model.Margin.Bottom;              //  и смещаются на одну клетку
 
                     IndexX++;
                     Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
@@ -370,7 +371,7 @@ namespace Game_of_Life.Cells
             }
         }
 
-        static public void SM_DeletingCells(uint RowsCount, byte VoS)
+        static public void SM_DeletingCells(int RowsCount, byte VoS)
         {
             /*
              *  Метод 
@@ -389,8 +390,8 @@ namespace Game_of_Life.Cells
              * 
              */
 
-            uint IndexX = ScrollPosition.GetCameraX() - 1;
-            uint IndexY = ScrollPosition.GetCameraY() - 1;
+            int IndexX = ScrollPosition.GetCameraX() - 1;
+            int IndexY = ScrollPosition.GetCameraY() - 1;
 
 
             if (VoS == 1)

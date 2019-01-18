@@ -1,18 +1,19 @@
 ﻿using Game_of_Life.Cells;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Game_of_Life.Options
 {
     internal class Logic
     {
-        static private uint RowsCount;
-        static private uint cellhgh;
-        static private uint IndexX, IndexY, value, valueconst;  //  рабочие переменные для элемента горизонтального массива, вертикального, инкремента цикла, его установки
+        static private int RowsCount;
+        static private int cellhgh;
+        static private int IndexX, IndexY, value, valueconst;  //  рабочие переменные для элемента горизонтального массива, вертикального, инкремента цикла, его установки
 
-        static public uint GetCellhgh() => cellhgh;
+        static public int GetCellhgh() => cellhgh;
 
-        static public uint GetRowsCount() => RowsCount;
+        static public int GetRowsCount() => RowsCount;
 
         //-----------------------------------------------------------------------------------------------------------------------------------\\
 
@@ -34,7 +35,7 @@ namespace Game_of_Life.Options
 
         //----------------------------------------------------------------------------------------------------------------------------------\\
 
-        static public void Drawing()
+        static public void Drawing(Grid grid)
         {
             /*
              * Метод отрисовки картинок
@@ -43,8 +44,8 @@ namespace Game_of_Life.Options
             //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
             if (SystemParameters.PrimaryScreenHeight > SystemParameters.PrimaryScreenWidth)
-                cellhgh = Convert.ToUInt32(SystemParameters.PrimaryScreenHeight / (5 + ScrollPosition.GetAprx()));  //cellhgh = щширина экрана / (5*scrollposition.aprx)
-            else cellhgh = Convert.ToUInt32(SystemParameters.PrimaryScreenWidth / (5 + ScrollPosition.GetAprx()));
+                cellhgh = Convert.ToInt32(SystemParameters.PrimaryScreenHeight / (5 + ScrollPosition.GetAprx()));  //cellhgh = щширина экрана / (5*scrollposition.aprx)
+            else cellhgh = Convert.ToInt32(SystemParameters.PrimaryScreenWidth / (5 + ScrollPosition.GetAprx()));
             //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
             IndexX = ScrollPosition.GetCameraX() - 1;
@@ -56,7 +57,7 @@ namespace Game_of_Life.Options
              *  и загрузить картинку
              */
 
-            EmptyCells.SetGridImage(IndexX, IndexY);
+            EmptyCells.SetGridImage(IndexX, IndexY, grid);
 
             EmptyCells.SetImagePosition(IndexX, IndexY, cellhgh);
 
@@ -76,7 +77,7 @@ namespace Game_of_Life.Options
                      *  и загрузить картинку
                      */
 
-                    EmptyCells.SetGridImage(IndexX, IndexY);
+                    EmptyCells.SetGridImage(IndexX, IndexY, grid);
 
                     EmptyCells.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, ScreenSideofDrawing.SD_BottomSide);
 
@@ -95,7 +96,7 @@ namespace Game_of_Life.Options
                      *  и загрузить картинку
                      */
 
-                    EmptyCells.SetGridImage(IndexX, IndexY);
+                    EmptyCells.SetGridImage(IndexX, IndexY, grid);
 
                     EmptyCells.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, ScreenSideofDrawing.SD_LeftSide);
 
@@ -114,7 +115,7 @@ namespace Game_of_Life.Options
                      *  и загрузить картинку
                      */
 
-                    EmptyCells.SetGridImage(IndexX, IndexY);
+                    EmptyCells.SetGridImage(IndexX, IndexY, grid);
 
                     EmptyCells.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, ScreenSideofDrawing.SD_RightSide);
 
@@ -133,7 +134,7 @@ namespace Game_of_Life.Options
                      *  и загрузить картинку
                      */
 
-                    EmptyCells.SetGridImage(IndexX, IndexY);
+                    EmptyCells.SetGridImage(IndexX, IndexY, grid);
 
                     EmptyCells.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, ScreenSideofDrawing.SD_TopSide);
 

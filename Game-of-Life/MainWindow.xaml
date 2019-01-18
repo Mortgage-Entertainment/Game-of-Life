@@ -9,6 +9,6 @@
         WindowState="Maximized"
         WindowStyle="None" Loaded="Window_Loaded">
 
-    <Grid x:Name="mygrid">
+    <Grid x:Name="maingrid">
     </Grid>
 </Window>

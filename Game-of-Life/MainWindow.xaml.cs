@@ -2,6 +2,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using Game_of_Life.Cells;
+using Game_of_Life.Options;
 
 namespace Game_of_Life
 {
@@ -17,22 +19,8 @@ namespace Game_of_Life
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //EmtyCell.GridInitialization();
-            //Logic.Drawing();
-
-            SomeImage some = new SomeImage();
-            some.Image_drow(mygrid);
-        }
-
-
-        class SomeImage
-        {
-            public void Image_drow(Grid mygrid)
-            {
-                Image image = new Image();
-                mygrid.Children.Add(image);
-                image.Source = new BitmapImage(new Uri(@"D:\Game-of-Life\Game-of-Life\Game-of-Life\Resources\540.jpg"));
-            }
+            EmptyCells.GridInitialization();
+            Logic.Drawing(maingrid);
         }
     }
 }

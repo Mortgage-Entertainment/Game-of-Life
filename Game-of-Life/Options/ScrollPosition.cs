@@ -1,30 +1,31 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Game_of_Life.Options
 {
     internal class ScrollPosition
     {
-        static private uint CameraX = 127, CameraY = 7;
+        static private int CameraX = 127, CameraY = 7;
         static private byte Aprx = 4;            // степень приближения в клетках (approximitation)
-        static private uint LeftOffset = 0, RightOffset = 0;
-        static private uint TopOffset = 0, BottomOffset = 0;
+        static private int LeftOffset = 0, RightOffset = 0;
+        static private int TopOffset = 0, BottomOffset = 0;
 
         //-----------------------------------------------------<Геттеры>----------------------------------------------------------------------\\
 
-        static public uint GetRightOffset() => RightOffset;
+        static public int GetRightOffset() => RightOffset;
 
-        static public uint GetLeftOffset() => LeftOffset;
+        static public int GetLeftOffset() => LeftOffset;
 
-        static public uint GetTopOffset() => TopOffset;
+        static public int GetTopOffset() => TopOffset;
 
-        static public uint GetBottomOffset() => BottomOffset;
+        static public int GetBottomOffset() => BottomOffset;
 
         static public byte GetAprx() => Aprx;
 
-        static public uint GetCameraX() => CameraX;
+        static public int GetCameraX() => CameraX;
 
-        static public uint GetCameraY() => CameraY;
+        static public int GetCameraY() => CameraY;
 
         //---------------------------------------------------------<Методы скроллинга>---------------------------------------------------------------------------\\
 
@@ -44,7 +45,7 @@ namespace Game_of_Life.Options
 
         //-------------------------------------------------------<Приближение>---------------------------------------------------------------\\
 
-        static public void ScrollingApproximation()
+        static public void ScrollingApproximation(Grid grid)
         {
             /*
              *  Метод приближения камеры
@@ -54,12 +55,12 @@ namespace Game_of_Life.Options
              */
 
             Aprx--;
-            Logic.Drawing();
+            Logic.Drawing(grid);
         }
 
         //---------------------------------------------------------<Отдаление>----------------------------------------------------------------------\\
 
-        static public void ScrollingDistancing()
+        static public void ScrollingDistancing(Grid grid)
         {
             /*
              *  Метод отдаления камеры
@@ -69,7 +70,7 @@ namespace Game_of_Life.Options
              */
 
             Aprx++;
-            Logic.Drawing();
+            Logic.Drawing(grid);
         }
 
         //-------------------------------------------------------------<Перемещение>-----------------------------------------------------------------------\\
@@ -99,7 +100,7 @@ namespace Game_of_Life.Options
 
                     if (BottomOffset > Convert.ToInt32(Logic.GetCellhgh() / 2)) {
 
-                        TopOffset = Convert.ToUInt32(Logic.GetCellhgh() - BottomOffset);
+                        TopOffset = Convert.ToInt32(Logic.GetCellhgh() - BottomOffset);
                         BottomOffset = 0;
                         CameraX--;
                         Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_BottomSide, true);
@@ -136,7 +137,7 @@ namespace Game_of_Life.Options
 
                     if (LeftOffset > Convert.ToInt32(Logic.GetCellhgh() / 2)) {
 
-                        RightOffset = Convert.ToUInt32(Logic.GetCellhgh() - LeftOffset);
+                        RightOffset = Convert.ToInt32(Logic.GetCellhgh() - LeftOffset);
                         LeftOffset = 0;
                         CameraX--;
                         Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_LeftSide, true);
@@ -171,7 +172,7 @@ namespace Game_of_Life.Options
 
                     if (TopOffset > Convert.ToInt32(Logic.GetCellhgh() / 2)) {
 
-                        BottomOffset = Convert.ToUInt32(Logic.GetCellhgh() - TopOffset);
+                        BottomOffset = Convert.ToInt32(Logic.GetCellhgh() - TopOffset);
                         TopOffset = 0;
                         CameraX--;
                         Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_TopSide, true);
@@ -208,7 +209,7 @@ namespace Game_of_Life.Options
 
                     if (RightOffset > Convert.ToInt32(Logic.GetCellhgh() / 2)) {
 
-                        LeftOffset = Convert.ToUInt32(Logic.GetCellhgh() - RightOffset);
+                        LeftOffset = Convert.ToInt32(Logic.GetCellhgh() - RightOffset);
                         RightOffset = 0;
                         CameraX--;
                         Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_RightSide, true);
