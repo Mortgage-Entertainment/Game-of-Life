@@ -199,7 +199,7 @@ namespace Game_of_Life.Options
             }
 
 
-            ////  Пер+емещение   // Впарво
+            ////  Перемещение   // Впарво
             if (CursorPositionX > SystemParameters.PrimaryScreenWidth - 2) {
                 
                 if (LeftOffset < 1) {

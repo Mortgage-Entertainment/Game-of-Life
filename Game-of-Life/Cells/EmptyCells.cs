@@ -28,7 +28,7 @@ namespace Game_of_Life.Cells
  
         //---------------------------------------------<Объявление переменных>---------------------------------------------------------------\\
 
-        private const int ArraySize = 150;     // для удобства хранит размер массива
+        private const int ArraySize = 150;     // хранит размер массива, чтобы, при случае, меняя переменную, менялся размер всех массивов, использующих это значение
         static private int Value = 0;         // для удобства хранит кол-во созданных объектов этого класса
         static private BaseCell[,] Grid = new BaseCell[ArraySize, ArraySize];        // Один из важнейших массивов в игре. Хранит пустые клетки (для удобной работы)
         
@@ -58,7 +58,7 @@ namespace Game_of_Life.Cells
 
         static public void BaseCellConstr()   // Конструктор по умолчанию класса BaseCell
         {
-            BaseCell.CellType = 0;   // Устанавливаем в тип клетки значение None
+            // BaseCell.CellType = 0;   // Устанавливаем в тип клетки значение None
             Value++;
         }
 

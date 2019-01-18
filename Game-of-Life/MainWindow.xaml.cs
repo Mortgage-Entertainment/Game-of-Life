@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace Game_of_Life
 {
@@ -17,10 +19,20 @@ namespace Game_of_Life
         {
             //EmtyCell.GridInitialization();
             //Logic.Drawing();
-            Button button = new Button();
-            Grid grid = new Grid();
 
-            grid.Children.Add(button);
+            SomeImage some = new SomeImage();
+            some.Image_drow(mygrid);
+        }
+
+
+        class SomeImage
+        {
+            public void Image_drow(Grid mygrid)
+            {
+                Image image = new Image();
+                mygrid.Children.Add(image);
+                image.Source = new BitmapImage(new Uri(@"D:\Game-of-Life\Game-of-Life\Game-of-Life\Resources\540.jpg"));
+            }
         }
     }
 }
