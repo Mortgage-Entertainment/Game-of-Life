@@ -30,7 +30,7 @@ namespace Game_of_Life.Cells
 
         private const int ArraySize = 150;     // хранит размер массива, чтобы, при случае, меняя переменную, менялся размер всех массивов, использующих это значение
         static private int Value = 0;         // для удобства хранит кол-во созданных объектов этого класса
-        static private BaseCell[,] Grid = new BaseCell[ArraySize, ArraySize];        // Один из важнейших массивов в игре. Хранит пустые клетки (для удобной работы)
+        static public BaseCell[,] Grid = new BaseCell[ArraySize, ArraySize];        // Один из важнейших массивов в игре. Хранит пустые клетки (для удобной работы)
         
         static private int[] MarginValues = new int[4];            // Массив хранящий координаты margin для установки их в объект при отрисовке
 
@@ -46,21 +46,15 @@ namespace Game_of_Life.Cells
              *   префикс CT - CellType
              */
 
-            CT_None = 0,      // Это значение имеет каждый объект этого класса по умолчанию
-            CT_Neuron,        // Нейрон
-            CT_Building,      // Тип строительной клетки
-            CT_Leukocyte,     // Лейкоцит
-            CT_Muscle,        // Мышца
-            CT_Dead           // Мёртвая клетка
+            CT_NONE = 0,      // Это значение имеет каждый объект этого класса по умолчанию
+            CT_NEURON,        // Нейрон
+            CT_BUILDING,      // Тип строительной клетки
+            CT_LEUKOCYTE,     // Лейкоцит
+            CT_MUSCLE,        // Мышца
+            CT_DEAD           // Мёртвая клетка
         };
 
         //---------------------------------<Конструкторы>------------------------------------------\\
-
-        static public void BaseCellConstr()   // Конструктор по умолчанию класса BaseCell
-        {
-            // BaseCell.CellType = 0;   // Устанавливаем в тип клетки значение None
-            Value++;
-        }
 
         static public void BaseCellConstr(uint IndexX, uint IndexY)
         {
@@ -83,7 +77,7 @@ namespace Game_of_Life.Cells
             {
                 while (IndexY < 150)
                 {
-                    Grid[IndexX, IndexY] = new BaseCell();
+                    Grid[IndexX, IndexY] = new BaseCell(IndexX, IndexY);
                     IndexY++;
                 }
                 IndexY = 0;
@@ -184,7 +178,7 @@ namespace Game_of_Life.Cells
             Grid[IndexX, IndexY].Model.Source = new BitmapImage(new Uri("../Resources/540.jpg", UriKind.Relative));
         }
 
-        //--------------------------------------------------------------Перемещение камеры ( SM - ScrollingMove )------------------------------------------------------------------------------\\
+        //--------------------------------------------------------------<Перемещение камеры ( SM - ScrollingMove )>------------------------------------------------------------------------------\\
 
         static public void SM_OffsetingImages(int IndexX, int IndexY, int cellhgh, byte VoS)
         {

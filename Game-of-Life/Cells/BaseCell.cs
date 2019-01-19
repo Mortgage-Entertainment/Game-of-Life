@@ -32,11 +32,6 @@ namespace Game_of_Life.Cells
 
         //-------------------------------------------------<Конструкторы>---------------------------------------------------------------------------------\\
 
-        public BaseCell()
-        {
-            EmptyCells.BaseCellConstr();
-        }
-
         public BaseCell(uint IndexX, uint IndexY)
         {
             EmptyCells.BaseCellConstr(IndexX, IndexY);
