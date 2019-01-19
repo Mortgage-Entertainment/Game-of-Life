@@ -181,7 +181,7 @@ namespace Game_of_Life.Cells
 
             Grid[IndexX, IndexY].Model = new Image();
             grid.Children.Add(Grid[IndexX, IndexY].Model);
-            Grid[IndexX, IndexY].Model.Source = new BitmapImage(new Uri(@"D:\Game-of-Life\Game-of-Life\Game-of-Life\Resources\540.jpg"));
+            Grid[IndexX, IndexY].Model.Source = new BitmapImage(new Uri("../Resources/540.jpg", UriKind.Relative));
         }
 
         //--------------------------------------------------------------Перемещение камеры ( SM - ScrollingMove )------------------------------------------------------------------------------\\
