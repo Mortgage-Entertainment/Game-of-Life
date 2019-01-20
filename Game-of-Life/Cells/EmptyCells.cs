@@ -166,16 +166,16 @@ namespace Game_of_Life.Cells
             Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
         }
 
-        static public void SetGridImage(int IndexX, int IndexY, Grid grid)    // аргументы для нахождения определённого элемента в масстиве "Grid"
+        static public void SetGridImage(int IndexX, int IndexY, Grid grid)    // аргументы для нахождения определённого элемента в масстиве "Grid" и grid в XAML разметке, в котором все будет отрисовываться
         {
             /*
              * Функция, устанавливающая
              * картинку для пустой клетки
              */
 
-            Grid[IndexX, IndexY].Model = new Image();
-            grid.Children.Add(Grid[IndexX, IndexY].Model);
-            Grid[IndexX, IndexY].Model.Source = new BitmapImage(new Uri("../Resources/540.jpg", UriKind.Relative));
+            Grid[IndexX, IndexY].Model = new Image();     // Создаем объект картинки
+            grid.Children.Add(Grid[IndexX, IndexY].Model);   // Засовываем его в grid в XAML разметке
+            Grid[IndexX, IndexY].Model.Source = new BitmapImage(new Uri("../Resources/540.jpg", UriKind.Relative));  // загружем изображение в объект картинки
         }
 
         //--------------------------------------------------------------<Перемещение камеры ( SM - ScrollingMove )>------------------------------------------------------------------------------\\
@@ -351,13 +351,13 @@ namespace Game_of_Life.Cells
 
                     IndexX--;   //  начало расчёта координат новой отрисованной ячейки
 
-                    MarginValues[1] = (int)Grid[IndexX, IndexY].Model.Margin.Left + CellHeight;   //  берутся координаты
-                    MarginValues[2] = (int)Grid[IndexX, IndexY].Model.Margin.Top;                 //  соседней уже отрисованной
-                    MarginValues[3] = (int)Grid[IndexX, IndexY].Model.Margin.Right - CellHeight;  //  ячейки 
-                    MarginValues[4] = (int)Grid[IndexX, IndexY].Model.Margin.Bottom;              //  и смещаются на одну клетку
+                    MarginValues[0] = (int)Grid[IndexX, IndexY].Model.Margin.Left + CellHeight;   //  берутся координаты
+                    MarginValues[1] = (int)Grid[IndexX, IndexY].Model.Margin.Top;                 //  соседней уже отрисованной
+                    MarginValues[2] = (int)Grid[IndexX, IndexY].Model.Margin.Right - CellHeight;  //  ячейки 
+                    MarginValues[3] = (int)Grid[IndexX, IndexY].Model.Margin.Bottom;              //  и смещаются на одну клетку
 
                     IndexX++;
-                    Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
+                    Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
                     //  конец расчёта координат новой отрисованной ячейки
 
                     IndexY++;

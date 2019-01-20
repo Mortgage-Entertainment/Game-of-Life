@@ -44,8 +44,9 @@ namespace Game_of_Life.Options
             //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
             if (SystemParameters.PrimaryScreenHeight > SystemParameters.PrimaryScreenWidth)
-                cellhgh = Convert.ToInt32(SystemParameters.PrimaryScreenHeight / (5 + ScrollPosition.GetAprx()));  //cellhgh = щширина экрана / (5*scrollposition.aprx)
+                cellhgh = Convert.ToInt32(SystemParameters.PrimaryScreenHeight / (5 + ScrollPosition.GetAprx()));  //cellhgh = ширина экрана / (5*scrollposition.aprx)
             else cellhgh = Convert.ToInt32(SystemParameters.PrimaryScreenWidth / (5 + ScrollPosition.GetAprx()));
+
             //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
             IndexX = ScrollPosition.GetCameraX() - 1;
