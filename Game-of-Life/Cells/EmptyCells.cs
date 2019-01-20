@@ -21,11 +21,11 @@ namespace Game_of_Life.Cells
          *     о ячейках.
          *   
          */  //   если кто-то знает о классе EmptyCell, то для него:
-
-                    //   КЛАСС EmptyCell БЫЛ РЗДЕЛЁН на 
-                          //
-                          //  EmptyCells    И       //  BaseCell
- 
+                                    //                             \\
+                                   // КЛАСС EmptyCell БЫЛ РЗДЕЛЁН на\\ 
+                                  //                                 \\
+                                 //  EmptyCells  \\  И  //  BaseCell  \\
+                
         //---------------------------------------------<Объявление переменных>---------------------------------------------------------------\\
 
         private const int ArraySize = 150;     // хранит размер массива, чтобы, при случае, меняя переменную, менялся размер всех массивов, использующих это значение
@@ -51,14 +51,13 @@ namespace Game_of_Life.Cells
             CT_BUILDING,      // Тип строительной клетки
             CT_LEUKOCYTE,     // Лейкоцит
             CT_MUSCLE,        // Мышца
-            CT_DEAD           // Мёртвая клетка
+            CT_DEAD           // Мёртвая клетка 
         };
 
         //---------------------------------<Конструкторы>------------------------------------------\\
 
         static public void BaseCellConstr(uint IndexX, uint IndexY)
         {
-            Grid[IndexX, IndexY].CellType = 0;    // Устанавливаем в тип клетки значение None
             Value++;
         }
 
@@ -78,6 +77,7 @@ namespace Game_of_Life.Cells
                 while (IndexY < 150)
                 {
                     Grid[IndexX, IndexY] = new BaseCell(IndexX, IndexY);
+                    Grid[IndexX, IndexY].CellType = 0;    // Устанавливаем в тип клетки значение None
                     IndexY++;
                 }
                 IndexY = 0;
