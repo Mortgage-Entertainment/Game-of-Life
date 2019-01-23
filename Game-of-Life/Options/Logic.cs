@@ -38,7 +38,10 @@ namespace Game_of_Life.Options
         static public void Drawing(Grid grid)
         {
             /*
-             * Метод отрисовки картинок
+             *  Метод отрисовки картинок
+             *  ячеек на старте игры
+             *  и при скроллинге 
+             *    приближения и отдаления
              */
 
             //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------\\
@@ -52,31 +55,19 @@ namespace Game_of_Life.Options
             IndexX = ScrollPosition.GetCameraX() - 1;
             IndexY = ScrollPosition.GetCameraY() - 1;
 
-            /*
-             *  если картинка не создана то создать
-             *  установить растягиваемость
-             *  и загрузить картинку
-             */
-
             EmptyCells.SetGridImage(IndexX, IndexY, grid);
 
             EmptyCells.SetImagePosition(IndexX, IndexY, cellhgh);
 
             valueconst = 3;
 
-            while (valueconst < ScrollPosition.GetAprx() + 7)
-            {
+            while (valueconst < ScrollPosition.GetAprx() + 7) {
+
                 value = valueconst;
                 RowsCount = (valueconst - 1) / 2;
                 IndexX = IndexX + RowsCount;
                 IndexY = IndexY + RowsCount;
-                while (value > 0)
-                {
-                    /*
-                     *  если картинка не создана то создать
-                     *  установить растягиваемость
-                     *  и загрузить картинку
-                     */
+                while (value > 0) {
 
                     EmptyCells.SetGridImage(IndexX, IndexY, grid);
 
@@ -89,13 +80,7 @@ namespace Game_of_Life.Options
                 IndexY--;
                 value = valueconst - 1;
 
-                while (value > 0)
-                {
-                    /*
-                     *  если картинка не создана то создать
-                     *  установить растягиваемость
-                     *  и загрузить картинку
-                     */
+                while (value > 0) {
 
                     EmptyCells.SetGridImage(IndexX, IndexY, grid);
 
@@ -108,13 +93,7 @@ namespace Game_of_Life.Options
                 IndexX++;
                 value = valueconst - 1;
 
-                while (value > 0)
-                {
-                    /*
-                     *  если картинка не создана то создать
-                     *  установить растягиваемость
-                     *  и загрузить картинку
-                     */
+                while (value > 0) {
 
                     EmptyCells.SetGridImage(IndexX, IndexY, grid);
 
@@ -127,13 +106,7 @@ namespace Game_of_Life.Options
                 IndexY++;
                 value = valueconst - 2;
 
-                while (value > 0)
-                {
-                    /*
-                     *  если картинка не создана то создать
-                     *  установить растягиваемость
-                     *  и загрузить картинку
-                     */
+                while (value > 0) {
 
                     EmptyCells.SetGridImage(IndexX, IndexY, grid);
 
@@ -148,7 +121,66 @@ namespace Game_of_Life.Options
                 valueconst += 2;
             }
         }
+
         ////   КОНЕЦ ФУНКЦИИ     ///  DRAWING
+        
+        //----------------------------------------------------<Скроллинг приближения>----------------------------------------------------------------------\\
+        
+        static public void DeleteOutEmptyCell()
+        {
+            /*
+             *  Метод удаления изображений 
+             *  клеток из ряда,
+             *  ушедшего за край экрана
+             *  при приближении камеры
+             */
+             
+            valueconst = (RowsCount * 2) + 1 + 2;
+            value = valueconst;
+            IndexX = IndexX + RowsCount + 1;
+            IndexY = IndexY + RowsCount + 1;
+
+            while (value > 0) {
+
+                EmptyCells.Grid[IndexX, IndexY].Model = null;
+
+                IndexX--;
+                value--;
+            }
+
+            IndexY--;
+            value = valueconst - 1;
+
+            while (value > 0) {
+
+                EmptyCells.Grid[IndexX, IndexY].Model = null;
+
+                IndexY--;
+                value--;
+            }
+
+            IndexX++;
+            value = valueconst - 1;
+
+            while (value > 0) {
+
+                EmptyCells.Grid[IndexX, IndexY].Model = null;
+
+                IndexX++;
+                value--;
+            }
+
+            IndexY++;
+            value = valueconst - 2;
+
+            while (value > 0) {
+
+                EmptyCells.Grid[IndexX, IndexY].Model = null;
+
+                IndexY++;
+                value--;
+            }
+        }
 
         //-------------------------------------------------Перемещение камеры( SM - Scrolling of Move )-----------------------------------------------------------------\\
         
