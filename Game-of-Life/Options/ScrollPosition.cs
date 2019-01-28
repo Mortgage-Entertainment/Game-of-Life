@@ -6,10 +6,11 @@ namespace Game_of_Life.Options
 {
     internal class ScrollPosition
     {
-        static private int CameraX = 127, CameraY = 7;
-        static private byte Aprx = 4;            // степень приближения в клетках (approximitation)
-        static private int LeftOffset = 0, RightOffset = 0;
-        static private int TopOffset = 0, BottomOffset = 0;
+        static private int CameraX = 127, CameraY = 7;  //  позиция камеры
+        static private byte Aprx = 4;            //  степень приближения в клетках (approximitation)
+        static private int LeftOffset = 0, RightOffset = 0;  //  Переменные смещения камеры              //  чтобы камера была
+        static private int TopOffset = 0, BottomOffset = 0;  //  служат для более точного определения    //  плавной, а не
+        static private int AprxOffset = 0, DistOffset = 0;   //  позиции камеры, чем по одной клетке     //  скакала по клеткам
 
         //--------------------------------------------------------------<Геттеры>-------------------------------------------------------------------------------\\
 
@@ -26,6 +27,10 @@ namespace Game_of_Life.Options
         static public int GetCameraX() => CameraX;
 
         static public int GetCameraY() => CameraY;
+
+        static public int GetAprxOffset() => AprxOffset;
+
+        static public int GetDistOffset() => DistOffset;
 
         //---------------------------------------------------------<Методы скроллинга>---------------------------------------------------------------------------\\
 
@@ -54,8 +59,31 @@ namespace Game_of_Life.Options
              *
              */
 
-            Aprx--;
-            Logic.Drawing(grid);
+            if (DistOffset < 1) {
+
+                if (AprxOffset > Convert.ToInt32(Logic.GetCellhgh() / 2)) {
+
+                    DistOffset = Logic.GetCellhgh() - AprxOffset;
+                    AprxOffset = 0;
+
+                } else {
+
+                    AprxOffset += Settings.ScrollDistSpeed;
+                }
+
+            } else {
+
+                if (DistOffset > Settings.ScrollDistSpeed) {
+
+                    DistOffset -= Settings.ScrollDistSpeed;
+
+                } else {
+
+                    AprxOffset = Settings.ScrollDistSpeed - DistOffset;
+                    DistOffset = 0;
+                }
+
+            }
         }
 
         //--------------------------------------------------------------<Отдаление>-----------------------------------------------------------------------\\
@@ -69,8 +97,40 @@ namespace Game_of_Life.Options
              *
              */
 
-            Aprx++;
-            Logic.Drawing(grid);
+            if (AprxOffset < 1)
+            {
+
+                if (DistOffset > Convert.ToInt32(Logic.GetCellhgh() / 2))
+                {
+
+                    AprxOffset = Logic.GetCellhgh() - DistOffset;
+                    DistOffset = 0;
+
+                }
+                else
+                {
+
+                    DistOffset += Settings.ScrollDistSpeed;
+                }
+
+            }
+            else
+            {
+
+                if (AprxOffset > Settings.ScrollDistSpeed)
+                {
+
+                    AprxOffset -= Settings.ScrollDistSpeed;
+
+                }
+                else
+                {
+
+                    DistOffset = Settings.ScrollDistSpeed - AprxOffset;
+                    AprxOffset = 0;
+                }
+
+            }
         }
 
         //-------------------------------------------------------------<Перемещение>-----------------------------------------------------------------------\\

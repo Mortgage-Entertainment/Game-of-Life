@@ -23,5 +23,7 @@ namespace Game_of_Life.Options
          */
 
         static public int ScrollMoveSpeed;
+
+        static public int ScrollDistSpeed;
     }
 }
