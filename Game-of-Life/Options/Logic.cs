@@ -9,6 +9,8 @@ namespace Game_of_Life.Options
     {
         static private int RowsCount;
         static private int cellhgh;
+        static private int cellhghOffsetAprx = 0;
+        static private int cellhghOffsetDist = 0;
         static private int IndexX, IndexY, value, valueconst;  //  рабочие переменные для элемента горизонтального массива, вертикального, инкремента цикла, его установки
 
         static public int GetCellhgh() => cellhgh;
@@ -124,7 +126,7 @@ namespace Game_of_Life.Options
 
         ////   КОНЕЦ ФУНКЦИИ     ///  DRAWING
         
-        //----------------------------------------------------<Скроллинг приближения>----------------------------------------------------------------------\\
+        //------------------------------------------------<Скроллинг приближения и отдаления>----------------------------------------------------------------------\\
         
         static public void DeleteOutEmptyCell()
         {
@@ -180,6 +182,22 @@ namespace Game_of_Life.Options
                 IndexY++;
                 value--;
             }
+        }
+
+        static public void SetCellhghOffsets()
+        {
+            int ScrnSize;
+            if (SystemParameters.PrimaryScreenHeight > SystemParameters.PrimaryScreenWidth)
+                ScrnSize = Convert.ToInt32(SystemParameters.PrimaryScreenHeight);
+            else
+                ScrnSize = Convert.ToInt32(SystemParameters.PrimaryScreenWidth);
+
+            if (cellhghOffsetAprx > 0)
+                cellhghOffsetAprx = Convert.ToInt32(cellhgh / (ScrnSize / ScrollPosition.GetAprxOffset()));
+         
+            if (cellhghOffsetAprx > 0)
+                cellhghOffsetDist = Convert.ToInt32(cellhgh / (ScrnSize / ScrollPosition.GetAprxOffset()));
+            
         }
 
         //-------------------------------------------------Перемещение камеры( SM - Scrolling of Move )-----------------------------------------------------------------\\
