@@ -57,7 +57,6 @@
     </ApplicationDefinition>
     <Compile Include="Cells\EmptyCells.cs" />
     <Compile Include="Options\Settings.cs" />
-    <Compile Include="Options\NativeWindow.cs" />
     <Compile Include="Options\Logic.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
