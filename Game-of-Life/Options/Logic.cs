@@ -9,8 +9,9 @@ namespace Game_of_Life.Options
     {
         static private int RowsCount;
         static private int cellhgh;
-        static private int cellhghOffsetAprx = 0;
-        static private int cellhghOffsetDist = 0;
+        static private int cellhghVisual;  //  переменная, хранящая размер картинки клетки с учётом смещения изображения
+        static private int cellhghOffsetAprx = 0;  //  переменные смещения изображения клетки 
+        static private int cellhghOffsetDist = 0;  //  нужны для плавной камеры
         static private int IndexX, IndexY, value, valueconst;  //  рабочие переменные для элемента горизонтального массива, вертикального, инкремента цикла, его установки
 
         static public int GetCellhgh() => cellhgh;
@@ -52,6 +53,8 @@ namespace Game_of_Life.Options
                 cellhgh = Convert.ToInt32(SystemParameters.PrimaryScreenHeight / (5 + ScrollPosition.GetAprx()));  //cellhgh = ширина экрана / (5*scrollposition.aprx)
             else cellhgh = Convert.ToInt32(SystemParameters.PrimaryScreenWidth / (5 + ScrollPosition.GetAprx()));
 
+            cellhghVisual = cellhgh - cellhghOffsetDist + cellhghOffsetAprx;
+
             //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
             IndexX = ScrollPosition.GetCameraX() - 1;
@@ -73,7 +76,7 @@ namespace Game_of_Life.Options
 
                     EmptyCells.SetGridImage(IndexX, IndexY, grid);
 
-                    EmptyCells.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, ScreenSideofDrawing.SD_BottomSide);
+                    EmptyCells.SetImagePosition(IndexX, IndexY, cellhghVisual, RowsCount, valueconst, value, ScreenSideofDrawing.SD_BottomSide);
 
                     IndexX--;
                     value--;
@@ -86,7 +89,7 @@ namespace Game_of_Life.Options
 
                     EmptyCells.SetGridImage(IndexX, IndexY, grid);
 
-                    EmptyCells.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, ScreenSideofDrawing.SD_LeftSide);
+                    EmptyCells.SetImagePosition(IndexX, IndexY, cellhghVisual, RowsCount, valueconst, value, ScreenSideofDrawing.SD_LeftSide);
 
                     IndexY--;
                     value--;
@@ -99,7 +102,7 @@ namespace Game_of_Life.Options
 
                     EmptyCells.SetGridImage(IndexX, IndexY, grid);
 
-                    EmptyCells.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, ScreenSideofDrawing.SD_RightSide);
+                    EmptyCells.SetImagePosition(IndexX, IndexY, cellhghVisual, RowsCount, valueconst, value, ScreenSideofDrawing.SD_RightSide);
 
                     IndexX++;
                     value--;
@@ -112,7 +115,7 @@ namespace Game_of_Life.Options
 
                     EmptyCells.SetGridImage(IndexX, IndexY, grid);
 
-                    EmptyCells.SetImagePosition(IndexX, IndexY, cellhgh, RowsCount, valueconst, value, ScreenSideofDrawing.SD_TopSide);
+                    EmptyCells.SetImagePosition(IndexX, IndexY, cellhghVisual, RowsCount, valueconst, value, ScreenSideofDrawing.SD_TopSide);
 
                     IndexY++;
                     value--;

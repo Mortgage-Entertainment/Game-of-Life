@@ -109,7 +109,6 @@ namespace Game_of_Life.Options
                     AprxOffset = Logic.GetCellhgh() - DistOffset;
                     DistOffset = 0;
                     Aprx++;
-                    Logic.DeleteOutEmptyCell();
 
                 } else {
 
