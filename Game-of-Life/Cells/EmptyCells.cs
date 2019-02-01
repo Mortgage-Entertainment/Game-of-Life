@@ -126,7 +126,7 @@ namespace Game_of_Life.Cells
 
             if (TypeofFormule == 3)
             {
-                MarginValues[0] = unchecked((int)((int)(SystemParameters.PrimaryScreenWidth / 2) - CellHeight / 2 - (CellHeight * RowsCount) + (CellHeight * (CellsinRow - value)) + ScrollPosition.GetLeftOffset() - ScrollPosition.GetRightOffset()));        //установка горизонтальной координаты картинки центральной ячйеки
+                MarginValues[0] = unchecked((int)((int)(SystemParameters.PrimaryScreenWidth / 2) - CellHeight / 2 - (CellHeight * (RowsCount + 1)) + (CellHeight * (CellsinRow - value)) + ScrollPosition.GetLeftOffset() - ScrollPosition.GetRightOffset()));        //установка горизонтальной координаты картинки центральной ячйеки
                 MarginValues[1] = unchecked((int)((int)(SystemParameters.PrimaryScreenHeight / 2) - CellHeight / 2 - (CellHeight * RowsCount) + ScrollPosition.GetTopOffset() - ScrollPosition.GetBottomOffset()));       //установка вертикальной координаты картинки центральной ячйеки
 
                 MarginValues[2] = Convert.ToInt32(SystemParameters.PrimaryScreenWidth - CellHeight - MarginValues[0]);

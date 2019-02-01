@@ -65,6 +65,8 @@ namespace Game_of_Life.Options
 
                     DistOffset = Logic.GetCellhgh() - AprxOffset;
                     AprxOffset = 0;
+                    Aprx--;
+                    Logic.DeleteOutEmptyCell();
 
                 } else {
 
@@ -84,6 +86,9 @@ namespace Game_of_Life.Options
                 }
 
             }
+
+            Logic.SetCellhghOffsets();
+            Logic.Drawing(grid);
         }
 
         //--------------------------------------------------------------<Отдаление>-----------------------------------------------------------------------\\
@@ -97,40 +102,35 @@ namespace Game_of_Life.Options
              *
              */
 
-            if (AprxOffset < 1)
-            {
+            if (AprxOffset < 1) {
 
-                if (DistOffset > Convert.ToInt32(Logic.GetCellhgh() / 2))
-                {
+                if (DistOffset > Convert.ToInt32(Logic.GetCellhgh() / 2)) {
 
                     AprxOffset = Logic.GetCellhgh() - DistOffset;
                     DistOffset = 0;
+                    Aprx++;
 
-                }
-                else
-                {
+                } else {
 
                     DistOffset += Settings.ScrollDistSpeed;
                 }
 
-            }
-            else
-            {
+            } else {
 
-                if (AprxOffset > Settings.ScrollDistSpeed)
-                {
+                if (AprxOffset > Settings.ScrollDistSpeed) {
 
                     AprxOffset -= Settings.ScrollDistSpeed;
 
-                }
-                else
-                {
+                } else {
 
                     DistOffset = Settings.ScrollDistSpeed - AprxOffset;
                     AprxOffset = 0;
                 }
 
             }
+
+            Logic.SetCellhghOffsets();
+            Logic.Drawing(grid);
         }
 
         //-------------------------------------------------------------<Перемещение>-----------------------------------------------------------------------\\
