@@ -191,9 +191,9 @@ namespace Game_of_Life.Options
         {
             int ScrnSize;
             if (SystemParameters.PrimaryScreenHeight > SystemParameters.PrimaryScreenWidth)
-                ScrnSize = Convert.ToInt32(SystemParameters.PrimaryScreenHeight);
+                ScrnSize = (int)SystemParameters.PrimaryScreenHeight;
             else
-                ScrnSize = Convert.ToInt32(SystemParameters.PrimaryScreenWidth);
+                ScrnSize = (int)SystemParameters.PrimaryScreenWidth;
 
             if (cellhghOffsetAprx > 0)
                 cellhghOffsetAprx = Convert.ToInt32(cellhgh / (ScrnSize / ScrollPosition.GetAprxOffset()));
@@ -226,6 +226,7 @@ namespace Game_of_Life.Options
 
 
             while ( ScrollPosition.GetCameraX() - 1 + RowsCount + 1  >  IndexX ) {                //  Перемещение
+
                 while ( ScrollPosition.GetCameraY() - 1 + RowsCount + 1  >  IndexY) {             //
                                                                                                   //  камеры
                     EmptyCells.SM_OffsetingImages(IndexX, IndexY, cellhgh, VoS);        //
