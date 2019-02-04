@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Cells\EmptyCells.cs" />
+    <Compile Include="Options\Console.cs" />
     <Compile Include="Options\Settings.cs" />
     <Compile Include="Options\Logic.cs" />
     <Compile Include="Resources.Designer.cs">
