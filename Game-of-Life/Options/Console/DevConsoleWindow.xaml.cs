@@ -49,7 +49,6 @@ namespace Game_of_Life.Options.Console
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            sender = sender;
             if (e.Key == Key.OemTilde)
             {
                 this.Hide();
