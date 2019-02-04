@@ -19,7 +19,6 @@ namespace Game_of_Life.Options
         static public int GetRowsCount() => RowsCount;
 
         //-----------------------------------------------------------------------------------------------------------------------------------\\
-
         public enum ScreenSideofDrawing
         {
             /*
