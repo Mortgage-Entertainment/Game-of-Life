@@ -17,19 +17,23 @@
                     функция;
                     breal;
                  */
-                 // Прим. Команда должна быть в нижнем регистре
+                // Прим. Команда должна быть в нижнем регистре
                 case "help":
                     devWindowConsole.Output.Text += "\nClear - clear the console" + "\nExit - close the application";
                     break;
+
                 case "clear":
                     devWindowConsole.Output.Text = string.Empty;
                     break;
+
                 case "exit":
                     App.Current.Shutdown();
                     break;
+
                 case "close":
                     App.Current.Shutdown();
                     break;
+
                 case "quit":
                     App.Current.Shutdown();
                     break;
