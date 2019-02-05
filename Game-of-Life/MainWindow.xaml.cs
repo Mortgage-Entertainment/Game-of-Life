@@ -9,7 +9,7 @@ namespace Game_of_Life
     /// </summary>
     public partial class MainWindow : Window
     {
-        static public Options.Console.DevWindowConsole DevConsole = new Options.Console.DevWindowConsole();
+        static public Options.Console.DevWindowConsole DevConsole = new Options.Console.DevWindowConsole(); // Создаем экземпляр консоли
 
         public MainWindow()
         {
@@ -22,7 +22,7 @@ namespace Game_of_Life
             Logic.Drawing(maingrid);
         }
 
-        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e) // Если тильда, то показать консоль
         {
             if (e.Key == System.Windows.Input.Key.OemTilde)
             {

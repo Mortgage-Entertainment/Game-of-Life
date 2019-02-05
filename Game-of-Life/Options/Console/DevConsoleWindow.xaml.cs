@@ -14,13 +14,13 @@ namespace Game_of_Life.Options.Console
             InitializeComponent();
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) // Если нажали закрыть - скрыть
         {
-            e.Cancel = true;
+            e.Cancel = true; // Отмена закрытия
             this.Hide();
         }
 
-        private void Window_Closing(object sender, EventArgs e)
+        private void Window_Deactivate(object sender, EventArgs e) // Если окно неактивно и не скрыто - скрыть
         {
             if (this.Visibility != Visibility.Hidden)
             {
@@ -28,7 +28,7 @@ namespace Game_of_Life.Options.Console
             }
         }
 
-        private void Input_KeyDown(object sender, KeyEventArgs e)
+        private void Input_KeyDown(object sender, KeyEventArgs e) // Если нажат ввод - ввод
         {
             if (e.Key == Key.Enter)
             {
@@ -36,18 +36,18 @@ namespace Game_of_Life.Options.Console
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e) // Нажатие кнопки = ввод
         {
             Button_Click();
         }
 
-        private void Button_Click()
+        private void Button_Click() // Упрощение кода для ввода
         {
             DevConsole.ExeCom(Input.Text, this);
             Input.Text = string.Empty;
         }
 
-        private void Window_KeyDown(object sender, KeyEventArgs e)
+        private void Window_KeyDown(object sender, KeyEventArgs e) // Скрытие консоли на ~
         {
             if (e.Key == Key.OemTilde)
             {
