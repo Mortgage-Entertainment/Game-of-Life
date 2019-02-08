@@ -1,7 +1,6 @@
 ﻿using Game_of_Life.Cells;
 using Game_of_Life.Options;
 using System.Windows;
-using System.Windows.Input;
 
 namespace Game_of_Life
 {
@@ -29,11 +28,6 @@ namespace Game_of_Life
             {
                 DevConsole.Visibility = Visibility.Visible;
             }
-        }
-
-        private void Window_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            DevConsole.AddOutput("X:" + this.PointToScreen(Mouse.GetPosition(null)).X.ToString() + " Y:" + this.PointToScreen(Mouse.GetPosition(null)).Y.ToString());
         }
     }
 }
