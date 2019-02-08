@@ -1,12 +1,7 @@
 ﻿namespace Game_of_Life.Options
 {
-    internal class DevConsole
+    public class DevConsole
     {
-        static public void AddOutput(string OutputInfo) // вывести что-то в консоль
-        {
-            MainWindow.DevConsole.Output.Text += "\n" + OutputInfo;
-        }
-
         static public void ExeCom(string command, object sender) // Обработчик комманд (комманда, ссылка на экземпляр консоли)
         {
             Options.Console.DevWindowConsole devWindowConsole = sender as Options.Console.DevWindowConsole; // "Конвертация" ссылки в экземпляр
