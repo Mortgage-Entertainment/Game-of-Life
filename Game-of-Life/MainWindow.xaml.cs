@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Game_of_Life.Cells;
 using Game_of_Life.Options;
+using System.Windows.Input;
 
 namespace Game_of_Life
 {
@@ -21,6 +22,15 @@ namespace Game_of_Life
         {
             EmptyCells.GridInitialization();
             Logic.Drawing(maingrid);
+        }
+
+        private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (e.Delta > 0) {
+                ScrollPosition.ScrollingDistancing(maingrid);
+            } else {
+                ScrollPosition.ScrollingApproximation(maingrid);
+            }
         }
     }
 }
