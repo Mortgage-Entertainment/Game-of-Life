@@ -272,7 +272,7 @@ namespace Game_of_Life.Options
              *       привязки ко времени
              */
 
-            ScrollPosition.ScrollingMove((int)Mouse.GetPosition(null).X, (int)Mouse.GetPosition(null).Y);
+            ScrollPosition.ScrollingMove(Mouse.GetPosition(null));
         }
 
         public void HandlersInit()
