@@ -2,9 +2,10 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using System.Threading;
+using System.Windows.Input;
 using Game_of_Life.Cells;
 using Game_of_Life.Options;
-using System.Windows.Input;
 
 namespace Game_of_Life
 {
@@ -17,6 +18,47 @@ namespace Game_of_Life
         {
             InitializeComponent();
         }
+
+        //----------------------------------------<Timer>------------------------------------------------\\
+
+        public void GlobalTimerInit()
+        {
+            /*
+             *  Инициализириует глобальный таймер
+             *    ( создаёт его и назначет обработчик )
+             *  
+             */
+
+            TimerCallback GTHandler;
+            GTHandler = GlobalTimerHandler;
+            Timer GlobalTimer = new Timer(GTHandler, 0, 0, 20);
+        }
+
+        private void GlobalTimerHandler(object Sender)
+        {
+            /*
+             *  Обработчик события таймера
+             *  Срабатывает каждый его цикл
+             *  
+             *  В глобальном таймере находятся:
+             *     
+             *     Проверки глобальных условий
+             *       ( такие, как условия 
+             *         поражения и победы в игре )
+             *         
+             *     Методы отрисовки
+             *      ( например, метод ScrollingMove,
+             *        который проверяет положение курсора и
+             *        в зависимости от него двигает камеру )
+             *        
+             *     Всё, что требует
+             *       привязки ко времени
+             */
+
+            ScrollPosition.ScrollingMove(Mouse.GetPosition(maingrid));
+        }
+
+        //-----------------------------------------------------------------------------------------------\\
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
