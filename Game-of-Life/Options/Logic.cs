@@ -59,8 +59,8 @@ namespace Game_of_Life.Options
 
             //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
-            IndexX = ScrollPosition.GetCameraX() - 1;
-            IndexY = ScrollPosition.GetCameraY() - 1;
+            IndexX = (int)(ScrollPosition.CameraPosition.X - 1);
+            IndexY = (int)(ScrollPosition.CameraPosition.Y - 1);
 
             EmptyCells.SetGridImage(IndexX, IndexY, grid);
 
@@ -123,8 +123,8 @@ namespace Game_of_Life.Options
                     value--;
                 }
 
-                IndexX = ScrollPosition.GetCameraX() - 1;
-                IndexY = ScrollPosition.GetCameraY() - 1;
+                IndexX = (int)(ScrollPosition.CameraPosition.X - 1);
+                IndexY = (int)(ScrollPosition.CameraPosition.Y - 1);
                 valueconst += 2;
             }
         }
@@ -220,16 +220,16 @@ namespace Game_of_Life.Options
              */
 
             byte VoS = (byte)VectorofScrolling;                                        //  Подготовка
-            IndexX = ScrollPosition.GetCameraX() - 1;                                  //  
-            IndexY = ScrollPosition.GetCameraY() - 1;                                  //  метода
+            IndexX = (int)(ScrollPosition.CameraPosition.X - 1);                                  //  
+            IndexY = (int)(ScrollPosition.CameraPosition.Y - 1);                                  //  метода
 
             IndexX = IndexX - RowsCount;                                               //  ( задание начальных
             IndexY = IndexY - RowsCount;                                               //   значений переменных
 
 
-            while ( ScrollPosition.GetCameraX() - 1 + RowsCount + 1  >  IndexX ) {                //  Перемещение
+            while ( ScrollPosition.CameraPosition.X - 1 + RowsCount + 1  >  IndexX ) {                //  Перемещение
 
-                while ( ScrollPosition.GetCameraY() - 1 + RowsCount + 1  >  IndexY) {             //
+                while ( ScrollPosition.CameraPosition.Y - 1 + RowsCount + 1  >  IndexY) {             //
                                                                                                   //  камеры
                     EmptyCells.SM_OffsetingImages(IndexX, IndexY, cellhgh, VoS);        //
 
@@ -272,7 +272,7 @@ namespace Game_of_Life.Options
              *       привязки ко времени
              */
 
-            ScrollPosition.ScrollingMove((int)Mouse.GetPosition(null).X, (int)Mouse.GetPosition(null).Y);
+            ScrollPosition.ScrollingMove(Mouse.GetPosition(null));
         }
 
         static public void GlobalTimerInit(Grid grid)

@@ -22,8 +22,11 @@ namespace Game_of_Life.Options
          *   
          */
 
-        static public int ScrollMoveSpeed;
 
-        static public int ScrollDistSpeed;
+                  //^TO DO^\\
+        //------*Заполнить поля*------\\
+        static public int ScrollMoveSpeed;   
+                                                  
+        static public int ScrollDistSpeed;   
     }
 }
