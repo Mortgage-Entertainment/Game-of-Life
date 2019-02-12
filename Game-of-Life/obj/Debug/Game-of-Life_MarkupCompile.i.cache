@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-S:\FOR PRO\С#\Mortgage-Entertainment\Game-of-Life\Game-of-Life\obj\Debug\
+D:\Mortgage Entertainment\Game-of-Life v0.6\Game-of-Life\obj\Debug\
 Game_of_Life
 none
 false
 DEBUG;TRACE
-S:\FOR PRO\С#\Mortgage-Entertainment\Game-of-Life\Game-of-Life\App.xaml
-2-741864316
+D:\Mortgage Entertainment\Game-of-Life v0.6\Game-of-Life\App.xaml
+3-1687504036
 
-191613862250
+20260039270
 14434534373
-MainWindow.xaml;Options\Console\DevConsoleWindow.xaml;
+MainWindow.xaml;Options\Console\DevConsoleWindow.xaml;Options\Console\MiniMap\MiniMap.xaml;
 
-True
+False
 
