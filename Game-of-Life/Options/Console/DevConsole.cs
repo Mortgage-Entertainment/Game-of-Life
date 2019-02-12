@@ -1,4 +1,6 @@
-﻿namespace Game_of_Life.Options
+﻿using Game_of_Life.Options.Console.MiniMap;
+
+namespace Game_of_Life.Options
 {
     public class DevConsole
     {
@@ -31,6 +33,11 @@
 
                 case "quit":
                     App.Current.Shutdown();
+                    break;
+
+                case "minimap":
+                    MiniMap miniMap = new MiniMap();
+                    miniMap.Show();
                     break;
 
                 default: // Если неверная команда, то вывести об этом сообщение

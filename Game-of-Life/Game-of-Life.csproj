@@ -60,6 +60,9 @@
     <Compile Include="Options\Console\DevConsoleWindow.xaml.cs">
       <DependentUpon>DevConsoleWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Options\Console\MiniMap\MiniMap.xaml.cs">
+      <DependentUpon>MiniMap.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Options\Settings.cs" />
     <Compile Include="Options\Logic.cs" />
     <Compile Include="Resources.Designer.cs">
@@ -84,6 +87,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Options\Console\DevConsoleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Options\Console\MiniMap\MiniMap.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -121,5 +128,6 @@
   <ItemGroup>
     <Resource Include="Resources\540.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
