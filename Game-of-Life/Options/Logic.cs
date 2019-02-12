@@ -251,6 +251,13 @@ namespace Game_of_Life.Options
 
         //-----------------------------------------------------------------------------------------------------------------------------\\
 
+        delegate IInputElement PointofCoordination(Grid);
+
+        static private void MaingridGetting(Grid grid)
+        {
+
+        }
+        
         static private void GlobalTimerHandler(object Sender)
         {
             /*
@@ -272,7 +279,9 @@ namespace Game_of_Life.Options
              *       привязки ко времени
              */
 
-            ScrollPosition.ScrollingMove(Mouse.GetPosition(null));
+            PointofCoordination ElemCoord = new PointofCoordination();
+
+            ScrollPosition.ScrollingMove(Mouse.GetPosition(Sender));
         }
 
         static public void GlobalTimerInit(Grid grid)
