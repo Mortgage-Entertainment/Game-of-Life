@@ -64,7 +64,7 @@ namespace Game_of_Life
         {
             EmptyCells.GridInitialization();
             Logic.Drawing(maingrid);
-            Logic.GlobalTimerInit(maingrid);
+            GlobalTimerInit();
         }
 
         private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
