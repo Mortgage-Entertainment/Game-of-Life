@@ -22,6 +22,7 @@ namespace Game_of_Life
         {
             EmptyCells.GridInitialization();
             Logic.Drawing(maingrid);
+            Logic.GlobalTimerInit(maingrid);
         }
 
         private void Window_MouseWheel(object sender, MouseWheelEventArgs e)

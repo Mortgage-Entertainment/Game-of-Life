@@ -251,7 +251,7 @@ namespace Game_of_Life.Options
 
         //-----------------------------------------------------------------------------------------------------------------------------\\
 
-        private void GlobalTimerHandler(object Sender)
+        static private void GlobalTimerHandler(object Sender)
         {
             /*
              *  Обработчик события таймера
@@ -275,7 +275,7 @@ namespace Game_of_Life.Options
             ScrollPosition.ScrollingMove((int)Mouse.GetPosition(null).X, (int)Mouse.GetPosition(null).Y);
         }
 
-        public void HandlersInit()
+        static public void GlobalTimerInit(Grid grid)
         {
             /*
              *  Инициализириует глобальный таймер
@@ -284,7 +284,7 @@ namespace Game_of_Life.Options
              */
 
             TimerCallback GTHandler = new TimerCallback(GlobalTimerHandler);
-            Timer GlobalTimer = new Timer(GTHandler, 0, 0, 20);
+            Timer GlobalTimer = new Timer(GTHandler, grid, 0, 20);
         }
 
     }
