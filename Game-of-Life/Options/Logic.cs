@@ -2,8 +2,6 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Threading;
-using System.Windows.Input;
 
 namespace Game_of_Life.Options
 {
@@ -250,7 +248,5 @@ namespace Game_of_Life.Options
         }
 
         //------------------------------------------------------------------------------------------------------------------------------\\
-
-
     }
 }
