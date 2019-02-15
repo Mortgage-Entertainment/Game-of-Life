@@ -19,6 +19,7 @@ namespace Game_of_Life
         public MainWindow()
         {
             InitializeComponent();
+            GlobalTimer.Start();
         }
 
         //----------------------------------------<Timer>------------------------------------------------\\
