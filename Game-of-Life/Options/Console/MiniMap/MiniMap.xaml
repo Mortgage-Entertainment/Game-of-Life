@@ -8,6 +8,5 @@
         Title="MiniMap" Height="700" Width="700">
 
     <Grid>
-        
     </Grid>
 </Window>
