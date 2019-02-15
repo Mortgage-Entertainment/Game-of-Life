@@ -87,6 +87,12 @@ namespace Game_of_Life {
             #line hidden
             
             #line 10 "..\..\MainWindow.xaml"
+            ((Game_of_Life.MainWindow)(target)).MouseWheel += new System.Windows.Input.MouseWheelEventHandler(this.Window_MouseWheel);
+            
+            #line default
+            #line hidden
+            
+            #line 10 "..\..\MainWindow.xaml"
             ((Game_of_Life.MainWindow)(target)).KeyDown += new System.Windows.Input.KeyEventHandler(this.Window_KeyDown);
             
             #line default
