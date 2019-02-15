@@ -14,6 +14,11 @@ namespace Game_of_Life.Options.Console
             InitializeComponent();
         }
 
+        public void AddOutput(string OutputInfo) // вывести что-то в консоль
+        {
+            this.Output.Text += "\n" + OutputInfo;
+        }
+
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) // Если нажали закрыть - скрыть
         {
             e.Cancel = true; // Отмена закрытия
@@ -53,6 +58,11 @@ namespace Game_of_Life.Options.Console
             {
                 this.Hide();
             }
+        }
+
+        private void Output_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            Output.ScrollToEnd();
         }
     }
 }

@@ -20,6 +20,8 @@
          *
          */
 
+        //^TO DO^\\
+        //------*Заполнить поля*------\\
         static public int ScrollMoveSpeed;
 
         static public int ScrollDistSpeed;

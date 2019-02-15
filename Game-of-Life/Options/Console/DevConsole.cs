@@ -1,12 +1,9 @@
-﻿namespace Game_of_Life.Options
-{
-    internal class DevConsole
-    {
-        static public void AddOutput(string OutputInfo) // вывести что-то в консоль
-        {
-            MainWindow.DevConsole.Output.Text += "\n" + OutputInfo;
-        }
+﻿using Game_of_Life.Options.Console.MiniMap;
 
+namespace Game_of_Life.Options
+{
+    public class DevConsole
+    {
         static public void ExeCom(string command, object sender) // Обработчик комманд (комманда, ссылка на экземпляр консоли)
         {
             Options.Console.DevWindowConsole devWindowConsole = sender as Options.Console.DevWindowConsole; // "Конвертация" ссылки в экземпляр
@@ -36,6 +33,11 @@
 
                 case "quit":
                     App.Current.Shutdown();
+                    break;
+
+                case "minimap":
+                    MiniMap miniMap = new MiniMap();
+                    miniMap.Show();
                     break;
 
                 default: // Если неверная команда, то вывести об этом сообщение
