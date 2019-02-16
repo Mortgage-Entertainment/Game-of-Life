@@ -1,11 +1,8 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using System.Threading;
-using System.Windows.Input;
-using Game_of_Life.Cells;
+﻿using Game_of_Life.Cells;
 using Game_of_Life.Options;
+using System;
+using System.Windows;
+using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace Game_of_Life
@@ -15,7 +12,10 @@ namespace Game_of_Life
     /// </summary>
     public partial class MainWindow : Window
     {
-        DispatcherTimer GlobalTimer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 0, 0, 1000), IsEnabled = true }; // 1 сек = 1000 милСек
+        static public Options.Console.DevWindowConsole DevConsole = new Options.Console.DevWindowConsole(); // Создаем экземпляр консоли
+
+        private DispatcherTimer GlobalTimer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 0, 0, 1000), IsEnabled = true }; // 1 сек = 1000 милСек
+
         public MainWindow()
         {
             InitializeComponent();
@@ -23,10 +23,9 @@ namespace Game_of_Life
         }
 
         //----------------------------------------<Timer>------------------------------------------------\\
-        
+
         private void GlobalTimer_Tick(object sender, EventArgs e) // Каждый "тик" таймера
         {
-            
         }
 
         //-----------------------------------------------------------------------------------------------\\
@@ -40,10 +39,21 @@ namespace Game_of_Life
 
         private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            if (e.Delta > 0) {
+            if (e.Delta > 0)
+            {
                 ScrollPosition.ScrollingDistancing(maingrid);
-            } else {
+            }
+            else
+            {
                 ScrollPosition.ScrollingApproximation(maingrid);
+            }
+        }
+
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e) // Если тильда, то показать консоль
+        {
+            if (e.Key == System.Windows.Input.Key.OemTilde)
+            {
+                DevConsole.Visibility = Visibility.Visible;
             }
         }
     }

@@ -10,7 +10,7 @@ namespace Game_of_Life.Options
         static private int RowsCount;
         static private int cellhgh;
         static private int cellhghVisual;  //  переменная, хранящая размер картинки клетки с учётом смещения изображения
-        static private int cellhghOffsetAprx = 0;  //  переменные смещения изображения клетки 
+        static private int cellhghOffsetAprx = 0;  //  переменные смещения изображения клетки
         static private int cellhghOffsetDist = 0;  //  нужны для плавной камеры
         static private int IndexX, IndexY, value, valueconst;  //  рабочие переменные для элемента горизонтального массива, вертикального, инкремента цикла, его установки
 
@@ -19,14 +19,13 @@ namespace Game_of_Life.Options
         static public int GetRowsCount() => RowsCount;
 
         //-----------------------------------------------------------------------------------------------------------------------------------\\
-
         public enum ScreenSideofDrawing
         {
             /*
              *  Перечисление
              *  для определения стороны экрана
-             *  
-             *  префикс SD_ 
+             *
+             *  префикс SD_
              *   ( SD - Side of Drawing )
              */
 
@@ -43,7 +42,7 @@ namespace Game_of_Life.Options
             /*
              *  Метод отрисовки картинок
              *  ячеек на старте игры
-             *  и при скроллинге 
+             *  и при скроллинге
              *    приближения и отдаления
              */
 
@@ -66,14 +65,14 @@ namespace Game_of_Life.Options
 
             valueconst = 3;
 
-            while (valueconst < ScrollPosition.GetAprx() + 7) {
-
+            while (valueconst < ScrollPosition.GetAprx() + 7)
+            {
                 value = valueconst;
                 RowsCount = (valueconst - 1) / 2;
                 IndexX = IndexX + RowsCount;
                 IndexY = IndexY + RowsCount;
-                while (value > 0) {
-
+                while (value > 0)
+                {
                     EmptyCells.SetGridImage(IndexX, IndexY, grid);
 
                     EmptyCells.SetImagePosition(IndexX, IndexY, cellhghVisual, RowsCount, valueconst, value, ScreenSideofDrawing.SD_BottomSide);
@@ -85,8 +84,8 @@ namespace Game_of_Life.Options
                 IndexY--;
                 value = valueconst - 1;
 
-                while (value > 0) {
-
+                while (value > 0)
+                {
                     EmptyCells.SetGridImage(IndexX, IndexY, grid);
 
                     EmptyCells.SetImagePosition(IndexX, IndexY, cellhghVisual, RowsCount, valueconst, value, ScreenSideofDrawing.SD_LeftSide);
@@ -98,8 +97,8 @@ namespace Game_of_Life.Options
                 IndexX++;
                 value = valueconst - 1;
 
-                while (value > 0) {
-
+                while (value > 0)
+                {
                     EmptyCells.SetGridImage(IndexX, IndexY, grid);
 
                     EmptyCells.SetImagePosition(IndexX, IndexY, cellhghVisual, RowsCount, valueconst, value, ScreenSideofDrawing.SD_RightSide);
@@ -111,8 +110,8 @@ namespace Game_of_Life.Options
                 IndexY++;
                 value = valueconst - 2;
 
-                while (value > 0) {
-
+                while (value > 0)
+                {
                     EmptyCells.SetGridImage(IndexX, IndexY, grid);
 
                     EmptyCells.SetImagePosition(IndexX, IndexY, cellhghVisual, RowsCount, valueconst, value, ScreenSideofDrawing.SD_TopSide);
@@ -128,25 +127,25 @@ namespace Game_of_Life.Options
         }
 
         ////   КОНЕЦ ФУНКЦИИ     ///  DRAWING
-        
+
         //------------------------------------------------<Скроллинг приближения и отдаления>----------------------------------------------------------------------\\
-        
+
         static public void DeleteOutEmptyCell()
         {
             /*
-             *  Метод удаления изображений 
+             *  Метод удаления изображений
              *  клеток из ряда,
              *  ушедшего за край экрана
              *  при приближении камеры
              */
-             
+
             valueconst = (RowsCount * 2) + 1 + 2;
             value = valueconst;
             IndexX = IndexX + RowsCount + 1;
             IndexY = IndexY + RowsCount + 1;
 
-            while (value > 0) {
-
+            while (value > 0)
+            {
                 EmptyCells.Grid[IndexX, IndexY].Model = null;
 
                 IndexX--;
@@ -156,8 +155,8 @@ namespace Game_of_Life.Options
             IndexY--;
             value = valueconst - 1;
 
-            while (value > 0) {
-
+            while (value > 0)
+            {
                 EmptyCells.Grid[IndexX, IndexY].Model = null;
 
                 IndexY--;
@@ -167,8 +166,8 @@ namespace Game_of_Life.Options
             IndexX++;
             value = valueconst - 1;
 
-            while (value > 0) {
-
+            while (value > 0)
+            {
                 EmptyCells.Grid[IndexX, IndexY].Model = null;
 
                 IndexX++;
@@ -178,8 +177,8 @@ namespace Game_of_Life.Options
             IndexY++;
             value = valueconst - 2;
 
-            while (value > 0) {
-
+            while (value > 0)
+            {
                 EmptyCells.Grid[IndexX, IndexY].Model = null;
 
                 IndexY++;
@@ -197,38 +196,37 @@ namespace Game_of_Life.Options
 
             if (cellhghOffsetAprx > 0)
                 cellhghOffsetAprx = Convert.ToInt32(cellhgh / (ScrnSize / ScrollPosition.GetAprxOffset()));
-         
+
             if (cellhghOffsetAprx > 0)
                 cellhghOffsetDist = Convert.ToInt32(cellhgh / (ScrnSize / ScrollPosition.GetAprxOffset()));
-            
         }
 
         //-------------------------------------------------Перемещение камеры( SM - Scrolling of Move )-----------------------------------------------------------------\\
-        
+
         static public void SM_Drawing(ScreenSideofDrawing VectorofScrolling, bool ReDraw)
         {
             /*
              *  Метод перерисовки клеток
-             *  при 
-             *  
+             *  при
+             *
              *   скроллинге перемещения
-             *   
+             *
              *    ( метод ScrollingMove в классе ScrollPosition )
-             *    
+             *
              */
 
             byte VoS = (byte)VectorofScrolling;                                        //  Подготовка
-            IndexX = (int)(ScrollPosition.CameraPosition.X - 1);                                  //  
+            IndexX = (int)(ScrollPosition.CameraPosition.X - 1);                                  //
             IndexY = (int)(ScrollPosition.CameraPosition.Y - 1);                                  //  метода
 
             IndexX = IndexX - RowsCount;                                               //  ( задание начальных
             IndexY = IndexY - RowsCount;                                               //   значений переменных
 
-
-            while ( ScrollPosition.CameraPosition.X - 1 + RowsCount + 1  >  IndexX ) {                //  Перемещение
-
-                while ( ScrollPosition.CameraPosition.Y - 1 + RowsCount + 1  >  IndexY) {             //
-                                                                                                  //  камеры
+            while (ScrollPosition.CameraPosition.X - 1 + RowsCount + 1 > IndexX)
+            {                //  Перемещение
+                while (ScrollPosition.CameraPosition.Y - 1 + RowsCount + 1 > IndexY)
+                {             //
+                              //  камеры
                     EmptyCells.SM_OffsetingImages(IndexX, IndexY, cellhgh, VoS);        //
 
                     IndexY++;                                                                     //  ( клеток
@@ -237,14 +235,12 @@ namespace Game_of_Life.Options
                 IndexY = IndexY - (2 * RowsCount) - 1;                                            //
             }
 
-
-            if (ReDraw == true) {                           //  добавление и удаление картинок
-
+            if (ReDraw == true)
+            {                           //  добавление и удаление картинок
                 EmptyCells.SM_DeletingCells(RowsCount, VoS); //  удаление ячеек, что попали за границу экрана
 
                 EmptyCells.SM_AddingCells(RowsCount, VoS, cellhgh);   //  отрисовка ячеек, что были за границей экрана
             }
-
         }
 
         //------------------------------------------------------------------------------------------------------------------------------\\
