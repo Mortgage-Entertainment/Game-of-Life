@@ -14,6 +14,10 @@ namespace Game_of_Life
     {
         static public Options.Console.DevWindowConsole DevConsole = new Options.Console.DevWindowConsole(); // Создаем экземпляр консоли
 
+        //-----------------------------------------------<Глобальный таймер>------------------------------------------------------------------\\
+        
+        MainWindow mainWindow;
+
         private DispatcherTimer GlobalTimer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 0, 0, 1000), IsEnabled = true }; // 1 сек = 1000 милСек
 
         public MainWindow()
@@ -22,18 +26,18 @@ namespace Game_of_Life
             GlobalTimer.Start();
         }
 
-        //----------------------------------------<Timer>------------------------------------------------\\
-
         private void GlobalTimer_Tick(object sender, EventArgs e) // Каждый "тик" таймера
         {
+            ScrollPosition.ScrollingMove(Mouse.GetPosition(mainWindow));
         }
 
-        //-----------------------------------------------------------------------------------------------\\
+        //-----------------------------------------------------------------------------------------------------------------------------------\\
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             EmptyCells.GridInitialization();
             Logic.Drawing(maingrid);
+            mainWindow = new MainWindow();
             GlobalTimer.Tick += GlobalTimer_Tick;
         }
 
