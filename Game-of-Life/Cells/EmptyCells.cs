@@ -238,15 +238,15 @@ namespace Game_of_Life.Cells
              *
              */   /////  не закончено, расчёта координат пока нет
 
-            int IndexX = ScrollPosition.GetCameraX() - 1;
-            int IndexY = ScrollPosition.GetCameraY() - 1;
+            int IndexX = (int)ScrollPosition.CameraPosition.X - 1;
+            int IndexY = (int)ScrollPosition.CameraPosition.Y - 1;
 
             if (VoS == 1)
             {                  //  При перемещении    / ВНИЗ
                 IndexX = IndexX - RowsCount;
                 IndexY = IndexY + RowsCount;
 
-                while (ScrollPosition.GetCameraX() - 1 + ((RowsCount * 2) + 1) > IndexX)
+                while (ScrollPosition.CameraPosition.X - 1 + ((RowsCount * 2) + 1) > IndexX)
                 {
                     if (Grid[IndexX, IndexY].Model == null) Grid[IndexX, IndexY].Model = new Image();
 
@@ -270,7 +270,7 @@ namespace Game_of_Life.Cells
                 IndexX = IndexX - RowsCount;
                 IndexY = IndexY - RowsCount;
 
-                while (ScrollPosition.GetCameraY() - 1 + ((RowsCount * 2) + 1) > IndexY)
+                while (ScrollPosition.CameraPosition.Y - 1 + ((RowsCount * 2) + 1) > IndexY)
                 {
                     if (Grid[IndexX, IndexY].Model == null) Grid[IndexX, IndexY].Model = new Image();
 
@@ -294,7 +294,7 @@ namespace Game_of_Life.Cells
                 IndexX = IndexX - RowsCount;
                 IndexY = IndexY - RowsCount;
 
-                while (ScrollPosition.GetCameraX() - 1 + ((RowsCount * 2) + 1) > IndexX)
+                while (ScrollPosition.CameraPosition.X - 1 + ((RowsCount * 2) + 1) > IndexX)
                 {
                     if (Grid[IndexX, IndexY].Model == null) Grid[IndexX, IndexY].Model = new Image();
 
@@ -318,7 +318,7 @@ namespace Game_of_Life.Cells
                 IndexX = IndexX + RowsCount;
                 IndexY = IndexY - RowsCount;
 
-                while (ScrollPosition.GetCameraY() - 1 + ((RowsCount * 2) + 1) > IndexY)
+                while (ScrollPosition.CameraPosition.Y - 1 + ((RowsCount * 2) + 1) > IndexY)
                 {
                     if (Grid[IndexX, IndexY].Model == null) Grid[IndexX, IndexY].Model = new Image();
 
@@ -357,15 +357,15 @@ namespace Game_of_Life.Cells
              *
              */
 
-            int IndexX = ScrollPosition.GetCameraX() - 1;
-            int IndexY = ScrollPosition.GetCameraY() - 1;
+            int IndexX = (int)ScrollPosition.CameraPosition.X - 1;
+            int IndexY = (int)ScrollPosition.CameraPosition.Y - 1;
 
             if (VoS == 1)
             {                  //  При перемещении    / ВНИЗ
                 IndexX = IndexX - RowsCount;
                 IndexY = IndexY - RowsCount;
 
-                while (ScrollPosition.GetCameraX() - 1 + ((RowsCount * 2) + 1) > IndexX)
+                while (ScrollPosition.CameraPosition.X - 1 + ((RowsCount * 2) + 1) > IndexX)
                 {
                     if (Grid[IndexX, IndexY].Model != null) Grid[IndexX, IndexY].Model = null;
 
@@ -378,7 +378,7 @@ namespace Game_of_Life.Cells
                 IndexX = IndexX + RowsCount;
                 IndexY = IndexY - RowsCount;
 
-                while (ScrollPosition.GetCameraY() - 1 + ((RowsCount * 2) + 1) > IndexY)
+                while (ScrollPosition.CameraPosition.Y - 1 + ((RowsCount * 2) + 1) > IndexY)
                 {
                     if (Grid[IndexX, IndexY].Model != null) Grid[IndexX, IndexY].Model = null;
 
@@ -391,7 +391,7 @@ namespace Game_of_Life.Cells
                 IndexX = IndexX - RowsCount;
                 IndexY = IndexY + RowsCount;
 
-                while (ScrollPosition.GetCameraX() - 1 + ((RowsCount * 2) + 1) > IndexX)
+                while (ScrollPosition.CameraPosition.X - 1 + ((RowsCount * 2) + 1) > IndexX)
                 {
                     if (Grid[IndexX, IndexY].Model != null) Grid[IndexX, IndexY].Model = null;
 
@@ -404,7 +404,7 @@ namespace Game_of_Life.Cells
                 IndexX = IndexX - RowsCount;
                 IndexY = IndexY - RowsCount;
 
-                while (ScrollPosition.GetCameraY() - 1 + ((RowsCount * 2) + 1) > IndexY)
+                while (ScrollPosition.CameraPosition.Y - 1 + ((RowsCount * 2) + 1) > IndexY)
                 {
                     if (Grid[IndexX, IndexY].Model != null) Grid[IndexX, IndexY].Model = null;
 

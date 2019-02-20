@@ -6,11 +6,11 @@ namespace Game_of_Life.Options
 {
     internal class ScrollPosition
     {
-        static private int CameraX = 127, CameraY = 7;  //  позиция камеры
+        static public Point CameraPosition = new Point(127, 7);  //  позиция камеры
         static private byte Aprx = 4;            //  степень приближения в клетках (approximitation)
         static private int LeftOffset = 0, RightOffset = 0;  //  Переменные смещения камеры              //  чтобы камера была
         static private int TopOffset = 0, BottomOffset = 0;  //  служат для более точного определения    //  плавной, а не
-        static private int AprxOffset = 0, DistOffset = 0;   //  позиции камеры, чем по одной клетке     //  скакала по клеткам
+        static private int AprxOffset = 0, DistOffset = 0;  //  позиции камеры, чем по одной клетке     //  скакала по клеткам
 
         //--------------------------------------------------------------<Геттеры>-------------------------------------------------------------------------------\\
 
@@ -23,10 +23,6 @@ namespace Game_of_Life.Options
         static public int GetBottomOffset() => BottomOffset;
 
         static public byte GetAprx() => Aprx;
-
-        static public int GetCameraX() => CameraX;
-
-        static public int GetCameraY() => CameraY;
 
         static public int GetAprxOffset() => AprxOffset;
 
@@ -48,7 +44,7 @@ namespace Game_of_Life.Options
          *
          */
 
-        //-------------------------------------------------------<Приближение>---------------------------------------------------------------\\
+        //---------------------------------------------------<Приближение>------------------------------------------------------------\\
 
         static public void ScrollingApproximation(Grid grid)
         {
@@ -90,7 +86,7 @@ namespace Game_of_Life.Options
             Logic.Drawing(grid);
         }
 
-        //--------------------------------------------------------------<Отдаление>-----------------------------------------------------------------------\\
+        //---------------------------------------------<Отдаление>----------------------------------------------------------------\\
 
         static public void ScrollingDistancing(Grid grid)
         {
@@ -131,9 +127,9 @@ namespace Game_of_Life.Options
             Logic.Drawing(grid);
         }
 
-        //-------------------------------------------------------------<Перемещение>-----------------------------------------------------------------------\\
+        //------------------------------------------------------<Перемещение>------------------------------------------------------------------\\
 
-        static public void ScrollingMove(int CursorPositionX, int CursorPositionY)
+        static public void ScrollingMove(Point CursorPosition)
         {
             /*
              *  Метод перемещения
@@ -150,7 +146,7 @@ namespace Game_of_Life.Options
                      //   в остальных случаях он был скопирован и заменены только названия ( Top, Left, Right, Bottom )
 
             //---------------<Перемещение>--<Вниз>--------------------\\
-            if (CursorPositionY > SystemParameters.PrimaryScreenHeight - 2)
+            if (CursorPosition.Y > SystemParameters.PrimaryScreenHeight - 2)
             {
                 if (TopOffset < 1)
                 {
@@ -160,7 +156,7 @@ namespace Game_of_Life.Options
                     {
                         TopOffset = Convert.ToInt32(Logic.GetCellhgh() - BottomOffset);
                         BottomOffset = 0;
-                        CameraX--;
+                        CameraPosition.X--;
                         Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_BottomSide, true);
                     }
                     else
@@ -185,7 +181,7 @@ namespace Game_of_Life.Options
             }
 
             //---------------<Перемещение>--<Влево>--------------------\\
-            if (CursorPositionX < 2)
+            if (CursorPosition.X < 2)
             {
                 if (RightOffset < 1)
                 {
@@ -195,7 +191,7 @@ namespace Game_of_Life.Options
                     {
                         RightOffset = Convert.ToInt32(Logic.GetCellhgh() - LeftOffset);
                         LeftOffset = 0;
-                        CameraX--;
+                        CameraPosition.X--;
                         Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_LeftSide, true);
                     }
                     else
@@ -220,7 +216,7 @@ namespace Game_of_Life.Options
             }
 
             //---------------<Перемещение>--<Вверх>--------------------\\
-            if (CursorPositionY < 2)
+            if (CursorPosition.Y < 2)
             {
                 if (BottomOffset < 1)
                 {
@@ -230,7 +226,7 @@ namespace Game_of_Life.Options
                     {
                         BottomOffset = Convert.ToInt32(Logic.GetCellhgh() - TopOffset);
                         TopOffset = 0;
-                        CameraX--;
+                        CameraPosition.X--;
                         Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_TopSide, true);
                     }
                     else
@@ -255,7 +251,7 @@ namespace Game_of_Life.Options
             }
 
             //---------------<Перемещение>--<Вправо>--------------------\\
-            if (CursorPositionX > SystemParameters.PrimaryScreenWidth - 2)
+            if (CursorPosition.X > SystemParameters.PrimaryScreenWidth - 2)
             {
                 if (LeftOffset < 1)
                 {
@@ -265,7 +261,7 @@ namespace Game_of_Life.Options
                     {
                         LeftOffset = Convert.ToInt32(Logic.GetCellhgh() - RightOffset);
                         RightOffset = 0;
-                        CameraX--;
+                        CameraPosition.X--;
                         Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_RightSide, true);
                     }
                     else
@@ -290,6 +286,6 @@ namespace Game_of_Life.Options
             }
         }
 
-        //------------------------------------------------------------------------------------------------------------------------------------\\ */
+        //-----------------------------------------------------------------------------------------------------------------------------------------------\\
     }
 }
