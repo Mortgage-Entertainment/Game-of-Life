@@ -1,9 +1,9 @@
-﻿using Game_of_Life.Cells;
-using Game_of_Life.Options;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
+using Game_of_Life.Cells;
+using Game_of_Life.Options;
 
 namespace Game_of_Life
 {
@@ -14,7 +14,7 @@ namespace Game_of_Life
     {
         static public Options.Console.DevWindowConsole DevConsole = new Options.Console.DevWindowConsole(); // Создаем экземпляр консоли
 
-        private DispatcherTimer GlobalTimer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 0, 0, 1000), IsEnabled = true }; // 1 сек = 1000 милСек
+        private DispatcherTimer GlobalTimer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 0, 0, 20), IsEnabled = true }; // 1 сек = 1000 милСек
 
         public MainWindow()
         {
@@ -26,6 +26,7 @@ namespace Game_of_Life
 
         private void GlobalTimer_Tick(object sender, EventArgs e) // Каждый "тик" таймера
         {
+            ScrollPosition.ScrollingMove(Mouse.GetPosition(null), maingrid);
         }
 
         //-----------------------------------------------------------------------------------------------\\

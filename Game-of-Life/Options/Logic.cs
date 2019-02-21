@@ -1,7 +1,7 @@
-﻿using Game_of_Life.Cells;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using Game_of_Life.Cells;
 
 namespace Game_of_Life.Options
 {
@@ -29,7 +29,7 @@ namespace Game_of_Life.Options
              *   ( SD - Side of Drawing )
              */
 
-            SD_BottomSide = 1,   //  низ
+            SD_BottomSide = 1, //  низ
             SD_LeftSide = 2,   //  лево
             SD_TopSide = 3,    //  верх
             SD_RightSide = 4   //  право
@@ -146,7 +146,7 @@ namespace Game_of_Life.Options
 
             while (value > 0)
             {
-                EmptyCells.Grid[IndexX, IndexY].Model = null;
+                EmptyCells.CellGrid[IndexX, IndexY].Model = null;
 
                 IndexX--;
                 value--;
@@ -157,7 +157,7 @@ namespace Game_of_Life.Options
 
             while (value > 0)
             {
-                EmptyCells.Grid[IndexX, IndexY].Model = null;
+                EmptyCells.CellGrid[IndexX, IndexY].Model = null;
 
                 IndexY--;
                 value--;
@@ -168,7 +168,7 @@ namespace Game_of_Life.Options
 
             while (value > 0)
             {
-                EmptyCells.Grid[IndexX, IndexY].Model = null;
+                EmptyCells.CellGrid[IndexX, IndexY].Model = null;
 
                 IndexX++;
                 value--;
@@ -179,7 +179,7 @@ namespace Game_of_Life.Options
 
             while (value > 0)
             {
-                EmptyCells.Grid[IndexX, IndexY].Model = null;
+                EmptyCells.CellGrid[IndexX, IndexY].Model = null;
 
                 IndexY++;
                 value--;
@@ -201,9 +201,9 @@ namespace Game_of_Life.Options
                 cellhghOffsetDist = Convert.ToInt32(cellhgh / (ScrnSize / ScrollPosition.GetAprxOffset()));
         }
 
-        //-------------------------------------------------Перемещение камеры( SM - Scrolling of Move )-----------------------------------------------------------------\\
+        //-------------------------------------------------<Перемещение камеры( SM - Scrolling of Move )>-----------------------------------------------------------------\\
 
-        static public void SM_Drawing(ScreenSideofDrawing VectorofScrolling, bool ReDraw)
+        static public void SM_Drawing(ScreenSideofDrawing VectorofScrolling, bool ReDraw, Grid grid)
         {
             /*
              *  Метод перерисовки клеток
@@ -239,7 +239,7 @@ namespace Game_of_Life.Options
             {                           //  добавление и удаление картинок
                 EmptyCells.SM_DeletingCells(RowsCount, VoS); //  удаление ячеек, что попали за границу экрана
 
-                EmptyCells.SM_AddingCells(RowsCount, VoS, cellhgh);   //  отрисовка ячеек, что были за границей экрана
+                EmptyCells.SM_AddingCells(RowsCount, VoS, cellhgh, grid);   //  отрисовка ячеек, что были за границей экрана
             }
         }
 

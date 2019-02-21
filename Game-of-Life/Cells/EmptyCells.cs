@@ -30,13 +30,13 @@ namespace Game_of_Life.Cells
 
         private const int ArraySize = 150;     // хранит размер массива, чтобы, при случае, меняя переменную, менялся размер всех массивов, использующих это значение
         static private int Value = 0;         // для удобства хранит кол-во созданных объектов этого класса
-        static public BaseCell[,] Grid = new BaseCell[ArraySize, ArraySize];        // Один из важнейших массивов в игре. Хранит пустые клетки (для удобной работы)
+        static public BaseCell[,] CellGrid = new BaseCell[ArraySize, ArraySize];        // Один из важнейших массивов в игре. Хранит пустые клетки (для удобной работы)
 
         static private int[] MarginValues = new int[4];            // Массив хранящий координаты margin для установки их в объект при отрисовке
 
         //---------------------------------<Конструкторы>------------------------------------------\\
 
-        static public void BaseCellConstr(uint IndexX, uint IndexY)
+        static public void BaseCellConstr(int IndexX, int IndexY)
         {
             Value++;
         }
@@ -50,19 +50,14 @@ namespace Game_of_Life.Cells
              * элементы массива Grid
              */
 
-            uint IndexX = 0, IndexY = 0;
+            int IndexX = 0, IndexY = 0;
 
             while (IndexX < 150)
-            {
-                while (IndexX < 3)
-                {
-                    MarginValues[IndexX] = new int();
-                }
-
+            { 
                 while (IndexY < 150)
                 {
-                    Grid[IndexX, IndexY] = new BaseCell(IndexX, IndexY);
-                    Grid[IndexX, IndexY].cellType = 0;    // Устанавливаем в тип клетки значение None
+                    CellGrid[IndexX, IndexY] = new BaseCell(IndexX, IndexY);
+                    CellGrid[IndexX, IndexY].cellType = 0;    // Устанавливаем в тип клетки значение None
                     IndexY++;
                 }
                 IndexY = 0;
@@ -95,7 +90,7 @@ namespace Game_of_Life.Cells
                 MarginValues[2] = Convert.ToInt32(SystemParameters.PrimaryScreenWidth - CellHeight - MarginValues[0]);
                 MarginValues[3] = Convert.ToInt32(SystemParameters.PrimaryScreenHeight - CellHeight - MarginValues[1]);
 
-                Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
+                CellGrid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
             }
 
             if (TypeofFormule == 2)
@@ -106,7 +101,7 @@ namespace Game_of_Life.Cells
                 MarginValues[2] = Convert.ToInt32(SystemParameters.PrimaryScreenWidth - CellHeight - MarginValues[0]);
                 MarginValues[3] = Convert.ToInt32(SystemParameters.PrimaryScreenHeight - CellHeight - MarginValues[1]);
 
-                Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
+                CellGrid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
             }
 
             if (TypeofFormule == 3)
@@ -117,7 +112,7 @@ namespace Game_of_Life.Cells
                 MarginValues[2] = Convert.ToInt32(SystemParameters.PrimaryScreenWidth - CellHeight - MarginValues[0]);
                 MarginValues[3] = Convert.ToInt32(SystemParameters.PrimaryScreenHeight - CellHeight - MarginValues[1]);
 
-                Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
+                CellGrid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
             }
 
             if (TypeofFormule == 4)
@@ -128,7 +123,7 @@ namespace Game_of_Life.Cells
                 MarginValues[2] = Convert.ToInt32(SystemParameters.PrimaryScreenWidth - CellHeight - MarginValues[0]);
                 MarginValues[3] = Convert.ToInt32(SystemParameters.PrimaryScreenHeight - CellHeight - MarginValues[1]);
 
-                Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
+                CellGrid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
             }
         }
 
@@ -148,7 +143,7 @@ namespace Game_of_Life.Cells
             MarginValues[2] = Convert.ToInt32(SystemParameters.PrimaryScreenWidth - CellHeight - MarginValues[0]);
             MarginValues[3] = Convert.ToInt32(SystemParameters.PrimaryScreenHeight - CellHeight - MarginValues[1]);
 
-            Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
+            CellGrid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
         }
 
         static public void SetGridImage(int IndexX, int IndexY, Grid grid)    // аргументы для нахождения определённого элемента в масстиве "Grid" и grid в XAML разметке, в котором все будет отрисовываться
@@ -158,9 +153,9 @@ namespace Game_of_Life.Cells
              * картинку для пустой клетки
              */
 
-            Grid[IndexX, IndexY].Model = new Image();     // Создаем объект картинки
-            grid.Children.Add(Grid[IndexX, IndexY].Model);   // Засовываем его в grid в XAML разметке
-            Grid[IndexX, IndexY].Model.Source = new BitmapImage(new Uri("../Resources/540.jpg", UriKind.Relative));  // загружем изображение в объект картинки
+            CellGrid[IndexX, IndexY].Model = new Image();     // Создаем объект картинки
+            grid.Children.Add(CellGrid[IndexX, IndexY].Model);   // Засовываем его в grid в XAML разметке
+            CellGrid[IndexX, IndexY].Model.Source = new BitmapImage(new Uri("../Resources/540.jpg", UriKind.Relative));  // загружем изображение в объект картинки
         }
 
         //--------------------------------------------------------------<Перемещение камеры ( SM - ScrollingMove )>------------------------------------------------------------------------------\\
@@ -180,46 +175,46 @@ namespace Game_of_Life.Cells
 
             if (VoS == 1)
             {  //  при перемещении  / ВНИЗ
-                MarginValues[0] = (int)Grid[IndexX, IndexY].Model.Margin.Left;
-                MarginValues[1] = (int)Grid[IndexX, IndexY].Model.Margin.Top - Settings.ScrollMoveSpeed;
-                MarginValues[2] = (int)Grid[IndexX, IndexY].Model.Margin.Right;
-                MarginValues[3] = (int)Grid[IndexX, IndexY].Model.Margin.Bottom + Settings.ScrollMoveSpeed;
+                MarginValues[0] = (int)CellGrid[IndexX, IndexY].Model.Margin.Left;
+                MarginValues[1] = (int)CellGrid[IndexX, IndexY].Model.Margin.Top - Settings.ScrollMoveSpeed;
+                MarginValues[2] = (int)CellGrid[IndexX, IndexY].Model.Margin.Right;
+                MarginValues[3] = (int)CellGrid[IndexX, IndexY].Model.Margin.Bottom + Settings.ScrollMoveSpeed;
 
-                Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
+                CellGrid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
             }
 
             if (VoS == 2)
             {  //  при перемещении  / ВЛЕВО
-                MarginValues[0] = (int)Grid[IndexX, IndexY].Model.Margin.Left + Settings.ScrollMoveSpeed;
-                MarginValues[1] = (int)Grid[IndexX, IndexY].Model.Margin.Top;
-                MarginValues[2] = (int)Grid[IndexX, IndexY].Model.Margin.Right - Settings.ScrollMoveSpeed;
-                MarginValues[3] = (int)Grid[IndexX, IndexY].Model.Margin.Bottom;
+                MarginValues[0] = (int)CellGrid[IndexX, IndexY].Model.Margin.Left + Settings.ScrollMoveSpeed;
+                MarginValues[1] = (int)CellGrid[IndexX, IndexY].Model.Margin.Top;
+                MarginValues[2] = (int)CellGrid[IndexX, IndexY].Model.Margin.Right - Settings.ScrollMoveSpeed;
+                MarginValues[3] = (int)CellGrid[IndexX, IndexY].Model.Margin.Bottom;
 
-                Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
+                CellGrid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
             }
 
             if (VoS == 3)
             {  //  при перемещении  / ВВЕРХ
-                MarginValues[0] = (int)Grid[IndexX, IndexY].Model.Margin.Left;
-                MarginValues[1] = (int)Grid[IndexX, IndexY].Model.Margin.Top + Settings.ScrollMoveSpeed;
-                MarginValues[2] = (int)Grid[IndexX, IndexY].Model.Margin.Right;
-                MarginValues[3] = (int)Grid[IndexX, IndexY].Model.Margin.Bottom - Settings.ScrollMoveSpeed;
+                MarginValues[0] = (int)CellGrid[IndexX, IndexY].Model.Margin.Left;
+                MarginValues[1] = (int)CellGrid[IndexX, IndexY].Model.Margin.Top + Settings.ScrollMoveSpeed;
+                MarginValues[2] = (int)CellGrid[IndexX, IndexY].Model.Margin.Right;
+                MarginValues[3] = (int)CellGrid[IndexX, IndexY].Model.Margin.Bottom - Settings.ScrollMoveSpeed;
 
-                Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
+                CellGrid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
             }
 
             if (VoS == 4)
             {  //  при перемещении  / ВПРАВО
-                MarginValues[0] = (int)Grid[IndexX, IndexY].Model.Margin.Left - Settings.ScrollMoveSpeed;
-                MarginValues[1] = (int)Grid[IndexX, IndexY].Model.Margin.Top;
-                MarginValues[2] = (int)Grid[IndexX, IndexY].Model.Margin.Right + Settings.ScrollMoveSpeed;
-                MarginValues[3] = (int)Grid[IndexX, IndexY].Model.Margin.Bottom;
+                MarginValues[0] = (int)CellGrid[IndexX, IndexY].Model.Margin.Left - Settings.ScrollMoveSpeed;
+                MarginValues[1] = (int)CellGrid[IndexX, IndexY].Model.Margin.Top;
+                MarginValues[2] = (int)CellGrid[IndexX, IndexY].Model.Margin.Right + Settings.ScrollMoveSpeed;
+                MarginValues[3] = (int)CellGrid[IndexX, IndexY].Model.Margin.Bottom;
 
-                Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
+                CellGrid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
             }
         }
 
-        static public void SM_AddingCells(int RowsCount, byte VoS, int CellHeight)
+        static public void SM_AddingCells(int RowsCount, byte VoS, int CellHeight, Grid grid)
         {
             /*
              *  Метод
@@ -248,17 +243,17 @@ namespace Game_of_Life.Cells
 
                 while (ScrollPosition.CameraPosition.X - 1 + ((RowsCount * 2) + 1) > IndexX)
                 {
-                    if (Grid[IndexX, IndexY].Model == null) Grid[IndexX, IndexY].Model = new Image();
+                    if (CellGrid[IndexX, IndexY].Model == null) CellGrid[IndexX, IndexY].Model = new Image();
 
                     IndexY--;   //  начало расчёта координат новой отрисованной ячейки
 
-                    MarginValues[1] = (int)Grid[IndexX, IndexY].Model.Margin.Left;                  //  берутся координаты
-                    MarginValues[2] = (int)Grid[IndexX, IndexY].Model.Margin.Top + CellHeight;      //  соседней уже отрисованной
-                    MarginValues[3] = (int)Grid[IndexX, IndexY].Model.Margin.Right;                 //  ячейки
-                    MarginValues[4] = (int)Grid[IndexX, IndexY].Model.Margin.Bottom - CellHeight;   //  и смещаются на одну клетку
+                    MarginValues[0] = (int)CellGrid[IndexX, IndexY].Model.Margin.Left;                  //  берутся координаты
+                    MarginValues[1] = (int)CellGrid[IndexX, IndexY].Model.Margin.Top + CellHeight;      //  соседней уже отрисованной
+                    MarginValues[2] = (int)CellGrid[IndexX, IndexY].Model.Margin.Right;                 //  ячейки
+                    MarginValues[3] = (int)CellGrid[IndexX, IndexY].Model.Margin.Bottom - CellHeight;   //  и смещаются на одну клетку
 
                     IndexY++;
-                    Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
+                    CellGrid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
                     //  конец расчёта координат новой отрисованной ячейки
 
                     IndexX++;
@@ -272,17 +267,17 @@ namespace Game_of_Life.Cells
 
                 while (ScrollPosition.CameraPosition.Y - 1 + ((RowsCount * 2) + 1) > IndexY)
                 {
-                    if (Grid[IndexX, IndexY].Model == null) Grid[IndexX, IndexY].Model = new Image();
+                    if (CellGrid[IndexX, IndexY].Model == null) CellGrid[IndexX, IndexY].Model = new Image();
 
                     IndexX++;   //  начало расчёта координат новой отрисованной ячейки
 
-                    MarginValues[1] = (int)Grid[IndexX, IndexY].Model.Margin.Left - CellHeight;   //  берутся координаты
-                    MarginValues[2] = (int)Grid[IndexX, IndexY].Model.Margin.Top;                 //  соседней уже отрисованной
-                    MarginValues[3] = (int)Grid[IndexX, IndexY].Model.Margin.Right + CellHeight;  //  ячейки
-                    MarginValues[4] = (int)Grid[IndexX, IndexY].Model.Margin.Bottom;              //  и смещаются на одну клетку
+                    MarginValues[0] = (int)CellGrid[IndexX, IndexY].Model.Margin.Left - CellHeight;   //  берутся координаты
+                    MarginValues[1] = (int)CellGrid[IndexX, IndexY].Model.Margin.Top;                 //  соседней уже отрисованной
+                    MarginValues[2] = (int)CellGrid[IndexX, IndexY].Model.Margin.Right + CellHeight;  //  ячейки
+                    MarginValues[3] = (int)CellGrid[IndexX, IndexY].Model.Margin.Bottom;              //  и смещаются на одну клетку
 
                     IndexX--;
-                    Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
+                    CellGrid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
                     //  конец расчёта координат новой отрисованной ячейки
 
                     IndexY++;
@@ -296,17 +291,19 @@ namespace Game_of_Life.Cells
 
                 while (ScrollPosition.CameraPosition.X - 1 + ((RowsCount * 2) + 1) > IndexX)
                 {
-                    if (Grid[IndexX, IndexY].Model == null) Grid[IndexX, IndexY].Model = new Image();
+                    if (CellGrid[IndexX, IndexY].Model == null) CellGrid[IndexX, IndexY].Model = new Image();
 
                     IndexY++;   //  начало расчёта координат новой отрисованной ячейки
 
-                    MarginValues[1] = (int)Grid[IndexX, IndexY].Model.Margin.Left;                  //  берутся координаты
-                    MarginValues[2] = (int)Grid[IndexX, IndexY].Model.Margin.Top - CellHeight;      //  соседней уже отрисованной
-                    MarginValues[3] = (int)Grid[IndexX, IndexY].Model.Margin.Right;                 //  ячейки
-                    MarginValues[4] = (int)Grid[IndexX, IndexY].Model.Margin.Bottom + CellHeight;   //  и смещаются на одну клетку
+                    CellGrid[IndexX, IndexY].Model = new Image();
+
+                    MarginValues[0] = (int)CellGrid[IndexX, IndexY].Model.Margin.Left;                  //  берутся координаты
+                    MarginValues[1] = (int)CellGrid[IndexX, IndexY].Model.Margin.Top - CellHeight;      //  соседней уже отрисованной
+                    MarginValues[2] = (int)CellGrid[IndexX, IndexY].Model.Margin.Right;                 //  ячейки
+                    MarginValues[3] = (int)CellGrid[IndexX, IndexY].Model.Margin.Bottom + CellHeight;   //  и смещаются на одну клетку
 
                     IndexY--;
-                    Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[1], MarginValues[2], MarginValues[3], MarginValues[4]);
+                    CellGrid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
                     //  конец расчёта координат новой отрисованной ячейки
 
                     IndexX++;
@@ -320,17 +317,17 @@ namespace Game_of_Life.Cells
 
                 while (ScrollPosition.CameraPosition.Y - 1 + ((RowsCount * 2) + 1) > IndexY)
                 {
-                    if (Grid[IndexX, IndexY].Model == null) Grid[IndexX, IndexY].Model = new Image();
+                    if (CellGrid[IndexX, IndexY].Model == null) CellGrid[IndexX, IndexY].Model = new Image();
 
                     IndexX--;   //  начало расчёта координат новой отрисованной ячейки
 
-                    MarginValues[0] = (int)Grid[IndexX, IndexY].Model.Margin.Left + CellHeight;   //  берутся координаты
-                    MarginValues[1] = (int)Grid[IndexX, IndexY].Model.Margin.Top;                 //  соседней уже отрисованной
-                    MarginValues[2] = (int)Grid[IndexX, IndexY].Model.Margin.Right - CellHeight;  //  ячейки
-                    MarginValues[3] = (int)Grid[IndexX, IndexY].Model.Margin.Bottom;              //  и смещаются на одну клетку
+                    MarginValues[0] = (int)CellGrid[IndexX, IndexY].Model.Margin.Left + CellHeight;   //  берутся координаты
+                    MarginValues[1] = (int)CellGrid[IndexX, IndexY].Model.Margin.Top;                 //  соседней уже отрисованной
+                    MarginValues[2] = (int)CellGrid[IndexX, IndexY].Model.Margin.Right - CellHeight;  //  ячейки
+                    MarginValues[3] = (int)CellGrid[IndexX, IndexY].Model.Margin.Bottom;              //  и смещаются на одну клетку
 
                     IndexX++;
-                    Grid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
+                    CellGrid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
                     //  конец расчёта координат новой отрисованной ячейки
 
                     IndexY++;
@@ -367,7 +364,7 @@ namespace Game_of_Life.Cells
 
                 while (ScrollPosition.CameraPosition.X - 1 + ((RowsCount * 2) + 1) > IndexX)
                 {
-                    if (Grid[IndexX, IndexY].Model != null) Grid[IndexX, IndexY].Model = null;
+                    if (CellGrid[IndexX, IndexY].Model != null) CellGrid[IndexX, IndexY].Model = null;
 
                     IndexX++;
                 }
@@ -380,7 +377,7 @@ namespace Game_of_Life.Cells
 
                 while (ScrollPosition.CameraPosition.Y - 1 + ((RowsCount * 2) + 1) > IndexY)
                 {
-                    if (Grid[IndexX, IndexY].Model != null) Grid[IndexX, IndexY].Model = null;
+                    if (CellGrid[IndexX, IndexY].Model != null) CellGrid[IndexX, IndexY].Model = null;
 
                     IndexY++;
                 }
@@ -393,7 +390,7 @@ namespace Game_of_Life.Cells
 
                 while (ScrollPosition.CameraPosition.X - 1 + ((RowsCount * 2) + 1) > IndexX)
                 {
-                    if (Grid[IndexX, IndexY].Model != null) Grid[IndexX, IndexY].Model = null;
+                    if (CellGrid[IndexX, IndexY].Model != null) CellGrid[IndexX, IndexY].Model = null;
 
                     IndexX++;
                 }
@@ -406,7 +403,7 @@ namespace Game_of_Life.Cells
 
                 while (ScrollPosition.CameraPosition.Y - 1 + ((RowsCount * 2) + 1) > IndexY)
                 {
-                    if (Grid[IndexX, IndexY].Model != null) Grid[IndexX, IndexY].Model = null;
+                    if (CellGrid[IndexX, IndexY].Model != null) CellGrid[IndexX, IndexY].Model = null;
 
                     IndexY++;
                 }
