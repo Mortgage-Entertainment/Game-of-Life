@@ -54,11 +54,6 @@ namespace Game_of_Life.Cells
 
             while (IndexX < 150)
             {
-                while (IndexX < 3)
-                {
-                    MarginValues[IndexX] = new int();
-                }
-
                 while (IndexY < 150)
                 {
                     Grid[IndexX, IndexY] = new BaseCell(IndexX, IndexY);
