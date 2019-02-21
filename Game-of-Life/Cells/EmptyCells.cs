@@ -34,26 +34,6 @@ namespace Game_of_Life.Cells
 
         static private int[] MarginValues = new int[4];            // Массив хранящий координаты margin для установки их в объект при отрисовке
 
-        //-----------------------------------------------------------------------------------------\\
-
-        public enum CellType
-        {
-            /*
-             * Перечисление, которое содержит названия типов клеток.
-             * Будет юзаться для хранения типа клетки, которая содержится
-             * в объекте класса EmtyCell
-             *
-             *   префикс CT - CellType
-             */
-
-            CT_NONE = 0,      // Это значение имеет каждый объект этого класса по умолчанию
-            CT_NEURON,        // Нейрон
-            CT_BUILDING,      // Тип строительной клетки
-            CT_LEUKOCYTE,     // Лейкоцит
-            CT_MUSCLE,        // Мышца
-            CT_DEAD           // Мёртвая клетка
-        };
-
         //---------------------------------<Конструкторы>------------------------------------------\\
 
         static public void BaseCellConstr(uint IndexX, uint IndexY)
@@ -74,10 +54,15 @@ namespace Game_of_Life.Cells
 
             while (IndexX < 150)
             {
+                while (IndexX < 3)
+                {
+                    MarginValues[IndexX] = new int();
+                }
+
                 while (IndexY < 150)
                 {
                     Grid[IndexX, IndexY] = new BaseCell(IndexX, IndexY);
-                    Grid[IndexX, IndexY].CellType = 0;    // Устанавливаем в тип клетки значение None
+                    Grid[IndexX, IndexY].cellType = 0;    // Устанавливаем в тип клетки значение None
                     IndexY++;
                 }
                 IndexY = 0;

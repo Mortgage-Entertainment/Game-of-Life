@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Options\Types.cs" />
     <Compile Include="Cells\EmptyCells.cs" />
     <Compile Include="Options\Console\DevConsole.cs" />
     <Compile Include="Options\Console\DevConsoleWindow.xaml.cs">
