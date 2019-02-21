@@ -1,11 +1,9 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using System.Threading;
-using System.Windows.Input;
-using Game_of_Life.Cells;
+﻿using Game_of_Life.Cells;
 using Game_of_Life.Options;
+using System;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace Game_of_Life
 {
@@ -14,48 +12,20 @@ namespace Game_of_Life
     /// </summary>
     public partial class MainWindow : Window
     {
+        static public Options.Console.DevWindowConsole DevConsole = new Options.Console.DevWindowConsole(); // Создаем экземпляр консоли
+
+        private DispatcherTimer GlobalTimer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 0, 0, 1000), IsEnabled = true }; // 1 сек = 1000 милСек
+
         public MainWindow()
         {
             InitializeComponent();
+            GlobalTimer.Start();
         }
 
         //----------------------------------------<Timer>------------------------------------------------\\
 
-        public void GlobalTimerInit()
+        private void GlobalTimer_Tick(object sender, EventArgs e) // Каждый "тик" таймера
         {
-            /*
-             *  Инициализириует глобальный таймер
-             *    ( создаёт его и назначет обработчик )
-             *  
-             */
-
-            TimerCallback GTHandler;
-            GTHandler = GlobalTimerHandler;
-            Timer GlobalTimer = new Timer(GTHandler, 0, 0, 20);
-        }
-
-        private void GlobalTimerHandler(object Sender)
-        {
-            /*
-             *  Обработчик события таймера
-             *  Срабатывает каждый его цикл
-             *  
-             *  В глобальном таймере находятся:
-             *     
-             *     Проверки глобальных условий
-             *       ( такие, как условия 
-             *         поражения и победы в игре )
-             *         
-             *     Методы отрисовки
-             *      ( например, метод ScrollingMove,
-             *        который проверяет положение курсора и
-             *        в зависимости от него двигает камеру )
-             *        
-             *     Всё, что требует
-             *       привязки ко времени
-             */
-
-            ScrollPosition.ScrollingMove(Mouse.GetPosition(maingrid));
         }
 
         //-----------------------------------------------------------------------------------------------\\
@@ -64,15 +34,26 @@ namespace Game_of_Life
         {
             EmptyCells.GridInitialization();
             Logic.Drawing(maingrid);
-            GlobalTimerInit();
+            GlobalTimer.Tick += GlobalTimer_Tick;
         }
 
         private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            if (e.Delta > 0) {
+            if (e.Delta > 0)
+            {
                 ScrollPosition.ScrollingDistancing(maingrid);
-            } else {
+            }
+            else
+            {
                 ScrollPosition.ScrollingApproximation(maingrid);
+            }
+        }
+
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e) // Если тильда, то показать консоль
+        {
+            if (e.Key == System.Windows.Input.Key.OemTilde)
+            {
+                DevConsole.Visibility = Visibility.Visible;
             }
         }
     }

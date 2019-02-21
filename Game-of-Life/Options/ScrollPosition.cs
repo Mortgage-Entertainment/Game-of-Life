@@ -8,9 +8,9 @@ namespace Game_of_Life.Options
     {
         static public Point CameraPosition = new Point(127, 7);  //  позиция камеры
         static private byte Aprx = 4;            //  степень приближения в клетках (approximitation)
-        static private int LeftOffset = 0, RightOffset  = 0;  //  Переменные смещения камеры              //  чтобы камера была
-        static private int TopOffset  = 0, BottomOffset = 0;  //  служат для более точного определения    //  плавной, а не
-        static private int AprxOffset = 0, DistOffset   = 0;  //  позиции камеры, чем по одной клетке     //  скакала по клеткам
+        static private int LeftOffset = 0, RightOffset = 0;  //  Переменные смещения камеры              //  чтобы камера была
+        static private int TopOffset = 0, BottomOffset = 0;  //  служат для более точного определения    //  плавной, а не
+        static private int AprxOffset = 0, DistOffset = 0;  //  позиции камеры, чем по одной клетке     //  скакала по клеткам
 
         //--------------------------------------------------------------<Геттеры>-------------------------------------------------------------------------------\\
 
@@ -55,32 +55,31 @@ namespace Game_of_Life.Options
              *
              */
 
-            if (DistOffset < 1) {
-
-                if (AprxOffset > Convert.ToInt32(Logic.GetCellhgh() / 2)) {
-
+            if (DistOffset < 1)
+            {
+                if (AprxOffset > Convert.ToInt32(Logic.GetCellhgh() / 2))
+                {
                     DistOffset = Logic.GetCellhgh() - AprxOffset;
                     AprxOffset = 0;
                     Aprx--;
                     Logic.DeleteOutEmptyCell();
-
-                } else {
-
+                }
+                else
+                {
                     AprxOffset += Settings.ScrollDistSpeed;
                 }
-
-            } else {
-
-                if (DistOffset > Settings.ScrollDistSpeed) {
-
+            }
+            else
+            {
+                if (DistOffset > Settings.ScrollDistSpeed)
+                {
                     DistOffset -= Settings.ScrollDistSpeed;
-
-                } else {
-
+                }
+                else
+                {
                     AprxOffset = Settings.ScrollDistSpeed - DistOffset;
                     DistOffset = 0;
                 }
-
             }
 
             Logic.SetCellhghOffsets();
@@ -98,31 +97,30 @@ namespace Game_of_Life.Options
              *
              */
 
-            if (AprxOffset < 1) {
-
-                if (DistOffset > Convert.ToInt32(Logic.GetCellhgh() / 2)) {
-
+            if (AprxOffset < 1)
+            {
+                if (DistOffset > Convert.ToInt32(Logic.GetCellhgh() / 2))
+                {
                     AprxOffset = Logic.GetCellhgh() - DistOffset;
                     DistOffset = 0;
                     Aprx++;
-
-                } else {
-
+                }
+                else
+                {
                     DistOffset += Settings.ScrollDistSpeed;
                 }
-
-            } else {
-
-                if (AprxOffset > Settings.ScrollDistSpeed) {
-
+            }
+            else
+            {
+                if (AprxOffset > Settings.ScrollDistSpeed)
+                {
                     AprxOffset -= Settings.ScrollDistSpeed;
-
-                } else {
-
+                }
+                else
+                {
                     DistOffset = Settings.ScrollDistSpeed - AprxOffset;
                     AprxOffset = 0;
                 }
-
             }
 
             Logic.SetCellhghOffsets();
@@ -139,42 +137,41 @@ namespace Game_of_Life.Options
              *  Перемещает камеру в сторону
              *    ( клетки в обратную )
              *  , на которую "давит" курсор
-             *  
+             *
              *  для вызова внутри него - методы с префиксом SM_
              *   ( SM - Scrolling Move )
-             *  
-             */      /////   не закончено - 
+             *
+             */      /////   не закончено -
                      //   Код был проанализирован логически только в первоначальном варианте ( перемещение влево )
                      //   в остальных случаях он был скопирован и заменены только названия ( Top, Left, Right, Bottom )
 
-
             //---------------<Перемещение>--<Вниз>--------------------\\
-            if (CursorPosition.Y > SystemParameters.PrimaryScreenHeight - 2) {
-                
-                if (TopOffset < 1) {
+            if (CursorPosition.Y > SystemParameters.PrimaryScreenHeight - 2)
+            {
+                if (TopOffset < 1)
+                {
                     BottomOffset = BottomOffset + Settings.ScrollMoveSpeed;
 
-                    if (BottomOffset > Convert.ToInt32(Logic.GetCellhgh() / 2)) {
-
+                    if (BottomOffset > Convert.ToInt32(Logic.GetCellhgh() / 2))
+                    {
                         TopOffset = Convert.ToInt32(Logic.GetCellhgh() - BottomOffset);
                         BottomOffset = 0;
                         CameraPosition.X--;
                         Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_BottomSide, true);
-
-                    } else {
-
+                    }
+                    else
+                    {
                         Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_BottomSide, false);
                     }
-
-
-                } else {
-
-                    if (TopOffset > Settings.ScrollMoveSpeed) {
-
+                }
+                else
+                {
+                    if (TopOffset > Settings.ScrollMoveSpeed)
+                    {
                         TopOffset = TopOffset - Settings.ScrollMoveSpeed;
-
-                    } else {
-
+                    }
+                    else
+                    {
                         BottomOffset = Settings.ScrollMoveSpeed - TopOffset;
                         TopOffset = 0;
                     }
@@ -183,34 +180,33 @@ namespace Game_of_Life.Options
                 }
             }
 
-
             //---------------<Перемещение>--<Влево>--------------------\\
-            if (CursorPosition.X < 2) {
-
-                if (RightOffset < 1) {
-
+            if (CursorPosition.X < 2)
+            {
+                if (RightOffset < 1)
+                {
                     LeftOffset = LeftOffset + Settings.ScrollMoveSpeed;
 
-                    if (LeftOffset > Convert.ToInt32(Logic.GetCellhgh() / 2)) {
-
+                    if (LeftOffset > Convert.ToInt32(Logic.GetCellhgh() / 2))
+                    {
                         RightOffset = Convert.ToInt32(Logic.GetCellhgh() - LeftOffset);
                         LeftOffset = 0;
                         CameraPosition.X--;
                         Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_LeftSide, true);
-
-                    } else {
-
+                    }
+                    else
+                    {
                         Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_LeftSide, false);
                     }
-                    
-                } else {
-
-                    if (RightOffset > Settings.ScrollMoveSpeed) {
-
+                }
+                else
+                {
+                    if (RightOffset > Settings.ScrollMoveSpeed)
+                    {
                         RightOffset = RightOffset - Settings.ScrollMoveSpeed;
-
-                    } else {
-
+                    }
+                    else
+                    {
                         LeftOffset = Settings.ScrollMoveSpeed - RightOffset;
                         RightOffset = 0;
                     }
@@ -219,34 +215,33 @@ namespace Game_of_Life.Options
                 }
             }
 
-
             //---------------<Перемещение>--<Вверх>--------------------\\
-            if (CursorPosition.Y < 2) {
-
-                if (BottomOffset < 1) {
+            if (CursorPosition.Y < 2)
+            {
+                if (BottomOffset < 1)
+                {
                     TopOffset = TopOffset + Settings.ScrollMoveSpeed;
 
-                    if (TopOffset > Convert.ToInt32(Logic.GetCellhgh() / 2)) {
-
+                    if (TopOffset > Convert.ToInt32(Logic.GetCellhgh() / 2))
+                    {
                         BottomOffset = Convert.ToInt32(Logic.GetCellhgh() - TopOffset);
                         TopOffset = 0;
                         CameraPosition.X--;
                         Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_TopSide, true);
-
-                    } else {
-
+                    }
+                    else
+                    {
                         Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_TopSide, false);
                     }
-
-
-                } else {
-
-                    if (BottomOffset > Settings.ScrollMoveSpeed) {
-
+                }
+                else
+                {
+                    if (BottomOffset > Settings.ScrollMoveSpeed)
+                    {
                         BottomOffset = BottomOffset - Settings.ScrollMoveSpeed;
-
-                    } else {
-
+                    }
+                    else
+                    {
                         TopOffset = Settings.ScrollMoveSpeed - BottomOffset;
                         BottomOffset = 0;
                     }
@@ -255,34 +250,33 @@ namespace Game_of_Life.Options
                 }
             }
 
-
             //---------------<Перемещение>--<Вправо>--------------------\\
-            if (CursorPosition.X > SystemParameters.PrimaryScreenWidth - 2) {
-                
-                if (LeftOffset < 1) {
-
+            if (CursorPosition.X > SystemParameters.PrimaryScreenWidth - 2)
+            {
+                if (LeftOffset < 1)
+                {
                     RightOffset = RightOffset + Settings.ScrollMoveSpeed;
 
-                    if (RightOffset > Convert.ToInt32(Logic.GetCellhgh() / 2)) {
-
+                    if (RightOffset > Convert.ToInt32(Logic.GetCellhgh() / 2))
+                    {
                         LeftOffset = Convert.ToInt32(Logic.GetCellhgh() - RightOffset);
                         RightOffset = 0;
                         CameraPosition.X--;
                         Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_RightSide, true);
-
-                    } else {
-
+                    }
+                    else
+                    {
                         Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_RightSide, false);
                     }
-                    
-                } else {
-
-                    if (LeftOffset > Settings.ScrollMoveSpeed) {
-
+                }
+                else
+                {
+                    if (LeftOffset > Settings.ScrollMoveSpeed)
+                    {
                         LeftOffset = LeftOffset - Settings.ScrollMoveSpeed;
-
-                    } else {
-
+                    }
+                    else
+                    {
                         RightOffset = Settings.ScrollMoveSpeed - LeftOffset;
                         LeftOffset = 0;
                     }
@@ -292,6 +286,6 @@ namespace Game_of_Life.Options
             }
         }
 
-        //-----------------------------------------------------------------------------------------------------------------------------------------------\\ 
+        //-----------------------------------------------------------------------------------------------------------------------------------------------\\
     }
 }

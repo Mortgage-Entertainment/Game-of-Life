@@ -2,7 +2,7 @@
 {
     internal class NeuronCell : Cell
     {
-        public NeuronCell() : base ()
+        public NeuronCell() : base()
         {
         }
     }
