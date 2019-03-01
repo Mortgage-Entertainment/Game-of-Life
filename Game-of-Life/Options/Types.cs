@@ -17,6 +17,7 @@ namespace Game_of_Life.Options
          */
 
         CT_NONE = 0,      // Это значение имеет каждый объект этого класса по умолчанию
+        CT_BASE,          // Обычная, ничего не умеющая, клетка
         CT_NEURON,        // Нейрон
         CT_BUILDING,      // Тип строительной клетки
         CT_LEUKOCYTE,     // Лейкоцит
@@ -26,7 +27,18 @@ namespace Game_of_Life.Options
 
     public enum ResourseType
     {
-        RT_SALT = 0       // Соль
+        /*
+         * Перечисление, объект которого будет показывать то,
+         * какой тип ресурсов можно добыть с определённой клетки.
+         * 
+         * Префикс RT - ResourseType
+         */
 
+        RT_SALT = 0,       // Соль
+        RT_CABODRA,        // Углеводы (carbohydrates)
+        RT_PROTEIN,        // Белок
+        RT_LYMPH,          // Лимфа
+        RT_GLYCOGEN,       // Гликоген
+        RT_WBC             // Белые кровяные тельца (White Blood Cell)
     };
 }

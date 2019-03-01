@@ -2,6 +2,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using Game_of_Life.Cells;
+using Game_of_Life.Cells.TypesOfCells;
+using Game_of_Life.Cells.TypesOfResourses;
 
 namespace Game_of_Life.Options
 {
@@ -37,7 +39,7 @@ namespace Game_of_Life.Options
 
         //----------------------------------------------------------------------------------------------------------------------------------\\
 
-        static public void Drawing(Grid grid)
+        static public void Drawing(Canvas canvas)
         {
             /*
              *  Метод отрисовки картинок
@@ -59,7 +61,7 @@ namespace Game_of_Life.Options
             IndexX = (int)(ScrollPosition.CameraPosition.X - 1);
             IndexY = (int)(ScrollPosition.CameraPosition.Y - 1);
 
-            EmptyCells.SetGridImage(IndexX, IndexY, grid);
+            EmptyCells.SetGridImage(IndexX, IndexY, canvas);
 
             EmptyCells.SetImagePosition(IndexX, IndexY, cellhgh);
 
@@ -73,7 +75,7 @@ namespace Game_of_Life.Options
                 IndexY = IndexY + RowsCount;
                 while (value > 0)
                 {
-                    EmptyCells.SetGridImage(IndexX, IndexY, grid);
+                    EmptyCells.SetGridImage(IndexX, IndexY, canvas);
 
                     EmptyCells.SetImagePosition(IndexX, IndexY, cellhghVisual, RowsCount, valueconst, value, ScreenSideofDrawing.SD_BottomSide);
 
@@ -86,7 +88,7 @@ namespace Game_of_Life.Options
 
                 while (value > 0)
                 {
-                    EmptyCells.SetGridImage(IndexX, IndexY, grid);
+                    EmptyCells.SetGridImage(IndexX, IndexY, canvas);
 
                     EmptyCells.SetImagePosition(IndexX, IndexY, cellhghVisual, RowsCount, valueconst, value, ScreenSideofDrawing.SD_LeftSide);
 
@@ -99,7 +101,7 @@ namespace Game_of_Life.Options
 
                 while (value > 0)
                 {
-                    EmptyCells.SetGridImage(IndexX, IndexY, grid);
+                    EmptyCells.SetGridImage(IndexX, IndexY, canvas);
 
                     EmptyCells.SetImagePosition(IndexX, IndexY, cellhghVisual, RowsCount, valueconst, value, ScreenSideofDrawing.SD_RightSide);
 
@@ -112,7 +114,7 @@ namespace Game_of_Life.Options
 
                 while (value > 0)
                 {
-                    EmptyCells.SetGridImage(IndexX, IndexY, grid);
+                    EmptyCells.SetGridImage(IndexX, IndexY, canvas);
 
                     EmptyCells.SetImagePosition(IndexX, IndexY, cellhghVisual, RowsCount, valueconst, value, ScreenSideofDrawing.SD_TopSide);
 
@@ -203,7 +205,7 @@ namespace Game_of_Life.Options
 
         //-------------------------------------------------<Перемещение камеры( SM - Scrolling of Move )>-----------------------------------------------------------------\\
 
-        static public void SM_Drawing(ScreenSideofDrawing VectorofScrolling, bool ReDraw, Grid grid)
+        static public void SM_Drawing(ScreenSideofDrawing VectorofScrolling, bool ReDraw, Canvas canvas)
         {
             /*
              *  Метод перерисовки клеток
@@ -239,7 +241,7 @@ namespace Game_of_Life.Options
             {                           //  добавление и удаление картинок
                 EmptyCells.SM_DeletingCells(RowsCount, VoS); //  удаление ячеек, что попали за границу экрана
 
-                EmptyCells.SM_AddingCells(RowsCount, VoS, cellhgh, grid);   //  отрисовка ячеек, что были за границей экрана
+                EmptyCells.SM_AddingCells(RowsCount, VoS, cellhgh, canvas);   //  отрисовка ячеек, что были за границей экрана
             }
         }
 
@@ -250,16 +252,41 @@ namespace Game_of_Life.Options
          *    означает отрисовку клеток
          */ 
         
-        static public void CD_Draw()
+        static public void CD_Draw(CellType cellType,ResourseType resourseType, BaseCell baseCell)
         {
             /*
              *  Метод, который отрисовывает клетку (одну, конкретную)
              *    по координатам ячейки, в которой она находится
              *  
              */
-             
 
+            object cell;
+
+            switch (cellType)
+            {
+                case CellType.CT_NONE:
+                    break;
+                case CellType.CT_BASE:
+                    cell = new Cell();
+                    break;
+                case CellType.CT_NEURON:
+                    cell = new NeuronCell();
+                    break;
+                case CellType.CT_BUILDING:
+                    cell = new BuildingCell();
+                    break;
+                case CellType.CT_LEUKOCYTE:
+                    cell = new LeukocyteCell();
+                    break;
+                case CellType.CT_MUSCLE:
+                    cell = new MuscleCell();
+                    break;
+                case CellType.CT_DEAD:
+                    cell = new DeadCell();
+                    break;
+                default:
+                    break;
+            }
         }
-
     }
 }

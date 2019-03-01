@@ -26,7 +26,7 @@ namespace Game_of_Life
 
         private void GlobalTimer_Tick(object sender, EventArgs e) // Каждый "тик" таймера
         {
-            ScrollPosition.ScrollingMove(Mouse.GetPosition(null), maingrid);
+            ScrollPosition.ScrollingMove(Mouse.GetPosition(null), mainCanvas);
         }
 
         //-----------------------------------------------------------------------------------------------\\
@@ -34,7 +34,7 @@ namespace Game_of_Life
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             EmptyCells.GridInitialization();
-            Logic.Drawing(maingrid);
+            Logic.Drawing(mainCanvas);
             GlobalTimer.Tick += GlobalTimer_Tick;
         }
 
@@ -42,11 +42,11 @@ namespace Game_of_Life
         {
             if (e.Delta > 0)
             {
-                ScrollPosition.ScrollingDistancing(maingrid);
+                ScrollPosition.ScrollingDistancing(mainCanvas);
             }
             else
             {
-                ScrollPosition.ScrollingApproximation(maingrid);
+                ScrollPosition.ScrollingApproximation(mainCanvas);
             }
         }
 

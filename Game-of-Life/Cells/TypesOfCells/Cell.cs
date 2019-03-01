@@ -1,4 +1,4 @@
-﻿namespace Game_of_Life
+﻿namespace Game_of_Life.Cells.TypesOfCells
 {
     internal class Cell
     {

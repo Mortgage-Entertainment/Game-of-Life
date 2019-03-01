@@ -35,5 +35,6 @@ namespace Game_of_Life.Cells
         {
             EmptyCells.BaseCellConstr(IndexX, IndexY);
         }
+
     }
 }

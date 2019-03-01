@@ -55,6 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Cells\TypesOfCells\BuildingCell.cs" />
+    <Compile Include="Cells\TypesOfCells\DeadCell.cs" />
+    <Compile Include="Cells\TypesOfCells\LeukocyteCell.cs" />
+    <Compile Include="Cells\TypesOfCells\MuscleCell.cs" />
+    <Compile Include="Cells\TypesOfResourses\SaltRes.cs" />
     <Compile Include="Options\Types.cs" />
     <Compile Include="Cells\EmptyCells.cs" />
     <Compile Include="Options\Console\DevConsole.cs" />
@@ -80,9 +85,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Cells\Cell.cs" />
+    <Compile Include="Cells\TypesOfCells\Cell.cs" />
     <Compile Include="Cells\BaseCell.cs" />
-    <Compile Include="Cells\NeuronCell.cs" />
+    <Compile Include="Cells\TypesOfCells\NeuronCell.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

@@ -146,7 +146,7 @@ namespace Game_of_Life.Cells
             CellGrid[IndexX, IndexY].Model.Margin = new Thickness(MarginValues[0], MarginValues[1], MarginValues[2], MarginValues[3]);
         }
 
-        static public void SetGridImage(int IndexX, int IndexY, Grid grid)    // аргументы для нахождения определённого элемента в масстиве "Grid" и grid в XAML разметке, в котором все будет отрисовываться
+        static public void SetGridImage(int IndexX, int IndexY,Canvas canvas)    // аргументы для нахождения определённого элемента в масстиве "Grid" и grid в XAML разметке, в котором все будет отрисовываться
         {
             /*
              * Функция, устанавливающая
@@ -154,7 +154,7 @@ namespace Game_of_Life.Cells
              */
 
             CellGrid[IndexX, IndexY].Model = new Image();     // Создаем объект картинки
-            grid.Children.Add(CellGrid[IndexX, IndexY].Model);   // Засовываем его в grid в XAML разметке
+            canvas.Children.Add(CellGrid[IndexX, IndexY].Model);   // Засовываем его в grid в XAML разметке
             CellGrid[IndexX, IndexY].Model.Source = new BitmapImage(new Uri("../Resources/540.jpg", UriKind.Relative));  // загружем изображение в объект картинки
         }
 
@@ -214,7 +214,7 @@ namespace Game_of_Life.Cells
             }
         }
 
-        static public void SM_AddingCells(int RowsCount, byte VoS, int CellHeight, Grid grid)
+        static public void SM_AddingCells(int RowsCount, byte VoS, int CellHeight, Canvas canvas)
         {
             /*
              *  Метод

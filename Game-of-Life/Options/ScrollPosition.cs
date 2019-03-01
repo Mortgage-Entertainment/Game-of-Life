@@ -46,7 +46,7 @@ namespace Game_of_Life.Options
 
         //---------------------------------------------------<Приближение>------------------------------------------------------------\\
 
-        static public void ScrollingApproximation(Grid grid)
+        static public void ScrollingApproximation(Canvas canvas)
         {
             /*
              *  Метод приближения камеры
@@ -83,12 +83,12 @@ namespace Game_of_Life.Options
             }
 
             Logic.SetCellhghOffsets();
-            Logic.Drawing(grid);
+            Logic.Drawing(canvas);
         }
 
         //---------------------------------------------<Отдаление>----------------------------------------------------------------\\
 
-        static public void ScrollingDistancing(Grid grid)
+        static public void ScrollingDistancing(Canvas canvas)
         {
             /*
              *  Метод отдаления камеры
@@ -124,12 +124,12 @@ namespace Game_of_Life.Options
             }
 
             Logic.SetCellhghOffsets();
-            Logic.Drawing(grid);
+            Logic.Drawing(canvas);
         }
 
         //------------------------------------------------------<Перемещение>------------------------------------------------------------------\\
 
-        static public void ScrollingMove(Point CursorPosition, Grid grid)
+        static public void ScrollingMove(Point CursorPosition, Canvas canvas)
         {
             /*
              *  Метод перемещения
@@ -157,11 +157,11 @@ namespace Game_of_Life.Options
                         TopOffset = Convert.ToInt32(Logic.GetCellhgh() - BottomOffset);
                         BottomOffset = 0;
                         CameraPosition.X--;
-                        Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_BottomSide, true, grid);
+                        Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_BottomSide, true, canvas);
                     }
                     else
                     {
-                        Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_BottomSide, false, grid);
+                        Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_BottomSide, false, canvas);
                     }
                 }
                 else
@@ -176,7 +176,7 @@ namespace Game_of_Life.Options
                         TopOffset = 0;
                     }
 
-                    Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_BottomSide, false, grid);
+                    Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_BottomSide, false, canvas);
                 }
             }
 
@@ -192,11 +192,11 @@ namespace Game_of_Life.Options
                         RightOffset = Convert.ToInt32(Logic.GetCellhgh() - LeftOffset);
                         LeftOffset = 0;
                         CameraPosition.X--;
-                        Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_LeftSide, true, grid);
+                        Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_LeftSide, true, canvas);
                     }
                     else
                     {
-                        Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_LeftSide, false, grid);
+                        Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_LeftSide, false, canvas);
                     }
                 }
                 else
@@ -211,7 +211,7 @@ namespace Game_of_Life.Options
                         RightOffset = 0;
                     }
 
-                    Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_LeftSide, false, grid);
+                    Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_LeftSide, false, canvas);
                 }
             }
 
@@ -227,11 +227,11 @@ namespace Game_of_Life.Options
                         BottomOffset = Convert.ToInt32(Logic.GetCellhgh() - TopOffset);
                         TopOffset = 0;
                         CameraPosition.X--;
-                        Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_TopSide, true, grid);
+                        Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_TopSide, true, canvas);
                     }
                     else
                     {
-                        Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_TopSide, false, grid);
+                        Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_TopSide, false, canvas);
                     }
                 }
                 else
@@ -246,7 +246,7 @@ namespace Game_of_Life.Options
                         BottomOffset = 0;
                     }
 
-                    Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_TopSide, false, grid);
+                    Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_TopSide, false, canvas);
                 }
             }
 
@@ -262,11 +262,11 @@ namespace Game_of_Life.Options
                         LeftOffset = Convert.ToInt32(Logic.GetCellhgh() - RightOffset);
                         RightOffset = 0;
                         CameraPosition.X--;
-                        Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_RightSide, true, grid);
+                        Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_RightSide, true, canvas);
                     }
                     else
                     {
-                        Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_RightSide, false, grid);
+                        Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_RightSide, false, canvas);
                     }
                 }
                 else
@@ -281,7 +281,7 @@ namespace Game_of_Life.Options
                         LeftOffset = 0;
                     }
 
-                    Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_RightSide, false, grid);
+                    Logic.SM_Drawing(Logic.ScreenSideofDrawing.SD_RightSide, false, canvas);
                 }
             }
         }
