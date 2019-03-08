@@ -46,7 +46,7 @@ namespace Game_of_Life.Options
 
         //---------------------------------------------------<Приближение>------------------------------------------------------------\\
 
-        static public void ScrollingApproximation(Canvas canvas)
+        static public void ScrollingApproximation(Grid canvas)
         {
             /*
              *  Метод приближения камеры
@@ -88,7 +88,7 @@ namespace Game_of_Life.Options
 
         //---------------------------------------------<Отдаление>----------------------------------------------------------------\\
 
-        static public void ScrollingDistancing(Canvas canvas)
+        static public void ScrollingDistancing(Grid canvas)
         {
             /*
              *  Метод отдаления камеры
@@ -129,7 +129,7 @@ namespace Game_of_Life.Options
 
         //------------------------------------------------------<Перемещение>------------------------------------------------------------------\\
 
-        static public void ScrollingMove(Point CursorPosition, Canvas canvas)
+        static public void ScrollingMove(Point CursorPosition, Grid canvas)
         {
             /*
              *  Метод перемещения

@@ -39,6 +39,7 @@ namespace Game_of_Life.Options
         RT_PROTEIN,        // Белок
         RT_LYMPH,          // Лимфа
         RT_GLYCOGEN,       // Гликоген
-        RT_WBC             // Белые кровяные тельца (White Blood Cell)
+        RT_WBC,            // Белые кровяные тельца (White Blood Cell)
+        RT_PROTandCAB      // Протеин и углеводы (PROTEIN AND CABODRA)
     };
 }

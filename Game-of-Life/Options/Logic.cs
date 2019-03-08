@@ -39,7 +39,7 @@ namespace Game_of_Life.Options
 
         //----------------------------------------------------------------------------------------------------------------------------------\\
 
-        static public void Drawing(Canvas canvas)
+        static public void Drawing(Grid canvas)
         {
             /*
              *  Метод отрисовки картинок
@@ -205,7 +205,7 @@ namespace Game_of_Life.Options
 
         //-------------------------------------------------<Перемещение камеры( SM - Scrolling of Move )>-----------------------------------------------------------------\\
 
-        static public void SM_Drawing(ScreenSideofDrawing VectorofScrolling, bool ReDraw, Canvas canvas)
+        static public void SM_Drawing(ScreenSideofDrawing VectorofScrolling, bool ReDraw, Grid canvas)
         {
             /*
              *  Метод перерисовки клеток
