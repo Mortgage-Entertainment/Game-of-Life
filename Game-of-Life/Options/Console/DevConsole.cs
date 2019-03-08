@@ -1,4 +1,6 @@
 ﻿using Game_of_Life.Options.Console.MiniMap;
+using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace Game_of_Life.Options
 {
@@ -14,9 +16,16 @@ namespace Game_of_Life.Options
                     функция;
                     breal;
                  */
-                // Прим. Команда должна быть в нижнем регистре
+                // Прим. Команда должна быть в нижнем регистре, вывод в консоль devWindowConsole.AddOutput(что, цвет), и не забывайте про перенос строки
                 case "help":
-                    devWindowConsole.Output.Text += "\nClear - clear the console" + "\nExit - close the application";
+                    devWindowConsole.AddOutput("\nClear", Brushes.Green);
+                    devWindowConsole.AddOutput(" - clear the console");
+
+                    devWindowConsole.AddOutput("\nClose, exit, quit", Brushes.Green);
+                    devWindowConsole.AddOutput(" - close the application");
+
+                    devWindowConsole.AddOutput("\nMinimap", Brushes.Green);
+                    devWindowConsole.AddOutput(" - open the minimap window");
                     break;
 
                 case "clear":
@@ -38,10 +47,15 @@ namespace Game_of_Life.Options
                 case "minimap":
                     MiniMap miniMap = new MiniMap();
                     miniMap.Show();
+                    devWindowConsole.AddOutput("\nMinimap opened");
+                    devWindowConsole.AddOutput("succesful", Brushes.Green);
+                    devWindowConsole.AddOutput(".");
                     break;
 
                 default: // Если неверная команда, то вывести об этом сообщение
-                    devWindowConsole.Output.Text += "\nUnknown command '" + command + "'.";
+                    devWindowConsole.AddOutput("\nUnknown command '");
+                    devWindowConsole.AddOutput(command, Brushes.DarkGreen);
+                    devWindowConsole.AddOutput("'.");
                     break;
             }
         }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Game_of_Life.Options.Console
 {
@@ -14,9 +16,13 @@ namespace Game_of_Life.Options.Console
             InitializeComponent();
         }
 
-        public void AddOutput(string OutputInfo) // вывести что-то в консоль
+        public void AddOutput(string OutputInfo, Brush br) // вывести что-то в консоль с цветом
         {
-            this.Output.Text += "\n" + OutputInfo;
+            this.Output.Inlines.Add(new Run(OutputInfo) { Foreground = br});
+        }
+        public void AddOutput(string OutputInfo) // вывести что-то в консоль с черным цветом
+        {
+            this.Output.Inlines.Add(new Run(OutputInfo) { Foreground = Brushes.Black });
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) // Если нажали закрыть - скрыть
@@ -58,11 +64,6 @@ namespace Game_of_Life.Options.Console
             {
                 this.Hide();
             }
-        }
-
-        private void Output_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-            Output.ScrollToEnd();
         }
     }
 }
